@@ -6,8 +6,10 @@ using System.Data;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Data.SQLite;
-
+using System.Globalization;
+using System.Timers;
 
 namespace Coordinator
 {
@@ -17,12 +19,11 @@ namespace Coordinator
         delegate void TextBoxDelegate(string message);
 
         //Global Variables
-        string CommName = "";
-        string typee = "";
-        string IpAddress = "";
-        string Portt = "";
-        string missionn = "";
-        int Cont = 0;
+        static string CommName = "";
+        static string typee = "";
+        static string IpAddress = "";
+        static string Portt = "";
+        static string missionn = "";
 
         //Struct of a connection
         public struct CommSet
@@ -35,18 +36,23 @@ namespace Coordinator
 
         public struct UAVStatus
         {
+            public string CommuName;
+            public string Type;
+            public string IP;
+            public string Port;
             public string N_UAV;
-            public decimal Lat;
-            public decimal Lon;
-            public decimal Alt;
-            public decimal Groundspeed;
+            public string Lat;          
+            public string Lon;
+            public string Alt;
+            public string Groundspeed;
 
         }
 
         public CommSet[] CommunicationParameters = new CommSet[163];   //Array that contains all de info's of all connections - USELESS
 
-        public UAVStatus[] UAVinfo = new UAVStatus[163];     //From this array we'll know the state of every UAV to pass to map 
-
+        public static UAVStatus[] UAVinfo = new UAVStatus[163];     //From this array we'll know the state of every UAV to pass to map 
+        public int CounterUAV = 0;
+ 
         public CommunicationLinks()
         {
             InitializeComponent();
@@ -89,6 +95,18 @@ namespace Coordinator
             DB.Fill(DS);
             DT = DS.Tables[0];
             dtvCommunication.DataSource = DT;
+
+            foreach(DataRow row in DT.Rows)
+            {
+                UAVinfo[CounterUAV].N_UAV = row["ConnectionName"].ToString();
+                UAVinfo[CounterUAV].CommuName = row["ConnectionName"].ToString();
+                UAVinfo[CounterUAV].Type = row["Type"].ToString();
+                UAVinfo[CounterUAV].IP = row["IPAddress"].ToString();
+                UAVinfo[CounterUAV].Port = row["Port"].ToString();
+
+                CounterUAV +=  1;
+            }
+
             sql_con.Close();
             
         }
@@ -116,6 +134,14 @@ namespace Coordinator
             typee = selectedRow.Cells[1].Value.ToString();
             IpAddress = selectedRow.Cells[2].Value.ToString();
             Portt = selectedRow.Cells[3].Value.ToString();
+
+
+            int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+            txtLat.Text = UAVinfo[indexx].Lat;
+            txtLon.Text = UAVinfo[indexx].Lon;
+            txtAlt.Text = UAVinfo[indexx].Alt;
+            txtGs.Text = UAVinfo[indexx].Groundspeed;
+
         }
 
         //Uploads a mission to a specific UAV (selects the file and then run the script that does that)
@@ -185,7 +211,7 @@ namespace Coordinator
         //Well now it sets the timer -- NOT anymore
         private void CommunicationLinks_Load(object sender, EventArgs e)
         {
-            
+            timer1.Start();
         }
 
         //Adds to DataBase a communication info 
@@ -194,6 +220,14 @@ namespace Coordinator
             string txtQuery = "insert into tbcomm (ConnectionName,Type, IPAddress, Port)values('" + txtName.Text + "','" + cbxType.Text  + "','" + txtIP.Text + "','" + txtPort.Text + "')";
             ExecuteQuery(txtQuery);
             LoadData();
+
+            UAVinfo[CounterUAV].N_UAV = txtName.Text;
+            UAVinfo[CounterUAV].CommuName = txtName.Text;
+            UAVinfo[CounterUAV].Type = cbxType.Text;
+            UAVinfo[CounterUAV].IP = txtIP.Text;
+            UAVinfo[CounterUAV].Port = txtPort.Text;
+
+            CounterUAV += 1;
 
             txtName.Clear();
             txtIP.Clear();
@@ -207,6 +241,8 @@ namespace Coordinator
             ExecuteQuery(txtQuery);
             LoadData();
 
+
+            
             txtName.Clear();
             txtIP.Clear();
             txtPort.Clear();
@@ -273,21 +309,44 @@ namespace Coordinator
                 this.txtGs.Text = gs;
             }
         }
-        
+
         //Launches the UAV and gets the current state of it (latitude, longitude etc)
         private void btnLaunch_Click(object sender, EventArgs e)
         {
-            var thread = new Thread(new ThreadStart(() =>
+            System.Timers.Timer aTimer = new System.Timers.Timer(2500);
+            aTimer.Elapsed += new ElapsedEventHandler(TimerCall);
+            aTimer.Enabled = true;
+            aTimer.AutoReset = true;
+ 
+        }
+
+        public void TimerCall(object sender, ElapsedEventArgs e)
+        {
+            
+            for(int j=0;j<= CounterUAV; j++)
             {
-                string script = "UAV_Current_State.py"; 
+                
+                string con = UAVinfo[j].Type;
+                string ip = UAVinfo[j].IP;
+                string port = UAVinfo[j].Port;
+
+                UAVEstate(con, ip, port);
+                Thread.Sleep(200);
+            }
+
+            Thread.Sleep(200);
+        }
+
+        public  void UAVEstate(string t,string i,string p)
+        {
+
+                
+                string script = "UAV_Current_State.py";
                 string python = @"C:\Python27\python.exe";
-                string mission = missionn;
-                string con = typee;
-                string ip = IpAddress;
-                string port = Portt;
+
                 string arg = "";
 
-                arg = script + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
+                arg = script + " " + t + " " + i + " " + p;   //Final String that will be passed to Dronekit
 
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
@@ -297,13 +356,13 @@ namespace Coordinator
                 var proc = Process.Start(psi);
 
                 StreamReader sr = proc.StandardOutput;
-                
-                
+
                 while (!proc.HasExited)
                 {
                     if (!sr.EndOfStream)
-                    {   
+                    {
                         string procOutput = sr.ReadToEnd();
+
                         string delimiter = ", ";
                         string[] StateList = procOutput.Split(delimiter.ToCharArray());
 
@@ -312,93 +371,39 @@ namespace Coordinator
                         string altitude = StateList[4];
                         string groundspeed = StateList[6];
 
-                        UpdatingTextBoxLatitude(latitude);
-                        UpdatingTextBoxLongitude(longitude);
-                        UpdatingTextBoxaltitude(altitude);
-                        UpdatingTextBoxGroundspeed(groundspeed);
+                        int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+                        UAVinfo[indexx].Lat = latitude;         //Convert to decimal or whatever later
+                        UAVinfo[indexx].Lon = longitude;
+                        UAVinfo[indexx].Alt = altitude;
+                        UAVinfo[indexx].Groundspeed = groundspeed;
+
+                        //UpdatingTextBoxLatitude(latitude);
+                        //UpdatingTextBoxLongitude(longitude);
+                        //UpdatingTextBoxaltitude(altitude);
+                        //UpdatingTextBoxGroundspeed(groundspeed);
                     }
-                    else Thread.Sleep(10);
-                }
-                
-            }));
+                     Thread.Sleep(200);
 
-            thread.Start();
+            }
+
         }
-
         //Does nothing, probably I double clicked on some element from the design and now if a delete this code, my design gives some error
         private void rtbScript_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        //Create an area that shows the current state of an UAV
-        private void btnUAVStatus_Click(object sender, EventArgs e)
+        public void ShowCounter()
         {
-            TabPage tpage = new TabPage(CommName);
-            tabControl1.TabPages.Add(tpage);
-
-            Label l1 = new Label();
-            l1.Text = "Latitude:";
-            l1.Left = 10;
-            l1.Top = 22;
-            Label l2 = new Label();
-            l2.Text = "Longitude";
-            l2.Left = 10;
-            l2.Top = 48;
-            Label l3 = new Label();
-            l3.Text = "Altitude (m)";
-            l3.Left = 10;
-            l3.Top = 74;
-            Label l4 = new Label();
-            l4.Text = "Ground Speed (m/s)";
-            l4.Left = 10;
-            l4.Top = 103;
-            tpage.Controls.Add(l1);
-            tpage.Controls.Add(l2);
-            tpage.Controls.Add(l3);
-            tpage.Controls.Add(l4);
-            
-            TextBox txtLat = new TextBox();
-            txtLat.Name = CommName + "Latitude";
-            txtLat.Height = 22;
-            txtLat.Width = 110;
-            txtLat.Left = 125;
-            txtLat.Top = 22;
-            TextBox txtLon = new TextBox();
-            txtLon.Name = CommName + "Longitude";
-            txtLon.Height = 22;
-            txtLon.Width = 110;
-            txtLon.Left = 125;
-            txtLon.Top = 48;
-            TextBox txtAlt = new TextBox();
-            txtAlt.Name = CommName + "Altitude";
-            txtAlt.Height = 22;
-            txtAlt.Width = 110;
-            txtAlt.Left = 125;
-            txtAlt.Top = 74;
-            TextBox txtGs = new TextBox();
-            txtGs.Name = CommName + "GroundSpeed";
-            txtGs.Height = 22;
-            txtGs.Width = 110;
-            txtGs.Left = 125;
-            txtGs.Top = 100;
-            tpage.Controls.Add(txtLat);
-            tpage.Controls.Add(txtLon);
-            tpage.Controls.Add(txtAlt);
-            tpage.Controls.Add(txtGs);
-
+            txtCounter.Text = CounterUAV.ToString();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Run_Script("UAV_Current_State.py");
+            ShowCounter();
         }
 
-        //Sets the timer
-        private void button1_Click(object sender, EventArgs e)
-        {
-            timer1.Start();
-        }
+        
     }
     
 }

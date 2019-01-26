@@ -28,3 +28,23 @@ C:\Users\Victor Luiz Ferreira\Desktop\TCC\Coordinator Com BD\Coordinator\bin\Deb
 C:\Users\Victor Luiz Ferreira\Desktop\TCC\Coordinator Com BD\Coordinator\bin\Debug\System.Data.SQLite.xml
 C:\Users\Victor Luiz Ferreira\Desktop\TCC\Coordinator Com BD\Coordinator\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\Victor Luiz Ferreira\Desktop\TCC\Coordinator Com BD\Coordinator\obj\Debug\Coordinator.csproj.CopyComplete
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\obj\Debug\Coordinator.csprojAssemblyReference.cache
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\obj\Debug\Coordinator.CommunicationLinks.resources
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\obj\Debug\Coordinator.Properties.Resources.resources
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\obj\Debug\Coordinator.csproj.GenerateResource.cache
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\obj\Debug\Coordinator.csproj.CoreCompileInputs.cache
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\obj\Debug\Coordinator.exe
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\obj\Debug\Coordinator.pdb
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\bin\Debug\Coordinator.exe.config
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\bin\Debug\Coordinator.exe
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\bin\Debug\Coordinator.pdb
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\bin\Debug\EntityFramework.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\bin\Debug\System.Data.SQLite.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\bin\Debug\EntityFramework.xml
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\bin\Debug\System.Data.SQLite.xml
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Coordinator Com BD\Coordinator\obj\Debug\Coordinator.csproj.CopyComplete
