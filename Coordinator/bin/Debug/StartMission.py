@@ -9,7 +9,6 @@ port = (sys.argv[3])
 connection_string = con + ':'+ ip + ':' + port
 
 # Connect to the Vehicle.
-print("Connecting to vehicle on: %s" % (connection_string,))
 vehicle = connect(connection_string, wait_ready=False)
 
 def arm_and_takeoff(aTargetAltitude):
@@ -25,7 +24,6 @@ def arm_and_takeoff(aTargetAltitude):
 
     print ("Arming motors")
     # Copter should arm in GUIDED mode
-    print ("Change mode: Starting GUIDED mode...")
     vehicle.mode    = VehicleMode("GUIDED")
     vehicle.armed   = True
 
@@ -40,7 +38,6 @@ def arm_and_takeoff(aTargetAltitude):
     # Wait until the vehicle reaches a safe height before processing the goto (otherwise the command
     #  after Vehicle.simple_takeoff will execute immediately).
     while True:
-        print (" Altitude: ", vehicle.location.global_relative_frame.alt)
         #Break and return from function just below target altitude.
         if vehicle.location.global_relative_frame.alt>=aTargetAltitude*0.95:
             print ("Reached target altitude")
@@ -56,4 +53,4 @@ vehicle.mode = VehicleMode("AUTO")
 # Close vehicle object before exiting script
 vehicle.close()
 
-print("Completed")
+print("Flight Started")

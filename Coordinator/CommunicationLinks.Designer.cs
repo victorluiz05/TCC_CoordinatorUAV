@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommunicationLinks));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -55,13 +55,17 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnLoadMission = new System.Windows.Forms.Button();
+            this.ltbDemands = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
-            this.txtCounter = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
+            this.btnResume = new System.Windows.Forms.Button();
+            this.btnReturn = new System.Windows.Forms.Button();
+            this.btnStartMission = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -70,6 +74,9 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.btnDelete);
             this.panel1.Controls.Add(this.btnEdit);
             this.panel1.Controls.Add(this.btnAdd);
@@ -81,7 +88,7 @@
             this.panel1.Controls.Add(this.txtIP);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(967, 609);
+            this.panel1.Location = new System.Drawing.Point(1222, 609);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(260, 169);
             this.panel1.TabIndex = 19;
@@ -138,6 +145,9 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 14);
             this.label1.Name = "label1";
@@ -147,6 +157,8 @@
             // 
             // txtName
             // 
+            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtName.Location = new System.Drawing.Point(114, 11);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(135, 20);
@@ -154,6 +166,8 @@
             // 
             // txtPort
             // 
+            this.txtPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPort.Location = new System.Drawing.Point(114, 107);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(135, 20);
@@ -186,10 +200,12 @@
             // 
             // dtvCommunication
             // 
+            this.dtvCommunication.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dtvCommunication.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtvCommunication.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dtvCommunication.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtvCommunication.Location = new System.Drawing.Point(967, 434);
+            this.dtvCommunication.Location = new System.Drawing.Point(976, 434);
             this.dtvCommunication.Name = "dtvCommunication";
             this.dtvCommunication.Size = new System.Drawing.Size(506, 169);
             this.dtvCommunication.TabIndex = 20;
@@ -197,7 +213,7 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(509, 132);
+            this.btnConnect.Location = new System.Drawing.Point(312, 110);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(233, 23);
             this.btnConnect.TabIndex = 21;
@@ -207,9 +223,9 @@
             // 
             // rtbScript
             // 
-            this.rtbScript.Location = new System.Drawing.Point(435, 538);
+            this.rtbScript.Location = new System.Drawing.Point(446, 434);
             this.rtbScript.Name = "rtbScript";
-            this.rtbScript.Size = new System.Drawing.Size(524, 240);
+            this.rtbScript.Size = new System.Drawing.Size(524, 341);
             this.rtbScript.TabIndex = 22;
             this.rtbScript.Text = "";
             this.rtbScript.TextChanged += new System.EventHandler(this.rtbScript_TextChanged);
@@ -221,14 +237,14 @@
             "script-arm-takeoff-and-auto.py",
             "vehicle_stateC.py",
             "UAV_Current_State.py"});
-            this.cbxScript.Location = new System.Drawing.Point(509, 89);
+            this.cbxScript.Location = new System.Drawing.Point(312, 67);
             this.cbxScript.Name = "cbxScript";
             this.cbxScript.Size = new System.Drawing.Size(233, 21);
             this.cbxScript.TabIndex = 23;
             // 
             // btnUpload
             // 
-            this.btnUpload.Location = new System.Drawing.Point(509, 218);
+            this.btnUpload.Location = new System.Drawing.Point(200, 51);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(122, 23);
             this.btnUpload.TabIndex = 24;
@@ -238,7 +254,7 @@
             // 
             // btnLaunch
             // 
-            this.btnLaunch.Location = new System.Drawing.Point(324, 42);
+            this.btnLaunch.Location = new System.Drawing.Point(138, 21);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(122, 23);
             this.btnLaunch.TabIndex = 25;
@@ -248,28 +264,28 @@
             // 
             // txtLat
             // 
-            this.txtLat.Location = new System.Drawing.Point(324, 89);
+            this.txtLat.Location = new System.Drawing.Point(138, 68);
             this.txtLat.Name = "txtLat";
             this.txtLat.Size = new System.Drawing.Size(135, 20);
             this.txtLat.TabIndex = 26;
             // 
             // txtLon
             // 
-            this.txtLon.Location = new System.Drawing.Point(324, 115);
+            this.txtLon.Location = new System.Drawing.Point(138, 94);
             this.txtLon.Name = "txtLon";
             this.txtLon.Size = new System.Drawing.Size(135, 20);
             this.txtLon.TabIndex = 27;
             // 
             // txtAlt
             // 
-            this.txtAlt.Location = new System.Drawing.Point(324, 141);
+            this.txtAlt.Location = new System.Drawing.Point(138, 120);
             this.txtAlt.Name = "txtAlt";
             this.txtAlt.Size = new System.Drawing.Size(135, 20);
             this.txtAlt.TabIndex = 28;
             // 
             // txtGs
             // 
-            this.txtGs.Location = new System.Drawing.Point(324, 167);
+            this.txtGs.Location = new System.Drawing.Point(138, 146);
             this.txtGs.Name = "txtGs";
             this.txtGs.Size = new System.Drawing.Size(135, 20);
             this.txtGs.TabIndex = 29;
@@ -277,7 +293,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(209, 89);
+            this.label5.Location = new System.Drawing.Point(23, 68);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 30;
@@ -286,7 +302,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(209, 115);
+            this.label6.Location = new System.Drawing.Point(23, 94);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(57, 13);
             this.label6.TabIndex = 31;
@@ -295,7 +311,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(209, 141);
+            this.label7.Location = new System.Drawing.Point(23, 120);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(62, 13);
             this.label7.TabIndex = 32;
@@ -304,29 +320,45 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(209, 170);
+            this.label8.Location = new System.Drawing.Point(23, 149);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 13);
             this.label8.TabIndex = 33;
             this.label8.Text = "Ground Speed (m/s):";
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnLoadMission);
+            this.panel2.Controls.Add(this.ltbDemands);
             this.panel2.Controls.Add(this.label9);
-            this.panel2.Location = new System.Drawing.Point(12, 473);
+            this.panel2.Controls.Add(this.btnUpload);
+            this.panel2.Location = new System.Drawing.Point(12, 434);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(417, 305);
+            this.panel2.Size = new System.Drawing.Size(422, 344);
             this.panel2.TabIndex = 37;
+            // 
+            // btnLoadMission
+            // 
+            this.btnLoadMission.Location = new System.Drawing.Point(14, 22);
+            this.btnLoadMission.Name = "btnLoadMission";
+            this.btnLoadMission.Size = new System.Drawing.Size(122, 23);
+            this.btnLoadMission.TabIndex = 45;
+            this.btnLoadMission.Text = "Load Mission";
+            this.btnLoadMission.UseVisualStyleBackColor = true;
+            this.btnLoadMission.Click += new System.EventHandler(this.btnLoadMission_Click);
+            // 
+            // ltbDemands
+            // 
+            this.ltbDemands.FormattingEnabled = true;
+            this.ltbDemands.Location = new System.Drawing.Point(14, 51);
+            this.ltbDemands.Name = "ltbDemands";
+            this.ltbDemands.Size = new System.Drawing.Size(180, 290);
+            this.ltbDemands.TabIndex = 1;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(159, 136);
+            this.label9.Location = new System.Drawing.Point(3, 3);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(71, 13);
             this.label9.TabIndex = 0;
@@ -349,29 +381,66 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "Map";
             // 
-            // txtCounter
+            // btnStop
             // 
-            this.txtCounter.Location = new System.Drawing.Point(728, 449);
-            this.txtCounter.Name = "txtCounter";
-            this.txtCounter.Size = new System.Drawing.Size(135, 20);
-            this.txtCounter.TabIndex = 39;
+            this.btnStop.Location = new System.Drawing.Point(26, 208);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(122, 23);
+            this.btnStop.TabIndex = 41;
+            this.btnStop.Text = "Stop Timers";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // label11
+            // btnPause
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(616, 452);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(89, 13);
-            this.label11.TabIndex = 40;
-            this.label11.Text = "Number of UAVs:";
+            this.btnPause.Location = new System.Drawing.Point(709, 67);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(122, 23);
+            this.btnPause.TabIndex = 42;
+            this.btnPause.Text = "Pause Mission";
+            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
+            // 
+            // btnResume
+            // 
+            this.btnResume.Location = new System.Drawing.Point(709, 114);
+            this.btnResume.Name = "btnResume";
+            this.btnResume.Size = new System.Drawing.Size(122, 23);
+            this.btnResume.TabIndex = 43;
+            this.btnResume.Text = "Resume Mission";
+            this.btnResume.UseVisualStyleBackColor = true;
+            this.btnResume.Click += new System.EventHandler(this.btnResume_Click);
+            // 
+            // btnReturn
+            // 
+            this.btnReturn.Location = new System.Drawing.Point(709, 161);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(122, 23);
+            this.btnReturn.TabIndex = 44;
+            this.btnReturn.Text = "Return to Home";
+            this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
+            // 
+            // btnStartMission
+            // 
+            this.btnStartMission.Location = new System.Drawing.Point(709, 21);
+            this.btnStartMission.Name = "btnStartMission";
+            this.btnStartMission.Size = new System.Drawing.Size(122, 23);
+            this.btnStartMission.TabIndex = 45;
+            this.btnStartMission.Text = "Start Mission";
+            this.btnStartMission.UseVisualStyleBackColor = true;
+            this.btnStartMission.Click += new System.EventHandler(this.btnStartMission_Click);
             // 
             // CommunicationLinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1494, 787);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.txtCounter);
+            this.Controls.Add(this.btnStartMission);
+            this.Controls.Add(this.btnReturn);
+            this.Controls.Add(this.btnResume);
+            this.Controls.Add(this.btnPause);
+            this.Controls.Add(this.btnStop);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label8);
@@ -383,14 +452,15 @@
             this.Controls.Add(this.txtLon);
             this.Controls.Add(this.txtLat);
             this.Controls.Add(this.btnLaunch);
-            this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.cbxScript);
             this.Controls.Add(this.rtbScript);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.dtvCommunication);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CommunicationLinks";
-            this.Text = "Form1";
+            this.Text = "Multi UAV Coordinator";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CommunicationLinks_FormClosed);
             this.Load += new System.EventHandler(this.CommunicationLinks_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -431,13 +501,17 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtCounter;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnPause;
+        private System.Windows.Forms.Button btnResume;
+        private System.Windows.Forms.Button btnReturn;
+        private System.Windows.Forms.ListBox ltbDemands;
+        private System.Windows.Forms.Button btnLoadMission;
+        private System.Windows.Forms.Button btnStartMission;
     }
 }
 
