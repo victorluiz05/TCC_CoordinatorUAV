@@ -8,7 +8,7 @@ namespace CoordinatorMap
 {
     public partial class MapSetup : Form
     {
-        CoordinatorMap map;
+        public CoordinatorMap MapControl;
 
         public MapSetup()
         {
@@ -28,12 +28,12 @@ namespace CoordinatorMap
 
             panel1.Visible = false;
 
-            map = new CoordinatorMap(position, cellSize);
-            map.TopLevel = false;
-            map.Visible = true;
-            Controls.Add(map);
-            map.Location = new Point(0, 0);
-            map.ClientSize = ClientSize;
+            MapControl = new CoordinatorMap(position, cellSize);
+            MapControl.TopLevel = false;
+            MapControl.Visible = true;
+            Controls.Add(MapControl);
+            MapControl.Location = new Point(0, 0);
+            MapControl.ClientSize = ClientSize;
         }
 
         public new Size ClientSize
@@ -46,7 +46,7 @@ namespace CoordinatorMap
             set
             {
                 base.ClientSize = value;
-                if (map != null) map.ClientSize = value;
+                if (MapControl != null) MapControl.ClientSize = value;
             }
         }
     }

@@ -14,6 +14,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using GMap.NET;
+using static CoordinatorMap.Utils;
 
 namespace Coordinator
 {
@@ -176,10 +177,16 @@ namespace Coordinator
            
             int indexx = Array.FindIndex(MissionList, s => s.MissionName == ltbDemands.SelectedItem.ToString());
             missionn = @MissionList[indexx].MissionPath; //This parameter will be passed to the script so it can know where the mission file is, and then, upload it to the vehicle
-                    
-            
-            //Run_Script("upload-mission.py");
-             GetWpList(MissionList[indexx].MissionPath);
+
+            int indexUAV = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+            Run_Script("upload-mission.py");
+
+            int uavId = indexUAV; //// Coloquei esse "indexx" para servir de exemplo. O certo é ser um índice único do uav!
+
+            map.MapControl.MissionChanged(
+                map.MapControl.GetUavById(uavId),
+                GetWpList(MissionList[indexx].MissionPath)
+            );
 
         }
 
@@ -360,15 +367,16 @@ namespace Coordinator
                 string con = UAVinfo[j].Type;
                 string ip = UAVinfo[j].IP;
                 string port = UAVinfo[j].Port;
+                string name = UAVinfo[j].N_UAV;
 
-                UAVEstate(con, ip, port);
+                UAVEstate(con, ip, port, name);
                 //Thread.Sleep(200);
             }
 
             Thread.Sleep(100);
         }
 
-        public void UAVEstate(string t, string i, string p)
+        public void UAVEstate(string t, string i, string p, string name)
         {
             //var thread = new Thread(new ThreadStart(() =>
             //{
@@ -402,15 +410,18 @@ namespace Coordinator
                     string groundspeed = StateList[6];
                     string heading = StateList[8];
 
-                    int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+                    int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == name);
                     UAVinfo[indexx].Lat = latitude;         //Convert to decimal or whatever later
                     UAVinfo[indexx].Lon = longitude;
                     UAVinfo[indexx].Alt = altitude;
                     UAVinfo[indexx].Groundspeed = groundspeed;
                     UAVinfo[indexx].Heading = heading;
 
-                    //UpdatingTextBoxLatitude(latitude);
-                    //UpdatingTextBoxLongitude(longitude);
+                    map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(ParseDouble(UAVinfo[indexx].Lat), ParseDouble(UAVinfo[indexx].Lon));
+                    //map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(Double.Parse(UAVinfo[indexx].Lat), Double.Parse(UAVinfo[indexx].Lon));                  
+
+                    UpdatingTextBoxLatitude(latitude);
+                    UpdatingTextBoxLongitude(longitude);
                     //UpdatingTextBoxaltitude(altitude);
                     //UpdatingTextBoxGroundspeed(groundspeed);
                 }
@@ -587,6 +598,7 @@ namespace Coordinator
         // Creating the listener channel on the server side and implemetation of threads when therer is more than one GCS
         public void Connection_Handler()
         {
+            /*
             var thread = new Thread(new ThreadStart(() =>
             {
 
@@ -607,6 +619,7 @@ namespace Coordinator
             }));
 
             thread.Start();
+            */
         }
 
         public void ReceivingMissions(Socket clientSocket)
@@ -703,10 +716,10 @@ namespace Coordinator
             thread.Start();
         }
 
-        
-        List<PointLatLng> Listawp = new List<PointLatLng>();
-        public void GetWpList(string FileName)
+        public List<PointLatLng> GetWpList(string FileName)
         {
+            List<PointLatLng> Listawp = new List<PointLatLng>();
+
             string[] lines = File.ReadAllLines(FileName);    //Creating an array for every line in the text file
             WPLatLon[] info = new WPLatLon[lines.Length];    //Creating an array of structs that will contain the waypoint info(Lat,Lon)
             var array = new string[lines.Length];    //Creating an array that stores information from each column of each row
@@ -727,12 +740,16 @@ namespace Coordinator
 
             
 
-            for(int j=0;j<=info.Length;j++)
+            for(int j=1;j<info.Length;j++) //// Fiz alterações aqui. Revise o que eu fiz ;)
             {
 
-                Listawp.Add(new PointLatLng(double.Parse(info[3].Lat), double.Parse(info[3].Lon)));
+                //Debug.WriteLine(info[j].Lat + " " + info[j].Lon);
+
+                Listawp.Add(new PointLatLng(ParseDouble(info[j].Lat), ParseDouble(info[j].Lon)));
 
             }
+
+            return Listawp;
         }
 
 

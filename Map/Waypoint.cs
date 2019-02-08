@@ -3,7 +3,7 @@ using CoordinatorMap.Grid;
 
 namespace CoordinatorMap
 {
-    public class Waypoint
+    internal class Waypoint
     {
         public Waypoint Prev;
         public Waypoint Next;

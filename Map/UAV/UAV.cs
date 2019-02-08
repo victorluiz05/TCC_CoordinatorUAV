@@ -13,9 +13,9 @@ namespace CoordinatorMap
         private int _currentWpNum = 0;
         private CoordinatorMap Coordinator;
         private List<PointLatLng> _waypointsLL;
-        public Waypoint FirstWaypoint;
+        internal Waypoint FirstWaypoint;
 
-        public UAV(int sysid, CoordinatorMap coordinator, Color color)
+        internal UAV(int sysid, CoordinatorMap coordinator, Color color)
         {
             Id = sysid;
             Coordinator = coordinator;
@@ -24,7 +24,7 @@ namespace CoordinatorMap
 
 
 
-        public static void StartAnimationThread(List<UAV> uavs, Mutex uavsListMutex) { new Thread(() => Animate(uavs, uavsListMutex)).Start(); }
+        internal static void StartAnimationThread(List<UAV> uavs, Mutex uavsListMutex) { new Thread(() => Animate(uavs, uavsListMutex)).Start(); }
 
         public PointLatLng CurrentPosition
         {
@@ -51,7 +51,7 @@ namespace CoordinatorMap
             }
         }
 
-        public List<PointLatLng> WaypointsLL
+        internal List<PointLatLng> WaypointsLL
         {
             get
             {
@@ -110,7 +110,7 @@ namespace CoordinatorMap
         }
         
         private bool _selected = false;
-        public bool Selected
+        internal bool Selected
         {
             get
             {

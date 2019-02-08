@@ -21,7 +21,7 @@ namespace CoordinatorMap
             MapPosition = position;
 
             InitializeComponent();
-
+            
             Map.DragButton = MouseButtons.Left;
             Map.ShowCenter = false; // Remove the center "plus" sign
 
@@ -49,8 +49,30 @@ namespace CoordinatorMap
             Map.Position = MapPosition;
 
 
+            // Set the proportion between meters and pixels:
+            Map.MouseWheelZoomEnabled = false;
+
+            _meterPixelProportion = new double[5];
+
+            PointLatLng[] points = new PointLatLng[] { MapPosition, new PointLatLng(MapPosition.Lat + 0.001, MapPosition.Lng) };
+            GMapRoute route = new GMapRoute(points, "test route");
+            double distance = Distance(points[0], points[1]);
+
+            for (int i = 0; i < 5; i++)
+            {
+                Map.Zoom = 17 + i;
+                Overlay.Routes.Add(route);
+                _meterPixelProportion[i] = distance / Math.Abs(route.LocalPoints[1].Y - route.LocalPoints[0].Y);
+                Overlay.Routes.Remove(route);
+            }
+
+            Map.Zoom = 19;
+
+            Map.MouseWheelZoomEnabled = true;
+
+
             // Initialize the Grid:
-            double  dx = ClientSize.Width / 2 * MeterPixelProportion,
+            double dx = ClientSize.Width / 2 * MeterPixelProportion,
                     dy = ClientSize.Height / 2 * MeterPixelProportion;
 
             PointLatLng temp1 = NewLLPoint(MapPosition, -dx, -dy, MapPosition.Lat);
@@ -58,26 +80,16 @@ namespace CoordinatorMap
             GridCoordinates = new double[] { temp1.Lat, temp2.Lat, temp1.Lng, temp2.Lng };
             InitGrid();
 
+
             MapHasLoaded = true;
         }
 
+        private double[] _meterPixelProportion;
         private double MeterPixelProportion // Distance in meters divided by distance in pixels
         {
             get
             {
-                switch (Map.Zoom)
-                {
-                    case 17:
-                        return 1.07588807726478;
-                    case 18:
-                        return 0.535345275160738;
-                    case 19:
-                        return 0.267672637580369;
-                    case 20:
-                        return 0.133836318790185;
-                    default: // case 21
-                        return 0.0669181593950923;
-                }
+                return _meterPixelProportion[(int)Map.Zoom - 17];
             }
         }
 
@@ -163,13 +175,14 @@ namespace CoordinatorMap
             return uav;
         }
 
-        private UAV GetUavById(int id)
-        {
-            return Uavs.Find(x => x.Id == id);
+        public UAV GetUavById(int id) {
+            UAV uav = Uavs.Find(x => x.Id == id);
+
+            return uav != null ? uav : AddUav(id);
         }
 
         // Everytime a mission changes, it must pass through this:
-        private void MissionChanged(UAV uav, List<PointLatLng> waypointsLL)
+        public void MissionChanged(UAV uav, List<PointLatLng> waypointsLL)
         {
             // Expand the Grid if necessary:
             double[] newGridCoordinates = new double[] { GridCoordinates[0], GridCoordinates[1], GridCoordinates[2], GridCoordinates[3] };
@@ -295,16 +308,16 @@ namespace CoordinatorMap
 
 
         private bool MapHasLoaded = false;
-        public GMapOverlay Overlay { get; } = new GMapOverlay("overlay");
-        public GridHandler GridCellsHandler { get; }
+        internal GMapOverlay Overlay { get; } = new GMapOverlay("overlay");
+        internal GridHandler GridCellsHandler { get; }
         private double[] GridCoordinates;
         private PointLatLng MapPosition;
         public float[] CellSize { get; }
         private List<UAV> Uavs = new List<UAV>();
 
         private Mutex UavsListMutex = new Mutex();
-        public Mutex UavPositionMutex { get; } = new Mutex();
-        public Mutex UavAngleMutex { get; } = new Mutex();
+        internal Mutex UavPositionMutex { get; } = new Mutex();
+        internal Mutex UavAngleMutex { get; } = new Mutex();
 
 
         private List<Color> UavColors = new List<Color>();
@@ -320,21 +333,21 @@ namespace CoordinatorMap
         }
 
 
-        private int _selectedUavNum = -1; // Index of the selected uav. -1 means none
-        public int SelectedUavNum
+        private int _selectedUavId = -1; // Index of the selected uav. -1 means none
+        public int SelectedUavId
         {
             get
             {
-                return _selectedUavNum;
+                return _selectedUavId;
             }
 
             set
             {
-                if (_selectedUavNum != -1) Uavs[_selectedUavNum].Selected = false;
+                if (_selectedUavId != -1) GetUavById(_selectedUavId).Selected = false;
 
-                _selectedUavNum = value;
+                _selectedUavId = value;
 
-                if (_selectedUavNum != -1) Uavs[_selectedUavNum].Selected = true;
+                if (_selectedUavId != -1) GetUavById(_selectedUavId).Selected = true;
             }
         }
     }

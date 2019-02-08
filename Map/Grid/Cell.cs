@@ -2,7 +2,7 @@
 
 namespace CoordinatorMap.Grid
 {
-    public class Cell
+    internal class Cell
     {
         public double Coordinate { get; } // Latitude or longitude
 
@@ -14,7 +14,7 @@ namespace CoordinatorMap.Grid
 
 
         private List<Cell> Children; // If Cell object represents latitude, it has child objects representing longitude values
-        
+
         public void InsertCell(double lng)
         {
             if (Children == null) Children = new List<Cell>();

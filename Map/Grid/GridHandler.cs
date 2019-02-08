@@ -5,7 +5,7 @@ using System;
 
 namespace CoordinatorMap.Grid
 {
-    public class GridHandler
+    internal class GridHandler
     {
         private List<Cell> Cells = new List<Cell>();
         private float[] CellSize;
