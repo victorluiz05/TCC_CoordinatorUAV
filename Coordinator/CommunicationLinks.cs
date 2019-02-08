@@ -13,6 +13,7 @@ using System.Timers;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using GMap.NET;
 
 namespace Coordinator
 {
@@ -50,6 +51,12 @@ namespace Coordinator
             public string MissionPath;
         }
 
+        public struct WPLatLon
+        {
+            public string Lat;
+            public string Lon;
+        }
+
         public MissionInfo[] MissionList = new MissionInfo[163];
         public int CounterMission = 0;
 
@@ -58,7 +65,14 @@ namespace Coordinator
 
         public CommunicationLinks()
         {
+            map = new CoordinatorMap.MapSetup();
+            map.TopLevel = false;
+            map.Visible = true;
+
             InitializeComponent();
+
+            map.ClientSize = panel3.ClientSize;
+            panel3.Controls.Add(map);
 
             LoadData();
         }
@@ -159,11 +173,13 @@ namespace Coordinator
             string FileName = fi.Name;
             missionn = @"Missions\" + FileName; //This parameter will be passed to the script so it can know where the mission file is, and then, upload it to the vehicle
             */
-
+           
             int indexx = Array.FindIndex(MissionList, s => s.MissionName == ltbDemands.SelectedItem.ToString());
-            missionn = @"Missions\" + MissionList[indexx].MissionPath; //This parameter will be passed to the script so it can know where the mission file is, and then, upload it to the vehicle
-
-            Run_Script("upload-mission.py");
+            missionn = @MissionList[indexx].MissionPath; //This parameter will be passed to the script so it can know where the mission file is, and then, upload it to the vehicle
+                    
+            
+            //Run_Script("upload-mission.py");
+             GetWpList(MissionList[indexx].MissionPath);
 
         }
 
@@ -356,10 +372,8 @@ namespace Coordinator
         {
             //var thread = new Thread(new ThreadStart(() =>
             //{
-
             string script = "UAV_Current_State.py";
             string python = @"C:\Python27\python.exe";
-
             string arg = "";
 
             arg = script + " " + t + " " + i + " " + p;   //Final String that will be passed to Dronekit
@@ -401,10 +415,8 @@ namespace Coordinator
                     //UpdatingTextBoxGroundspeed(groundspeed);
                 }
                 Thread.Sleep(100);
-
             }
             //}));
-
             //thread.Start();
 
         }
@@ -556,6 +568,8 @@ namespace Coordinator
             string FilePath = openFile.FileName;  //Getting the full path of the mission file
             FileInfo fi = new FileInfo(FilePath);
 
+            
+
             string FileName = fi.Name;
             missionn = @"Missions\" + FileName; //This parameter will be passed to the script so it can know where the mission file is, and then, upload it to the vehicle
 
@@ -643,6 +657,7 @@ namespace Coordinator
         private void CommunicationLinks_FormClosed(object sender, FormClosedEventArgs e)
         {
             listenerSocket.Close();
+            Environment.Exit(0);
         }
 
         private void btnStartMission_Click(object sender, EventArgs e)
@@ -687,6 +702,39 @@ namespace Coordinator
 
             thread.Start();
         }
+
+        
+        List<PointLatLng> Listawp = new List<PointLatLng>();
+        public void GetWpList(string FileName)
+        {
+            string[] lines = File.ReadAllLines(FileName);    //Creating an array for every line in the text file
+            WPLatLon[] info = new WPLatLon[lines.Length];    //Creating an array of structs that will contain the waypoint info(Lat,Lon)
+            var array = new string[lines.Length];    //Creating an array that stores information from each column of each row
+
+            for (int i = 1; i < lines.Length; i++)
+            {
+                array = lines[i].Split(new string[] { "	" }, StringSplitOptions.RemoveEmptyEntries);    //Adding info in each column of each line
+            }
+
+            for (int con = 1; con < lines.Length; con++)
+            {
+                //Writing in each struct variable of each position of the info array the values received by the text file
+                array = lines[con].Split(new string[] { "	" }, StringSplitOptions.RemoveEmptyEntries);    
+                info[con].Lat = array[8];
+                info[con].Lon = array[9];
+                
+            }
+
+            
+
+            for(int j=0;j<=info.Length;j++)
+            {
+
+                Listawp.Add(new PointLatLng(double.Parse(info[3].Lat), double.Parse(info[3].Lon)));
+
+            }
+        }
+
 
     }
     

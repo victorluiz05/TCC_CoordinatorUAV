@@ -85,7 +85,7 @@ def printfile(aFileName):
 
 path = (sys.argv[4])
 import_mission_filename = path
-#import_mission_filename = 'missions\mpmission.txt'   #VICTOR - Here is where the path os the mission file is written    
+#import_mission_filename = 'Missions\M1.txt'   #VICTOR - Here is where the path os the mission file is written    
 
 
 

@@ -1,0 +1,78 @@
+c:\users\udesc\documents\visual studio 2017\Projects\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csprojResolveAssemblyReference.cache
+c:\users\udesc\documents\visual studio 2017\Projects\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.Properties.Resources.resources
+c:\users\udesc\documents\visual studio 2017\Projects\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csproj.GenerateResource.Cache
+c:\users\udesc\documents\visual studio 2017\Projects\UAVCoordinator\UAVCoordinator\bin\Debug\UAVCoordinator.exe.config
+c:\users\udesc\documents\visual studio 2017\Projects\UAVCoordinator\UAVCoordinator\bin\Debug\UAVCoordinator.exe
+c:\users\udesc\documents\visual studio 2017\Projects\UAVCoordinator\UAVCoordinator\bin\Debug\UAVCoordinator.pdb
+c:\users\udesc\documents\visual studio 2017\Projects\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.exe
+c:\users\udesc\documents\visual studio 2017\Projects\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.pdb
+C:\Users\udesc\documents\visual studio 2017\Projects\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.UAVCoordinator.resources
+C:\Users\filip\OneDrive\Documentos\bcc\fase 4\UAVCoordinator\UAVCoordinator\bin\Debug\UAVCoordinator.exe.config
+C:\Users\filip\OneDrive\Documentos\bcc\fase 4\UAVCoordinator\UAVCoordinator\bin\Debug\UAVCoordinator.exe
+C:\Users\filip\OneDrive\Documentos\bcc\fase 4\UAVCoordinator\UAVCoordinator\bin\Debug\UAVCoordinator.pdb
+C:\Users\filip\OneDrive\Documentos\bcc\fase 4\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csprojAssemblyReference.cache
+C:\Users\filip\OneDrive\Documentos\bcc\fase 4\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.UAVCoordinator.resources
+C:\Users\filip\OneDrive\Documentos\bcc\fase 4\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.Properties.Resources.resources
+C:\Users\filip\OneDrive\Documentos\bcc\fase 4\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csproj.GenerateResource.cache
+C:\Users\filip\OneDrive\Documentos\bcc\fase 4\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csproj.CoreCompileInputs.cache
+C:\Users\filip\OneDrive\Documentos\bcc\fase 4\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csproj.CopyComplete
+C:\Users\filip\OneDrive\Documentos\bcc\fase 4\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.exe
+C:\Users\filip\OneDrive\Documentos\bcc\fase 4\UAVCoordinator\UAVCoordinator\obj\Debug\UAVCoordinator.pdb
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\UAVCoordinator.exe.config
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\UAVCoordinator.exe
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\UAVCoordinator.pdb
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csprojResolveAssemblyReference.cache
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.SetupForm.resources
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.UAVCoordinator.resources
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.Properties.Resources.resources
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csproj.GenerateResource.Cache
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.exe
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.pdb
+C:\Users\NH.NH-PC\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\UAVCoordinator.exe.config
+C:\Users\NH.NH-PC\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\UAVCoordinator.exe
+C:\Users\NH.NH-PC\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\UAVCoordinator.pdb
+C:\Users\NH.NH-PC\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csprojAssemblyReference.cache
+C:\Users\NH.NH-PC\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.SetupForm.resources
+C:\Users\NH.NH-PC\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.UAVCoordinator.resources
+C:\Users\NH.NH-PC\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.Properties.Resources.resources
+C:\Users\NH.NH-PC\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csproj.GenerateResource.cache
+C:\Users\NH.NH-PC\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csproj.CoreCompileInputs.cache
+C:\Users\NH.NH-PC\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csproj.CopyComplete
+C:\Users\NH.NH-PC\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.exe
+C:\Users\NH.NH-PC\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.pdb
+C:\Users\Filipe\Documents\UAV-Coordinator\UAVCoordinator\bin\Debug\UAVCoordinator.exe.config
+C:\Users\Filipe\Documents\UAV-Coordinator\UAVCoordinator\bin\Debug\UAVCoordinator.exe
+C:\Users\Filipe\Documents\UAV-Coordinator\UAVCoordinator\bin\Debug\UAVCoordinator.pdb
+C:\Users\Filipe\Documents\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csprojAssemblyReference.cache
+C:\Users\Filipe\Documents\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.SetupForm.resources
+C:\Users\Filipe\Documents\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.UAVCoordinator.resources
+C:\Users\Filipe\Documents\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.Properties.Resources.resources
+C:\Users\Filipe\Documents\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csproj.GenerateResource.cache
+C:\Users\Filipe\Documents\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csproj.CoreCompileInputs.cache
+C:\Users\Filipe\Documents\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csproj.CopyComplete
+C:\Users\Filipe\Documents\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.exe
+C:\Users\Filipe\Documents\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.pdb
+C:\Users\udesc\Documents\Visual Studio 2017\Projects\UAV-Coordinator\UAVCoordinator\bin\Debug\UAVCoordinator.exe.config
+C:\Users\udesc\Documents\Visual Studio 2017\Projects\UAV-Coordinator\UAVCoordinator\bin\Debug\UAVCoordinator.exe
+C:\Users\udesc\Documents\Visual Studio 2017\Projects\UAV-Coordinator\UAVCoordinator\bin\Debug\UAVCoordinator.pdb
+C:\Users\udesc\Documents\Visual Studio 2017\Projects\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csprojResolveAssemblyReference.cache
+C:\Users\udesc\Documents\Visual Studio 2017\Projects\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.SetupForm.resources
+C:\Users\udesc\Documents\Visual Studio 2017\Projects\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.UAVCoordinator.resources
+C:\Users\udesc\Documents\Visual Studio 2017\Projects\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.Properties.Resources.resources
+C:\Users\udesc\Documents\Visual Studio 2017\Projects\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.csproj.GenerateResource.Cache
+C:\Users\udesc\Documents\Visual Studio 2017\Projects\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.exe
+C:\Users\udesc\Documents\Visual Studio 2017\Projects\UAV-Coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.pdb
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\EntityFramework.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\GMap.NET.Core.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\GMap.NET.WindowsForms.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\Newtonsoft.Json.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\System.Data.SQLite.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\EntityFramework.xml
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\Newtonsoft.Json.xml
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\System.Data.SQLite.xml
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\bin\Debug\System.Data.SQLite.dll.config

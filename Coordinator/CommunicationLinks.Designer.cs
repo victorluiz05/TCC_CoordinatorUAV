@@ -1,16 +1,11 @@
-﻿namespace Coordinator
+﻿using CoordinatorMap;
+
+namespace Coordinator
 {
     partial class CommunicationLinks
     {
-        /// <summary>
-        /// Variável de designer necessária.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Limpar os recursos que estão sendo usados.
-        /// </summary>
-        /// <param name="disposing">true se for necessário descartar os recursos gerenciados; caso contrário, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -60,7 +55,6 @@
             this.ltbDemands = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnResume = new System.Windows.Forms.Button();
@@ -69,7 +63,6 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -90,7 +83,7 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Location = new System.Drawing.Point(1222, 609);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(260, 169);
+            this.panel1.Size = new System.Drawing.Size(210, 169);
             this.panel1.TabIndex = 19;
             // 
             // btnDelete
@@ -170,7 +163,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPort.Location = new System.Drawing.Point(114, 107);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(135, 20);
+            this.txtPort.Size = new System.Drawing.Size(85, 20);
             this.txtPort.TabIndex = 2;
             // 
             // txtIP
@@ -207,7 +200,7 @@
             this.dtvCommunication.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtvCommunication.Location = new System.Drawing.Point(976, 434);
             this.dtvCommunication.Name = "dtvCommunication";
-            this.dtvCommunication.Size = new System.Drawing.Size(506, 169);
+            this.dtvCommunication.Size = new System.Drawing.Size(456, 169);
             this.dtvCommunication.TabIndex = 20;
             this.dtvCommunication.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtvCommunication_CellClick);
             // 
@@ -366,20 +359,10 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.label10);
             this.panel3.Location = new System.Drawing.Point(895, 12);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(599, 416);
             this.panel3.TabIndex = 38;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(279, 206);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(28, 13);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Map";
             // 
             // btnStop
             // 
@@ -435,7 +418,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1494, 787);
+            this.ClientSize = new System.Drawing.Size(1444, 787);
             this.Controls.Add(this.btnStartMission);
             this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.btnResume);
@@ -467,14 +450,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtName;
@@ -504,7 +486,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnResume;
@@ -512,6 +493,7 @@
         private System.Windows.Forms.ListBox ltbDemands;
         private System.Windows.Forms.Button btnLoadMission;
         private System.Windows.Forms.Button btnStartMission;
+        private CoordinatorMap.MapSetup map;
     }
 }
 

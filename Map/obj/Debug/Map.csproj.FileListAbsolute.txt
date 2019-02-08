@@ -1,0 +1,101 @@
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\obj\Debug\Map.csprojResolveAssemblyReference.cache
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\obj\Debug\UAVCoordinator.Properties.Resources.resources
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\obj\Debug\Map.csproj.GenerateResource.Cache
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\obj\Debug\UAVCoordinator.exe
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\obj\Debug\UAVCoordinator.pdb
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\obj\Debug\CoordinatorMap.CoordinatorMap.resources
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\UAVCoordinator.exe.config
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\UAVCoordinator.exe
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\UAVCoordinator.pdb
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\EntityFramework.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\GMap.NET.Core.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\GMap.NET.WindowsForms.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\Newtonsoft.Json.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\System.Data.SQLite.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\EntityFramework.xml
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\Newtonsoft.Json.xml
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\System.Data.SQLite.xml
+C:\Users\udesc\Documents\Filipe\uav-coordinator\Map\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\UAVCoordinator.exe.config
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\UAVCoordinator.exe
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\UAVCoordinator.pdb
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\EntityFramework.dll
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\GMap.NET.Core.dll
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\GMap.NET.WindowsForms.dll
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\System.Data.SQLite.dll
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\EntityFramework.xml
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\System.Data.SQLite.xml
+C:\Users\Filipe\Documents\uav-coordinator\Map\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Filipe\Documents\uav-coordinator\Map\obj\Debug\Map.csprojAssemblyReference.cache
+C:\Users\Filipe\Documents\uav-coordinator\Map\obj\Debug\CoordinatorMap.CoordinatorMap.resources
+C:\Users\Filipe\Documents\uav-coordinator\Map\obj\Debug\UAVCoordinator.Properties.Resources.resources
+C:\Users\Filipe\Documents\uav-coordinator\Map\obj\Debug\Map.csproj.GenerateResource.cache
+C:\Users\Filipe\Documents\uav-coordinator\Map\obj\Debug\Map.csproj.CoreCompileInputs.cache
+C:\Users\Filipe\Documents\uav-coordinator\Map\obj\Debug\Map.csproj.CopyComplete
+C:\Users\Filipe\Documents\uav-coordinator\Map\obj\Debug\UAVCoordinator.exe
+C:\Users\Filipe\Documents\uav-coordinator\Map\obj\Debug\UAVCoordinator.pdb
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\UAVCoordinator.exe.config
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\UAVCoordinator.exe
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\UAVCoordinator.pdb
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\EntityFramework.dll
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\GMap.NET.Core.dll
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\GMap.NET.WindowsForms.dll
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\System.Data.SQLite.dll
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\EntityFramework.xml
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\System.Data.SQLite.xml
+C:\Users\Filipe\Downloads\uav-coordinator\Map\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Filipe\Downloads\uav-coordinator\Map\obj\Debug\Map.csprojAssemblyReference.cache
+C:\Users\Filipe\Downloads\uav-coordinator\Map\obj\Debug\CoordinatorMap.CoordinatorMap.resources
+C:\Users\Filipe\Downloads\uav-coordinator\Map\obj\Debug\CoordinatorMap.MapSetup.resources
+C:\Users\Filipe\Downloads\uav-coordinator\Map\obj\Debug\UAVCoordinator.Properties.Resources.resources
+C:\Users\Filipe\Downloads\uav-coordinator\Map\obj\Debug\Map.csproj.GenerateResource.cache
+C:\Users\Filipe\Downloads\uav-coordinator\Map\obj\Debug\Map.csproj.CoreCompileInputs.cache
+C:\Users\Filipe\Downloads\uav-coordinator\Map\obj\Debug\Map.csproj.CopyComplete
+C:\Users\Filipe\Downloads\uav-coordinator\Map\obj\Debug\UAVCoordinator.exe
+C:\Users\Filipe\Downloads\uav-coordinator\Map\obj\Debug\UAVCoordinator.pdb
+C:\Users\Filipe\Documents\uav-coordinator\Map\obj\Debug\CoordinatorMap.MapSetup.resources
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\UAVCoordinator.exe.config
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\UAVCoordinator.exe
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\UAVCoordinator.pdb
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\EntityFramework.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\GMap.NET.Core.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\GMap.NET.WindowsForms.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\System.Data.SQLite.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\EntityFramework.xml
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\System.Data.SQLite.xml
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\obj\Debug\Map.csprojAssemblyReference.cache
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\obj\Debug\CoordinatorMap.CoordinatorMap.resources
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\obj\Debug\CoordinatorMap.MapSetup.resources
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\obj\Debug\UAVCoordinator.Properties.Resources.resources
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\obj\Debug\Map.csproj.GenerateResource.cache
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\obj\Debug\Map.csproj.CoreCompileInputs.cache
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\obj\Debug\Map.csproj.CopyComplete
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\obj\Debug\UAVCoordinator.exe
+C:\Users\Victor Luiz Ferreira\Google Drive\TCC\Junção(Mapa+Coord)\UAV-Coordinator\Map\obj\Debug\UAVCoordinator.pdb

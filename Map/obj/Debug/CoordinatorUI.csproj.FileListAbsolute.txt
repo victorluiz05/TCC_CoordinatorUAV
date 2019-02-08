@@ -1,0 +1,5 @@
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.UAVCoordinator.resources
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.Properties.Resources.resources
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\CoordinatorUI.csproj.GenerateResource.Cache
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.exe
+C:\Users\udesc\Documents\Filipe\uav-coordinator\UAVCoordinator\obj\Debug\UAVCoordinator.pdb
