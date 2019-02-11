@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Data.SQLite;
-using System.Globalization;
 using System.Timers;
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using GMap.NET;
@@ -29,10 +25,11 @@ namespace Coordinator
         string IpAddress = "";
         string Portt = "";
         string missionn = "";
+        private Logger log = new Logger("CommunicationLinks");
 
         public struct UAVStatus
         {
-            public string CommuName;
+            //public string CommuName;
             public string Type;
             public string IP;
             public string Port;
@@ -43,6 +40,7 @@ namespace Coordinator
             public string Groundspeed;
             public string Heading;
             public bool Occupied;
+            public string CurrentWP;
 
         }
 
@@ -117,7 +115,7 @@ namespace Coordinator
             foreach (DataRow row in DT.Rows)
             {
                 UAVinfo[CounterUAV].N_UAV = row["ConnectionName"].ToString();
-                UAVinfo[CounterUAV].CommuName = row["ConnectionName"].ToString();
+                //UAVinfo[CounterUAV].CommuName = row["ConnectionName"].ToString();
                 UAVinfo[CounterUAV].Type = row["Type"].ToString();
                 UAVinfo[CounterUAV].IP = row["IPAddress"].ToString();
                 UAVinfo[CounterUAV].Port = row["Port"].ToString();
@@ -138,13 +136,16 @@ namespace Coordinator
         //Event clickon the DataGridView that selects the connection
         private void dtvCommunication_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            txtName.Text = dtvCommunication.SelectedRows[0].Cells[0].Value.ToString();
-            cbxType.Text = dtvCommunication.SelectedRows[0].Cells[1].Value.ToString();
-            txtIP.Text = dtvCommunication.SelectedRows[0].Cells[2].Value.ToString();
-            txtPort.Text = dtvCommunication.SelectedRows[0].Cells[3].Value.ToString();
-
             int Index = e.RowIndex;
+            if (Index < 0 || Index >= dtvCommunication.RowCount - 1) return;
+            dtvCommunication.ClearSelection();
+            dtvCommunication.Rows[Index].Selected = true;
+
+            txtName.Text = dtvCommunication.Rows[Index].Cells[0].Value.ToString();
+            cbxType.Text = dtvCommunication.Rows[Index].Cells[1].Value.ToString();
+            txtIP.Text = dtvCommunication.Rows[Index].Cells[2].Value.ToString();
+            txtPort.Text = dtvCommunication.Rows[Index].Cells[3].Value.ToString();
+
             DataGridViewRow selectedRow = dtvCommunication.Rows[Index];
 
             //Once you select a row in the table, the global variables are filled with the respective information, and from this, the values are passed to the thread that will connect with DroneKit
@@ -160,6 +161,7 @@ namespace Coordinator
             txtAlt.Text = UAVinfo[indexx].Alt;
             txtGs.Text = UAVinfo[indexx].Groundspeed;
 
+            if (map.MapControl != null) map.MapControl.SelectedUavId = indexx;
         }
 
         //Uploads a mission to a specific UAV (selects the file and then run the script that does that)
@@ -174,20 +176,32 @@ namespace Coordinator
             string FileName = fi.Name;
             missionn = @"Missions\" + FileName; //This parameter will be passed to the script so it can know where the mission file is, and then, upload it to the vehicle
             */
-           
+
+            if (dtvCommunication.RowCount < 2) return;
+
+            if (map.MapControl == null)
+            {
+                MessageBox.Show("You must set up the map before uploading a mission", "No map settings applied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             int indexx = Array.FindIndex(MissionList, s => s.MissionName == ltbDemands.SelectedItem.ToString());
             missionn = @MissionList[indexx].MissionPath; //This parameter will be passed to the script so it can know where the mission file is, and then, upload it to the vehicle
 
             int indexUAV = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+            if (indexUAV == -1)
+            {
+                MessageBox.Show("You must select an UAV before adding a mission", "No UAV selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             Run_Script("upload-mission.py");
 
-            int uavId = indexUAV; //// Coloquei esse "indexx" para servir de exemplo. O certo é ser um índice único do uav!
-
             map.MapControl.MissionChanged(
-                map.MapControl.GetUavById(uavId),
+                map.MapControl.GetUavById(indexUAV),
                 GetWpList(MissionList[indexx].MissionPath)
             );
 
+            map.MapControl.SelectedUavId = indexUAV;
         }
 
         //Function that runs a DroneKit script, it gets the arguments(such as the communication info and a mission file for example) to pass to Python using ProcessStartInfo
@@ -243,6 +257,8 @@ namespace Coordinator
         private void CommunicationLinks_Load(object sender, EventArgs e)
         {
             Connection_Handler();
+
+            if (CounterUAV > 0) dtvCommunication_CellClick(this, new DataGridViewCellEventArgs(0, 0));
         }
 
         //Adds to DataBase a communication info 
@@ -253,7 +269,7 @@ namespace Coordinator
             LoadData();
 
             UAVinfo[CounterUAV].N_UAV = txtName.Text;
-            UAVinfo[CounterUAV].CommuName = txtName.Text;
+            //UAVinfo[CounterUAV].CommuName = txtName.Text;
             UAVinfo[CounterUAV].Type = cbxType.Text;
             UAVinfo[CounterUAV].IP = txtIP.Text;
             UAVinfo[CounterUAV].Port = txtPort.Text;
@@ -263,6 +279,8 @@ namespace Coordinator
             txtName.Clear();
             txtIP.Clear();
             txtPort.Clear();
+
+            dtvCommunication_CellClick(this, new DataGridViewCellEventArgs(0, dtvCommunication.RowCount - 2));
         }
 
         //Updates an info in the DataBase
@@ -274,7 +292,7 @@ namespace Coordinator
 
             int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
             UAVinfo[indexx].N_UAV = txtName.Text;
-            UAVinfo[indexx].CommuName = txtName.Text;
+            //UAVinfo[indexx].CommuName = txtName.Text;
             UAVinfo[indexx].Type = cbxType.Text;
             UAVinfo[indexx].IP = txtIP.Text;
             UAVinfo[indexx].Port = txtPort.Text;
@@ -288,6 +306,9 @@ namespace Coordinator
         //Deletes an info from DataBase
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            int indexUAV = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+            if (map.MapControl != null) map.MapControl.RemoveUav(map.MapControl.GetUavById(indexUAV));
+
             string txtQuery = "delete from tbcomm where ConnectionName='" + txtName.Text + "'";
             ExecuteQuery(txtQuery);
             LoadData();
@@ -347,6 +368,18 @@ namespace Coordinator
             }
         }
 
+        public void UpdatingTextBoxCurrentWP(string currentwp)
+        {
+            if (this.txtWP.InvokeRequired)
+            {
+                this.txtWP.Invoke(new TextBoxDelegate(UpdatingTextBoxCurrentWP), new object[] { currentwp });
+            }
+            else
+            {
+                this.txtWP.Text = currentwp;
+            }
+        }
+
         System.Timers.Timer aTimer = new System.Timers.Timer(2000);
         //Launches the UAV and gets the current state of it (latitude, longitude etc)
         private void btnLaunch_Click(object sender, EventArgs e)
@@ -381,6 +414,7 @@ namespace Coordinator
             //var thread = new Thread(new ThreadStart(() =>
             //{
             string script = "UAV_Current_State.py";
+
             string python = @"C:\Python27\python.exe";
             string arg = "";
 
@@ -401,29 +435,54 @@ namespace Coordinator
                 {
                     string procOutput = sr.ReadToEnd();
 
-                    string delimiter = ", ";
-                    string[] StateList = procOutput.Split(delimiter.ToCharArray());
+                    const string delimiter = ", ";
+                    string[] StateList = procOutput.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                    string latitude = StateList[0];
-                    string longitude = StateList[2];
-                    string altitude = StateList[4];
-                    string groundspeed = StateList[6];
-                    string heading = StateList[8];
+                    try
+                    {
+                        string latitude = StateList[0];
+                        string longitude = StateList[1];
+                        string altitude = StateList[2];
+                        string groundspeed = StateList[3];
+                        string heading = StateList[4];
+                        string currentwp = StateList[5];
 
-                    int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == name);
-                    UAVinfo[indexx].Lat = latitude;         //Convert to decimal or whatever later
-                    UAVinfo[indexx].Lon = longitude;
-                    UAVinfo[indexx].Alt = altitude;
-                    UAVinfo[indexx].Groundspeed = groundspeed;
-                    UAVinfo[indexx].Heading = heading;
+                        double lat = ParseDouble(latitude);
+                        double lng = ParseDouble(longitude);
 
-                    map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(ParseDouble(UAVinfo[indexx].Lat), ParseDouble(UAVinfo[indexx].Lon));
-                    //map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(Double.Parse(UAVinfo[indexx].Lat), Double.Parse(UAVinfo[indexx].Lon));                  
+                        int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == name);
+                        UAVinfo[indexx].Lat = latitude;         //Convert to decimal or whatever later
+                        UAVinfo[indexx].Lon = longitude;
+                        UAVinfo[indexx].Alt = altitude;
+                        UAVinfo[indexx].Groundspeed = groundspeed;
+                        UAVinfo[indexx].Heading = heading;
+                        UAVinfo[indexx].CurrentWP = currentwp;
 
-                    UpdatingTextBoxLatitude(latitude);
-                    UpdatingTextBoxLongitude(longitude);
-                    //UpdatingTextBoxaltitude(altitude);
-                    //UpdatingTextBoxGroundspeed(groundspeed);
+                        if ((UAVinfo[indexx].Lat == "None") || (UAVinfo[indexx].Lon == "None"))
+                        {
+                            //Can't do Nothing
+                        }
+                        else
+                        {
+                            map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(ParseDouble(UAVinfo[indexx].Lat), ParseDouble(UAVinfo[indexx].Lon));
+                        }
+
+
+                        int ind = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+                        string latt = UAVinfo[ind].Lat;
+                        string lonn = UAVinfo[ind].Lon;
+                        string altt = UAVinfo[ind].Alt;
+                        string groundd = UAVinfo[ind].Groundspeed;
+                        string currentwpp = UAVinfo[ind].CurrentWP;
+
+                        UpdatingTextBoxLatitude(latt);
+                        UpdatingTextBoxLongitude(lonn);
+                        UpdatingTextBoxaltitude(altt);
+                        UpdatingTextBoxGroundspeed(groundd);
+                        UpdatingTextBoxCurrentWP(currentwpp);
+
+                    }
+                    catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
                 }
                 Thread.Sleep(100);
             }
@@ -431,18 +490,14 @@ namespace Coordinator
             //thread.Start();
 
         }
+
         //Does nothing, probably I double clicked on some element from the design and now if a delete this code, my design gives some error
         private void rtbScript_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void btnStop_Click(object sender, EventArgs e)
-        {
-            aTimer.Stop();
-
-        }
-
+        
         public void PauseMission(string typee, string IpAddress, string Portt)
         {
             var thread = new Thread(new ThreadStart(() =>
@@ -591,7 +646,7 @@ namespace Coordinator
 
             CounterMission += 1;
 
-
+            ltbDemands.SelectedIndex = CounterMission - 1;
         }
 
         Socket listenerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -678,7 +733,7 @@ namespace Coordinator
             var thread = new Thread(new ThreadStart(() =>
             {
                 string python = @"C:\Python27\python.exe";
-                string myPythonApp = "AutoCoord.py";
+                string myPythonApp = "script-arm-takeoff-and-auto.py";
                 string con = typee;
                 string ip = IpAddress;
                 string port = Portt;

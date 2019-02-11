@@ -94,6 +94,7 @@ namespace CoordinatorMap
         }
 
         private void Map_MouseMove(object sender, MouseEventArgs e) { CorrectPosition(); }
+
         private void Map_MouseLeave(object sender, EventArgs e) { CorrectPosition(); }
 
         private void CorrectPosition()
@@ -168,11 +169,16 @@ namespace CoordinatorMap
             UavsListMutex.ReleaseMutex();
 
 
-            ToolStripMenuItem uavMenuItem = new ToolStripMenuItem();
-            uavMenuItem.Text = "UAV " + id;
-
-
             return uav;
+        }
+
+        public void RemoveUav(UAV uav)
+        {
+            UavsListMutex.WaitOne();
+            Uavs.Remove(uav);
+            UavsListMutex.ReleaseMutex();
+
+            uav.RemoveItself();
         }
 
         public UAV GetUavById(int id) {
@@ -202,6 +208,8 @@ namespace CoordinatorMap
             uav.WaypointsLL = waypointsLL;
 
             GridCellsHandler.AddWaypoints(uav); // Link the uav's waypoints to Grid cells
+
+            CorrectPosition();
         }
 
         // Draw a cell from left to right:

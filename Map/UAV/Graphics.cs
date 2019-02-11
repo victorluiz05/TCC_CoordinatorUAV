@@ -119,7 +119,7 @@ namespace CoordinatorMap
 
         private void DrawTrail(PointLatLng pos)
         {
-            if (!_selected || pos == null || _waypointsLL.Count <= _currentWpNum + 1) return;
+            if (!_selected /*|| pos == null*/ || _waypointsLL == null || _waypointsLL.Count <= _currentWpNum + 1) return;
 
             PointLatLng wp1 = _waypointsLL[_currentWpNum], wp2 = _waypointsLL[_currentWpNum + 1];
             

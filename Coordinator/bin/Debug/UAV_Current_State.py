@@ -15,9 +15,11 @@ vehicle = connect(connection_string, wait_ready=False)
 currentLocation = vehicle.location.global_relative_frame
 currentGroundspeed = vehicle.groundspeed
 currentHeading = vehicle.heading
+cmds = vehicle.commands
+currentWP = cmds.next
 
 #CurrentState = currentLocation.lat + ":" + currentLocation.lon + " " + currentLocation.alt + " " + currentGroundspeed 
-print("%s, %s, %s, %s, %s " %(currentLocation.lat, currentLocation.lon, currentLocation.alt, currentGroundspeed, currentHeading))
+print("%s, %s, %s, %s, %s, %s " %(currentLocation.lat, currentLocation.lon, currentLocation.alt, currentGroundspeed, currentHeading, currentWP))
 
 # Close vehicle object before exiting script
 vehicle.close()

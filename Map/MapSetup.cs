@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
 using static CoordinatorMap.Utils;
 
 namespace CoordinatorMap
@@ -13,6 +14,16 @@ namespace CoordinatorMap
         public MapSetup()
         {
             InitializeComponent();
+
+            try
+            {
+                string[] cache = File.ReadAllText(@"Cache\mapsetup").Split(' ');
+                textBox1.Text = cache[0];
+                textBox2.Text = cache[1];
+                textBox3.Text = cache[2];
+                textBox4.Text = cache[3];
+            }
+            catch (FileNotFoundException) { }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -25,6 +36,10 @@ namespace CoordinatorMap
 
             cellSize[0] = ParseFloat(textBox4.Text);
             cellSize[1] = ParseFloat(textBox3.Text);
+
+            Directory.CreateDirectory(@"Cache");
+            File.WriteAllText(@"Cache\mapsetup",
+                textBox1.Text + " " + textBox2.Text + " " + textBox3.Text + " " + textBox4.Text);
 
             panel1.Visible = false;
 

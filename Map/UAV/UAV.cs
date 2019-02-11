@@ -130,10 +130,24 @@ namespace CoordinatorMap
                         Coordinator.Overlay.Polygons.Add(i);
                     }
 
+                if (_selected)
+                    foreach (GMapMarker i in WpMarkers)
+                    {
+                        Coordinator.Overlay.Markers.Remove(i);
+                        Coordinator.Overlay.Markers.Add(i);
+                    }
+
                 foreach (GMapPolygon i in TrailLines) Coordinator.Overlay.Polygons.Remove(i);
 
                 DrawTrail(_currentPosition);
             }
+        }
+
+        internal void RemoveItself()
+        {
+            ClearStage();
+            Coordinator.Overlay.Markers.Remove(UavMarker);
+            Coordinator.GridCellsHandler.RemoveWaypointsR(FirstWaypoint);
         }
     }
 }

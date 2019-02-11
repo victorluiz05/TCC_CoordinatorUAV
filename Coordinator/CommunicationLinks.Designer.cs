@@ -55,11 +55,12 @@ namespace Coordinator
             this.ltbDemands = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnStop = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnResume = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnStartMission = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtWP = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -83,7 +84,7 @@ namespace Coordinator
             this.panel1.Controls.Add(this.label3);
             this.panel1.Location = new System.Drawing.Point(1222, 609);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(210, 169);
+            this.panel1.Size = new System.Drawing.Size(260, 186);
             this.panel1.TabIndex = 19;
             // 
             // btnDelete
@@ -163,7 +164,7 @@ namespace Coordinator
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPort.Location = new System.Drawing.Point(114, 107);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(85, 20);
+            this.txtPort.Size = new System.Drawing.Size(135, 20);
             this.txtPort.TabIndex = 2;
             // 
             // txtIP
@@ -199,8 +200,10 @@ namespace Coordinator
             this.dtvCommunication.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dtvCommunication.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtvCommunication.Location = new System.Drawing.Point(976, 434);
+            this.dtvCommunication.MultiSelect = false;
             this.dtvCommunication.Name = "dtvCommunication";
-            this.dtvCommunication.Size = new System.Drawing.Size(456, 169);
+            this.dtvCommunication.ReadOnly = true;
+            this.dtvCommunication.Size = new System.Drawing.Size(506, 169);
             this.dtvCommunication.TabIndex = 20;
             this.dtvCommunication.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtvCommunication_CellClick);
             // 
@@ -251,7 +254,7 @@ namespace Coordinator
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(122, 23);
             this.btnLaunch.TabIndex = 25;
-            this.btnLaunch.Text = "Launch UAV";
+            this.btnLaunch.Text = "Start Telemetry";
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
@@ -364,16 +367,6 @@ namespace Coordinator
             this.panel3.Size = new System.Drawing.Size(599, 416);
             this.panel3.TabIndex = 38;
             // 
-            // btnStop
-            // 
-            this.btnStop.Location = new System.Drawing.Point(26, 208);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(122, 23);
-            this.btnStop.TabIndex = 41;
-            this.btnStop.Text = "Stop Timers";
-            this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-            // 
             // btnPause
             // 
             this.btnPause.Location = new System.Drawing.Point(709, 67);
@@ -414,16 +407,33 @@ namespace Coordinator
             this.btnStartMission.UseVisualStyleBackColor = true;
             this.btnStartMission.Click += new System.EventHandler(this.btnStartMission_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(23, 181);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(92, 13);
+            this.label10.TabIndex = 47;
+            this.label10.Text = "Current Waypoint:";
+            // 
+            // txtWP
+            // 
+            this.txtWP.Location = new System.Drawing.Point(138, 178);
+            this.txtWP.Name = "txtWP";
+            this.txtWP.Size = new System.Drawing.Size(135, 20);
+            this.txtWP.TabIndex = 46;
+            // 
             // CommunicationLinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1444, 787);
+            this.ClientSize = new System.Drawing.Size(1494, 804);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.txtWP);
             this.Controls.Add(this.btnStartMission);
             this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.btnResume);
             this.Controls.Add(this.btnPause);
-            this.Controls.Add(this.btnStop);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label8);
@@ -486,7 +496,6 @@ namespace Coordinator
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnResume;
         private System.Windows.Forms.Button btnReturn;
@@ -494,6 +503,8 @@ namespace Coordinator
         private System.Windows.Forms.Button btnLoadMission;
         private System.Windows.Forms.Button btnStartMission;
         private CoordinatorMap.MapSetup map;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtWP;
     }
 }
 
