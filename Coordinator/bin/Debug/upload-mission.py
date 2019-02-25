@@ -2,6 +2,7 @@ from __future__ import print_function
 import sys
 from dronekit import connect, Command
 import time
+from pymavlink import mavutil
 
 con = (sys.argv[1])
 ip = (sys.argv[2])
@@ -9,14 +10,14 @@ port = (sys.argv[3])
 connection_string = con + ':'+ ip + ':' + port
 
 # Connect to the Vehicle
-print('Connecting to vehicle on: %s' % connection_string)
+#print('Connecting to vehicle on: %s' % connection_string)
 vehicle = connect(connection_string, wait_ready=False)
 
 # Check that vehicle is armable. 
 # This ensures home_location is set (needed when saving WP file)
 
 while not vehicle.is_armable:
-    print(" Waiting for vehicle to initialise...")
+    #print(" Waiting for vehicle to initialise...")
     time.sleep(1)
 
 
@@ -27,7 +28,7 @@ def readmission(aFileName):
 
     This function is used by upload_mission().
     """
-    print("\nReading mission from file: %s" % aFileName)
+    #print("\nReading mission from file: %s" % aFileName)
     cmds = vehicle.commands
     missionlist=[]
     with open(aFileName) as f:
@@ -51,6 +52,18 @@ def readmission(aFileName):
                 ln_autocontinue=int(linearray[11].strip())
                 cmd = Command( 0, 0, 0, ln_frame, ln_command, ln_currentwp, ln_autocontinue, ln_param1, ln_param2, ln_param3, ln_param4, ln_param5, ln_param6, ln_param7)
                 missionlist.append(cmd)
+
+
+       #VICTOR'S MODIFICATION
+    wp_Last_Latitude = vehicle.location.global_relative_frame.lat
+    wp_Last_Longitude = vehicle.location.global_relative_frame.lon
+    wp_Last_Altitude =  vehicle.location.global_relative_frame.alt   
+    wpLastObject = Command( 0, 0, 0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 0, 0, 0, 0, 0, 
+                           wp_Last_Latitude, wp_Last_Longitude, wp_Last_Altitude)
+    missionlist.append(wpLastObject)
+      #VICTOR'S MODIFICATION 
+
+
     return missionlist
 
 
@@ -61,16 +74,18 @@ def upload_mission(aFileName):
     #Read mission from file
     missionlist = readmission(aFileName)
     
-    print("\nUpload mission from a file: %s" % import_mission_filename)
+    #print("\nUpload mission from a file: %s" % import_mission_filename)
     #Clear existing mission from vehicle
-    print(' Clear mission')
+    #print(' Clear mission')
     cmds = vehicle.commands
     cmds.clear()
     #Add new mission to vehicle
     for command in missionlist:
         cmds.add(command)
-    print(' Upload mission')
+    #print(' Upload mission')
     vehicle.commands.upload()
+    nWp = vehicle.commands.count
+    print("%s" % nWp)
 
 def printfile(aFileName):
     
@@ -88,15 +103,15 @@ import_mission_filename = path
 #import_mission_filename = 'Missions\M1.txt'   #VICTOR - Here is where the path os the mission file is written    
 
 
-
 #Upload mission from file
 upload_mission(import_mission_filename)
-
+#print('%s' % cont);
 #Download mission we just uploaded and save to a file
 #save_mission(export_mission_filename)
 
 #Close vehicle object before exiting script
-print("Close vehicle object")
+ 
+#print("Close vehicle object %s" % NN)
 vehicle.close()
 
 # Shut down simulator if it was started.

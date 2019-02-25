@@ -61,6 +61,7 @@ namespace Coordinator
             this.btnStartMission = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txtWP = new System.Windows.Forms.TextBox();
+            this.btnStatusUAV = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -423,11 +424,20 @@ namespace Coordinator
             this.txtWP.Size = new System.Drawing.Size(135, 20);
             this.txtWP.TabIndex = 46;
             // 
+            // btnStatusUAV
+            // 
+            this.btnStatusUAV.Location = new System.Drawing.Point(26, 219);
+            this.btnStatusUAV.Name = "btnStatusUAV";
+            this.btnStatusUAV.Size = new System.Drawing.Size(247, 23);
+            this.btnStatusUAV.TabIndex = 48;
+            this.btnStatusUAV.UseVisualStyleBackColor = true;
+            // 
             // CommunicationLinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1494, 804);
+            this.Controls.Add(this.btnStatusUAV);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtWP);
             this.Controls.Add(this.btnStartMission);
@@ -505,6 +515,7 @@ namespace Coordinator
         private CoordinatorMap.MapSetup map;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtWP;
+        private System.Windows.Forms.Button btnStatusUAV;
     }
 }
 

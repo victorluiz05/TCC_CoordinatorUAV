@@ -11,6 +11,7 @@ using System.Net.Sockets;
 using System.Text;
 using GMap.NET;
 using static CoordinatorMap.Utils;
+using System.Drawing;
 
 namespace Coordinator
 {
@@ -39,7 +40,7 @@ namespace Coordinator
             public string Alt;
             public string Groundspeed;
             public string Heading;
-            public bool Occupied;
+            public bool UAVAutomataEstate; //true for IN FLIGHT false for IDLE
             public string CurrentWP;
 
         }
@@ -162,6 +163,8 @@ namespace Coordinator
             txtGs.Text = UAVinfo[indexx].Groundspeed;
 
             if (map.MapControl != null) map.MapControl.SelectedUavId = indexx;
+
+            ChangeStatusButton();
         }
 
         //Uploads a mission to a specific UAV (selects the file and then run the script that does that)
@@ -225,6 +228,12 @@ namespace Coordinator
                 else
                 {
                     arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
+                }
+
+                if(myPythonApp == "script-arm-takeoff-and-auto.py")
+                {
+                    int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+                    UAVinfo[indexx].UAVAutomataEstate = true;
                 }
 
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
@@ -730,45 +739,12 @@ namespace Coordinator
 
         private void btnStartMission_Click(object sender, EventArgs e)
         {
-            var thread = new Thread(new ThreadStart(() =>
-            {
-                string python = @"C:\Python27\python.exe";
-                string myPythonApp = "script-arm-takeoff-and-auto.py";
-                string con = typee;
-                string ip = IpAddress;
-                string port = Portt;
-                string arg = "";
+            Control control = new Control();
 
-                arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
+            string PyOut = control.Fly_UAV(typee,IpAddress,Portt,CommName);
 
-                ProcessStartInfo psi = new ProcessStartInfo(python, arg);
-                psi.UseShellExecute = false;
-                psi.RedirectStandardOutput = true;
-                psi.CreateNoWindow = true;
+            rtbScript.Text = PyOut;
 
-                var proc = Process.Start(psi);
-
-                StreamReader sr = proc.StandardOutput;
-
-                while (!proc.HasExited)
-                {
-                    if (!sr.EndOfStream)
-                    {
-                        string procOutput = sr.ReadToEnd();
-                        this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput);
-
-                    }
-                    else Thread.Sleep(20);
-                }
-
-                int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
-                UAVinfo[indexx].Occupied = true;
-
-
-
-            }));
-
-            thread.Start();
         }
 
         public List<PointLatLng> GetWpList(string FileName)
@@ -806,6 +782,24 @@ namespace Coordinator
 
             return Listawp;
         }
+
+        public void ChangeStatusButton()
+        {
+            int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+
+            if (UAVinfo[indexx].UAVAutomataEstate == true)
+            {
+                btnStatusUAV.Text = "In Flight";
+                btnStatusUAV.BackColor = Color.Red;
+            }
+            else
+            {
+                btnStatusUAV.Text = "IDLE";
+                btnStatusUAV.BackColor = Color.Green;
+            }
+        }
+
+        //CRIAR A FUNÇÃO DE UPLOAD PROPRIA PARA OBTE O NUMERO DE WPS DA MISSÃO
 
 
     }
