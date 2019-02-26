@@ -13,6 +13,7 @@ using GMap.NET;
 using static CoordinatorMap.Utils;
 using System.Drawing;
 
+
 namespace Coordinator
 {
     public partial class CommunicationLinks : Form
@@ -42,6 +43,7 @@ namespace Coordinator
             public string Heading;
             public bool UAVAutomataEstate; //true for IN FLIGHT false for IDLE
             public string CurrentWP;
+            public string NumberWpMission;
 
         }
 
@@ -164,7 +166,7 @@ namespace Coordinator
 
             if (map.MapControl != null) map.MapControl.SelectedUavId = indexx;
 
-            ChangeStatusButton();
+            
         }
 
         //Uploads a mission to a specific UAV (selects the file and then run the script that does that)
@@ -197,7 +199,8 @@ namespace Coordinator
                 MessageBox.Show("You must select an UAV before adding a mission", "No UAV selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Run_Script("upload-mission.py");
+            //Run_Script("upload-mission.py");
+            UploadMission();
 
             map.MapControl.MissionChanged(
                 map.MapControl.GetUavById(indexUAV),
@@ -230,11 +233,7 @@ namespace Coordinator
                     arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
                 }
 
-                if(myPythonApp == "script-arm-takeoff-and-auto.py")
-                {
-                    int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
-                    UAVinfo[indexx].UAVAutomataEstate = true;
-                }
+               
 
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
@@ -476,6 +475,16 @@ namespace Coordinator
                             map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(ParseDouble(UAVinfo[indexx].Lat), ParseDouble(UAVinfo[indexx].Lon));
                         }
 
+                        if( (UAVinfo[indexx].UAVAutomataEstate == true) && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))) )
+                        {
+                           UAVinfo[indexx].UAVAutomataEstate = false;
+                           btnStatusUAV.BeginInvoke(new MethodInvoker(() =>
+                           {
+                              btnStatusUAV.Text = "IDLE";
+                              btnStatusUAV.BackColor = Color.Green;
+                           }));
+
+                        }
 
                         int ind = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
                         string latt = UAVinfo[ind].Lat;
@@ -487,8 +496,8 @@ namespace Coordinator
                         UpdatingTextBoxLatitude(latt);
                         UpdatingTextBoxLongitude(lonn);
                         UpdatingTextBoxaltitude(altt);
-                        UpdatingTextBoxGroundspeed(groundd);
-                        UpdatingTextBoxCurrentWP(currentwpp);
+                        UpdatingTextBoxGroundspeed(groundspeed);
+                        UpdatingTextBoxCurrentWP(currentwp);
 
                     }
                     catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
@@ -739,11 +748,8 @@ namespace Coordinator
 
         private void btnStartMission_Click(object sender, EventArgs e)
         {
-            Control control = new Control();
 
-            string PyOut = control.Fly_UAV(typee,IpAddress,Portt,CommName);
-
-            rtbScript.Text = PyOut;
+           Fly_UAV();
 
         }
 
@@ -798,8 +804,101 @@ namespace Coordinator
                 btnStatusUAV.BackColor = Color.Green;
             }
         }
+        
+        public void UploadMission()
+        {
+            var thread = new Thread(new ThreadStart(() =>
+            {
+                string python = @"C:\Python27\python.exe";
+                string myPythonApp = "upload-mission.py";
+                string mission = missionn;
+                string con = typee;
+                string ip = IpAddress;
+                string port = Portt;
+                string arg = "";
+                
+                arg = myPythonApp + " " + con + " " + ip + " " + port + " " + mission;   //Final String that will passed to Dronekit
 
-        //CRIAR A FUNÇÃO DE UPLOAD PROPRIA PARA OBTE O NUMERO DE WPS DA MISSÃO
+                ProcessStartInfo psi = new ProcessStartInfo(python, arg);
+                psi.UseShellExecute = false;
+                psi.RedirectStandardOutput = true;
+                psi.CreateNoWindow = true;
+
+                var proc = Process.Start(psi);
+
+                StreamReader sr = proc.StandardOutput;
+
+                while (!proc.HasExited)
+                {
+                    if (!sr.EndOfStream)
+                    {
+                        string procOutput = sr.ReadToEnd();
+
+                        int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+                        UAVinfo[indexx].NumberWpMission = procOutput;
+
+
+                    }
+                    else Thread.Sleep(20);
+                }
+            }));
+
+            thread.Start();
+
+
+
+        }
+
+        public void Fly_UAV()
+        {
+            var thread = new Thread(new ThreadStart(() =>
+            {
+                string python = @"C:\Python27\python.exe";
+                string myPythonApp = "script-arm-takeoff-and-auto.py";
+                string con = typee;
+                string ip = IpAddress;
+                string port = Portt;
+                string arg = "";
+
+                arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
+
+                int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+                UAVinfo[indexx].UAVAutomataEstate = true;
+                btnStatusUAV.BeginInvoke(new MethodInvoker(() =>
+                {
+                    btnStatusUAV.Text = "IN FLIGHT";
+                    btnStatusUAV.BackColor = Color.Red;
+                }));
+                
+                ProcessStartInfo psi = new ProcessStartInfo(python, arg);
+                psi.UseShellExecute = false;
+                psi.RedirectStandardOutput = true;
+                psi.CreateNoWindow = true;
+
+                var proc = Process.Start(psi);
+
+                StreamReader sr = proc.StandardOutput;
+
+                while (!proc.HasExited)
+                {
+                    if (!sr.EndOfStream)
+                    {
+                        string procOutput = sr.ReadToEnd();
+                        this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput);
+                        
+
+                    }
+                    else Thread.Sleep(20);
+                }
+
+
+            }));
+
+            thread.Start();
+
+            
+
+        }
 
 
     }
