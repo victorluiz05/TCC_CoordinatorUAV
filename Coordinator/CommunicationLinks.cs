@@ -477,12 +477,8 @@ namespace Coordinator
 
                         if( (UAVinfo[indexx].UAVAutomataEstate == true) && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))) )
                         {
-                           UAVinfo[indexx].UAVAutomataEstate = false;
-                           btnStatusUAV.BeginInvoke(new MethodInvoker(() =>
-                           {
-                              btnStatusUAV.Text = "IDLE";
-                              btnStatusUAV.BackColor = Color.Green;
-                           }));
+
+                            End_Mission(indexx);
 
                         }
 
@@ -896,9 +892,18 @@ namespace Coordinator
 
             thread.Start();
 
-            
-
         }
+
+        public void End_Mission(int indexx)
+        {
+            UAVinfo[indexx].UAVAutomataEstate = false;
+            btnStatusUAV.BeginInvoke(new MethodInvoker(() =>
+            {
+                btnStatusUAV.Text = "IDLE";
+                btnStatusUAV.BackColor = Color.Green;
+            }));
+        }
+
 
 
     }
