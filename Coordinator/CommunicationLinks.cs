@@ -9,9 +9,11 @@ using System.Data.SQLite;
 using System.Timers;
 using System.Net.Sockets;
 using System.Text;
+using System.Net;
 using GMap.NET;
 using static CoordinatorMap.Utils;
 using System.Drawing;
+using System.Collections;
 
 
 namespace Coordinator
@@ -667,14 +669,14 @@ namespace Coordinator
         // Creating the listener channel on the server side and implemetation of threads when therer is more than one GCS
         public void Connection_Handler()
         {
-            /*
+            
             var thread = new Thread(new ThreadStart(() =>
             {
 
-                IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8888);
+                IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8889);
                 listenerSocket.Bind(ipEnd);
                 listenerSocket.Listen(0);
-
+                
                 while (true)
                 {
                     Socket clientSocket = listenerSocket.Accept();
@@ -688,8 +690,10 @@ namespace Coordinator
             }));
 
             thread.Start();
-            */
+            
         }
+
+        Queue RequestQueue = new Queue();
 
         public void ReceivingMissions(Socket clientSocket)
         {
@@ -711,6 +715,9 @@ namespace Coordinator
                 MissionList[CounterMission].MissionName = fileName;
                 MissionList[CounterMission].MissionPath = missionn;
 
+                RequestQueue.Enqueue(MissionList[CounterMission]);
+
+
                 UpdatingTListboxMission(MissionList[CounterMission].MissionName);
                 //ltbDemands.Items.Add(MissionList[CounterMission].MissionName);
 
@@ -723,6 +730,33 @@ namespace Coordinator
 
 
         }
+
+        
+        public void Assign_Request()
+        {
+            int x = 0;
+            int stop = 0;
+
+            do
+            {
+                if(UAVinfo[x].UAVAutomataEstate == false)
+                {
+
+                    stop = 1;
+                }
+
+                x++;
+
+            } while (stop !=1);
+            
+            
+
+                       
+
+
+        }
+
+
 
         public void UpdatingTListboxMission(string mission)
         {
@@ -738,6 +772,7 @@ namespace Coordinator
 
         private void CommunicationLinks_FormClosed(object sender, FormClosedEventArgs e)
         {
+            
             listenerSocket.Close();
             Environment.Exit(0);
         }

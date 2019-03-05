@@ -69,9 +69,6 @@ namespace Coordinator
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.btnDelete);
             this.panel1.Controls.Add(this.btnEdit);
             this.panel1.Controls.Add(this.btnAdd);
@@ -83,9 +80,9 @@ namespace Coordinator
             this.panel1.Controls.Add(this.txtIP);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(1222, 609);
+            this.panel1.Location = new System.Drawing.Point(744, 353);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(260, 186);
+            this.panel1.Size = new System.Drawing.Size(261, 179);
             this.panel1.TabIndex = 19;
             // 
             // btnDelete
@@ -165,7 +162,7 @@ namespace Coordinator
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPort.Location = new System.Drawing.Point(114, 107);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(135, 20);
+            this.txtPort.Size = new System.Drawing.Size(136, 20);
             this.txtPort.TabIndex = 2;
             // 
             // txtIP
@@ -195,22 +192,19 @@ namespace Coordinator
             // 
             // dtvCommunication
             // 
-            this.dtvCommunication.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtvCommunication.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtvCommunication.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dtvCommunication.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtvCommunication.Location = new System.Drawing.Point(976, 434);
+            this.dtvCommunication.Location = new System.Drawing.Point(744, 242);
             this.dtvCommunication.MultiSelect = false;
             this.dtvCommunication.Name = "dtvCommunication";
             this.dtvCommunication.ReadOnly = true;
-            this.dtvCommunication.Size = new System.Drawing.Size(506, 169);
+            this.dtvCommunication.Size = new System.Drawing.Size(443, 105);
             this.dtvCommunication.TabIndex = 20;
             this.dtvCommunication.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtvCommunication_CellClick);
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(312, 110);
+            this.btnConnect.Location = new System.Drawing.Point(265, 93);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(233, 23);
             this.btnConnect.TabIndex = 21;
@@ -220,9 +214,9 @@ namespace Coordinator
             // 
             // rtbScript
             // 
-            this.rtbScript.Location = new System.Drawing.Point(446, 434);
+            this.rtbScript.Location = new System.Drawing.Point(372, 190);
             this.rtbScript.Name = "rtbScript";
-            this.rtbScript.Size = new System.Drawing.Size(524, 341);
+            this.rtbScript.Size = new System.Drawing.Size(366, 296);
             this.rtbScript.TabIndex = 22;
             this.rtbScript.Text = "";
             this.rtbScript.TextChanged += new System.EventHandler(this.rtbScript_TextChanged);
@@ -234,7 +228,7 @@ namespace Coordinator
             "script-arm-takeoff-and-auto.py",
             "vehicle_stateC.py",
             "UAV_Current_State.py"});
-            this.cbxScript.Location = new System.Drawing.Point(312, 67);
+            this.cbxScript.Location = new System.Drawing.Point(265, 50);
             this.cbxScript.Name = "cbxScript";
             this.cbxScript.Size = new System.Drawing.Size(233, 21);
             this.cbxScript.TabIndex = 23;
@@ -251,7 +245,7 @@ namespace Coordinator
             // 
             // btnLaunch
             // 
-            this.btnLaunch.Location = new System.Drawing.Point(138, 21);
+            this.btnLaunch.Location = new System.Drawing.Point(124, 4);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(122, 23);
             this.btnLaunch.TabIndex = 25;
@@ -261,28 +255,28 @@ namespace Coordinator
             // 
             // txtLat
             // 
-            this.txtLat.Location = new System.Drawing.Point(138, 68);
+            this.txtLat.Location = new System.Drawing.Point(124, 51);
             this.txtLat.Name = "txtLat";
             this.txtLat.Size = new System.Drawing.Size(135, 20);
             this.txtLat.TabIndex = 26;
             // 
             // txtLon
             // 
-            this.txtLon.Location = new System.Drawing.Point(138, 94);
+            this.txtLon.Location = new System.Drawing.Point(124, 77);
             this.txtLon.Name = "txtLon";
             this.txtLon.Size = new System.Drawing.Size(135, 20);
             this.txtLon.TabIndex = 27;
             // 
             // txtAlt
             // 
-            this.txtAlt.Location = new System.Drawing.Point(138, 120);
+            this.txtAlt.Location = new System.Drawing.Point(124, 103);
             this.txtAlt.Name = "txtAlt";
             this.txtAlt.Size = new System.Drawing.Size(135, 20);
             this.txtAlt.TabIndex = 28;
             // 
             // txtGs
             // 
-            this.txtGs.Location = new System.Drawing.Point(138, 146);
+            this.txtGs.Location = new System.Drawing.Point(124, 129);
             this.txtGs.Name = "txtGs";
             this.txtGs.Size = new System.Drawing.Size(135, 20);
             this.txtGs.TabIndex = 29;
@@ -290,7 +284,7 @@ namespace Coordinator
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 68);
+            this.label5.Location = new System.Drawing.Point(9, 51);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 30;
@@ -299,7 +293,7 @@ namespace Coordinator
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(23, 94);
+            this.label6.Location = new System.Drawing.Point(9, 77);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(57, 13);
             this.label6.TabIndex = 31;
@@ -308,7 +302,7 @@ namespace Coordinator
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(23, 120);
+            this.label7.Location = new System.Drawing.Point(9, 103);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(62, 13);
             this.label7.TabIndex = 32;
@@ -317,7 +311,7 @@ namespace Coordinator
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(23, 149);
+            this.label8.Location = new System.Drawing.Point(9, 132);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 13);
             this.label8.TabIndex = 33;
@@ -329,9 +323,9 @@ namespace Coordinator
             this.panel2.Controls.Add(this.ltbDemands);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.btnUpload);
-            this.panel2.Location = new System.Drawing.Point(12, 434);
+            this.panel2.Location = new System.Drawing.Point(12, 231);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(422, 344);
+            this.panel2.Size = new System.Drawing.Size(341, 283);
             this.panel2.TabIndex = 37;
             // 
             // btnLoadMission
@@ -347,9 +341,9 @@ namespace Coordinator
             // ltbDemands
             // 
             this.ltbDemands.FormattingEnabled = true;
-            this.ltbDemands.Location = new System.Drawing.Point(14, 51);
+            this.ltbDemands.Location = new System.Drawing.Point(6, 51);
             this.ltbDemands.Name = "ltbDemands";
-            this.ltbDemands.Size = new System.Drawing.Size(180, 290);
+            this.ltbDemands.Size = new System.Drawing.Size(180, 225);
             this.ltbDemands.TabIndex = 1;
             // 
             // label9
@@ -363,14 +357,14 @@ namespace Coordinator
             // 
             // panel3
             // 
-            this.panel3.Location = new System.Drawing.Point(895, 12);
+            this.panel3.Location = new System.Drawing.Point(744, 12);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(599, 416);
+            this.panel3.Size = new System.Drawing.Size(476, 224);
             this.panel3.TabIndex = 38;
             // 
             // btnPause
             // 
-            this.btnPause.Location = new System.Drawing.Point(709, 67);
+            this.btnPause.Location = new System.Drawing.Point(616, 67);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(122, 23);
             this.btnPause.TabIndex = 42;
@@ -380,7 +374,7 @@ namespace Coordinator
             // 
             // btnResume
             // 
-            this.btnResume.Location = new System.Drawing.Point(709, 114);
+            this.btnResume.Location = new System.Drawing.Point(616, 114);
             this.btnResume.Name = "btnResume";
             this.btnResume.Size = new System.Drawing.Size(122, 23);
             this.btnResume.TabIndex = 43;
@@ -390,7 +384,7 @@ namespace Coordinator
             // 
             // btnReturn
             // 
-            this.btnReturn.Location = new System.Drawing.Point(709, 161);
+            this.btnReturn.Location = new System.Drawing.Point(616, 161);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(122, 23);
             this.btnReturn.TabIndex = 44;
@@ -400,7 +394,7 @@ namespace Coordinator
             // 
             // btnStartMission
             // 
-            this.btnStartMission.Location = new System.Drawing.Point(709, 21);
+            this.btnStartMission.Location = new System.Drawing.Point(616, 21);
             this.btnStartMission.Name = "btnStartMission";
             this.btnStartMission.Size = new System.Drawing.Size(122, 23);
             this.btnStartMission.TabIndex = 45;
@@ -411,7 +405,7 @@ namespace Coordinator
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(23, 181);
+            this.label10.Location = new System.Drawing.Point(9, 164);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(92, 13);
             this.label10.TabIndex = 47;
@@ -419,14 +413,14 @@ namespace Coordinator
             // 
             // txtWP
             // 
-            this.txtWP.Location = new System.Drawing.Point(138, 178);
+            this.txtWP.Location = new System.Drawing.Point(124, 161);
             this.txtWP.Name = "txtWP";
             this.txtWP.Size = new System.Drawing.Size(135, 20);
             this.txtWP.TabIndex = 46;
             // 
             // btnStatusUAV
             // 
-            this.btnStatusUAV.Location = new System.Drawing.Point(26, 219);
+            this.btnStatusUAV.Location = new System.Drawing.Point(12, 202);
             this.btnStatusUAV.Name = "btnStatusUAV";
             this.btnStatusUAV.Size = new System.Drawing.Size(247, 23);
             this.btnStatusUAV.TabIndex = 48;
@@ -436,7 +430,7 @@ namespace Coordinator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1494, 804);
+            this.ClientSize = new System.Drawing.Size(1229, 537);
             this.Controls.Add(this.btnStatusUAV);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtWP);

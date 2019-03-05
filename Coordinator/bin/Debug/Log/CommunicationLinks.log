@@ -978,3 +978,78 @@
    em System.Double.Parse(String s, IFormatProvider provider)
    em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz Ferreira\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
    em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz Ferreira\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 458 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 10:01:58 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 458 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 10:02:19 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 458 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 10:02:23 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 458 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 10:02:24 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 458 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 10:02:50 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 458 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 14:19:34 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 459 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 14:19:35 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 459 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 14:21:10 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 459 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 14:21:51 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 459 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 14:22:01 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 459 : Invalid coordinates: None, None, None, 0.0422582104802, 352, 0 
+05/03/2019 14:22:41 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 459 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 14:22:42 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 459 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 14:22:46 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 459 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 14:23:38 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 459 : Invalid coordinates: None, None, None, None, None, 0 
+05/03/2019 14:23:42 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\CommunicationLinks.cs:linha 459 : Invalid coordinates: None, None, None, None, None, 0 
