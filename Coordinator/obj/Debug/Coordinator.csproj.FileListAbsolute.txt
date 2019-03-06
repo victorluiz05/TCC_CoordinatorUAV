@@ -298,3 +298,31 @@ C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\obj\Debug\Coor
 C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\obj\Debug\Coordinator.csproj.CopyComplete
 C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\obj\Debug\Coordinator.exe
 C:\Users\Victor Luiz\Google Drive\TCC\UAV-Coordinator\Coordinator\obj\Debug\Coordinator.pdb
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\obj\Debug\Coordinator.csprojAssemblyReference.cache
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\obj\Debug\Coordinator.CommunicationLinks.resources
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\obj\Debug\Coordinator.Properties.Resources.resources
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\obj\Debug\Coordinator.csproj.GenerateResource.cache
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\obj\Debug\Coordinator.csproj.CoreCompileInputs.cache
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\obj\Debug\Coordinator.exe
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\obj\Debug\Coordinator.pdb
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\Coordinator.exe.config
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\Coordinator.exe
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\Coordinator.pdb
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\EntityFramework.dll
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\GMap.NET.Core.dll
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\GMap.NET.WindowsForms.dll
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\Map.exe
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\System.Data.SQLite.dll
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\Map.pdb
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\Map.exe.config
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\EntityFramework.xml
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\System.Data.SQLite.xml
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\obj\Debug\Coordinator.csproj.CopyComplete

@@ -214,7 +214,7 @@ namespace Coordinator
             // 
             // rtbScript
             // 
-            this.rtbScript.Location = new System.Drawing.Point(372, 190);
+            this.rtbScript.Location = new System.Drawing.Point(372, 234);
             this.rtbScript.Name = "rtbScript";
             this.rtbScript.Size = new System.Drawing.Size(366, 296);
             this.rtbScript.TabIndex = 22;
@@ -430,7 +430,7 @@ namespace Coordinator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1229, 537);
+            this.ClientSize = new System.Drawing.Size(1240, 626);
             this.Controls.Add(this.btnStatusUAV);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtWP);

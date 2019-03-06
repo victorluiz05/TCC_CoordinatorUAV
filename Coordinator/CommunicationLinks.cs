@@ -202,14 +202,16 @@ namespace Coordinator
                 return;
             }
             //Run_Script("upload-mission.py");
-            UploadMission();
+            UploadMission(missionn,typee,IpAddress,Portt,CommName);
 
+            /*
             map.MapControl.MissionChanged(
                 map.MapControl.GetUavById(indexUAV),
                 GetWpList(MissionList[indexx].MissionPath)
             );
 
             map.MapControl.SelectedUavId = indexUAV;
+            */
         }
 
         //Function that runs a DroneKit script, it gets the arguments(such as the communication info and a mission file for example) to pass to Python using ProcessStartInfo
@@ -682,7 +684,7 @@ namespace Coordinator
                     Socket clientSocket = listenerSocket.Accept();
                     //THREADS
                     Thread MPthread;
-                    MPthread = new Thread(() => ReceivingMissions(clientSocket));
+                    MPthread = new Thread(() => Request_Received(clientSocket));
                     MPthread.Start();
                 }
 
@@ -693,9 +695,9 @@ namespace Coordinator
             
         }
 
-        Queue RequestQueue = new Queue();
+        Queue<string> RequestQueue = new Queue<string>();
 
-        public void ReceivingMissions(Socket clientSocket)
+        public void Request_Received(Socket clientSocket)
         {
             byte[] clientData = new byte[1024 * 5000];
             string receivedPath = @"Missions\";
@@ -715,8 +717,8 @@ namespace Coordinator
                 MissionList[CounterMission].MissionName = fileName;
                 MissionList[CounterMission].MissionPath = missionn;
 
-                RequestQueue.Enqueue(MissionList[CounterMission]);
-
+                RequestQueue.Enqueue(MissionList[CounterMission].MissionPath);
+                Assign_Request();
 
                 UpdatingTListboxMission(MissionList[CounterMission].MissionName);
                 //ltbDemands.Items.Add(MissionList[CounterMission].MissionName);
@@ -727,33 +729,36 @@ namespace Coordinator
                 clientSocket.Close();
 
             }
-
-
+            
         }
-
         
         public void Assign_Request()
         {
             int x = 0;
-            int stop = 0;
+            
 
-            do
+            while (RequestQueue.Count > 0)
             {
-                if(UAVinfo[x].UAVAutomataEstate == false)
+                int i = 0;
+
+                while ( (x!=1) && (i<=UAVinfo.Length) )
                 {
+                    if(UAVinfo[i].UAVAutomataEstate == false)
+                    {
 
-                    stop = 1;
+                        string request = @RequestQueue.Dequeue();
+                        UploadMission(request, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port,UAVinfo[i].N_UAV);
+                        Thread.Sleep(2000);
+                        Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port,UAVinfo[i].N_UAV);
+                        x = 1;
+                    }
+
+                    i++;
                 }
+            }
 
-                x++;
-
-            } while (stop !=1);
             
             
-
-                       
-
-
         }
 
 
@@ -780,7 +785,7 @@ namespace Coordinator
         private void btnStartMission_Click(object sender, EventArgs e)
         {
 
-           Fly_UAV();
+           Fly_UAV(typee,IpAddress,Portt, CommName);
 
         }
 
@@ -836,19 +841,35 @@ namespace Coordinator
             }
         }
         
-        public void UploadMission()
+        public void UploadMission(string mission, string con, string ip, string port, string namee)
         {
             var thread = new Thread(new ThreadStart(() =>
             {
                 string python = @"C:\Python27\python.exe";
                 string myPythonApp = "upload-mission.py";
-                string mission = missionn;
-                string con = typee;
-                string ip = IpAddress;
-                string port = Portt;
+                //string mission = missionn;
+                //string con = typee;
+                //string ip = IpAddress;
+                //string port = Portt;
                 string arg = "";
                 
                 arg = myPythonApp + " " + con + " " + ip + " " + port + " " + mission;   //Final String that will passed to Dronekit
+
+                int indexUAV = Array.FindIndex(UAVinfo, s => s.N_UAV == namee);
+                if (indexUAV == -1)
+                {
+                    MessageBox.Show("You must select an UAV before adding a mission", "No UAV selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                
+                map.MapControl.MissionChanged(
+                    map.MapControl.GetUavById(indexUAV),
+                    GetWpList(mission)
+                );
+
+                map.MapControl.SelectedUavId = indexUAV;
+                
 
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
@@ -880,20 +901,20 @@ namespace Coordinator
 
         }
 
-        public void Fly_UAV()
+        public void Fly_UAV(string con, string ip, string port, string namee)
         {
             var thread = new Thread(new ThreadStart(() =>
             {
                 string python = @"C:\Python27\python.exe";
                 string myPythonApp = "script-arm-takeoff-and-auto.py";
-                string con = typee;
-                string ip = IpAddress;
-                string port = Portt;
+                //string con = typee;
+                //string ip = IpAddress;
+                //string port = Portt;
                 string arg = "";
 
                 arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
 
-                int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+                int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == namee);
                 UAVinfo[indexx].UAVAutomataEstate = true;
                 btnStatusUAV.BeginInvoke(new MethodInvoker(() =>
                 {
