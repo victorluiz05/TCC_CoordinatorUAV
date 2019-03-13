@@ -51,9 +51,11 @@ namespace Coordinator
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.ltbAssignedTo = new System.Windows.Forms.ListBox();
             this.btnLoadMission = new System.Windows.Forms.Button();
             this.ltbDemands = new System.Windows.Forms.ListBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnResume = new System.Windows.Forms.Button();
@@ -62,6 +64,8 @@ namespace Coordinator
             this.label10 = new System.Windows.Forms.Label();
             this.txtWP = new System.Windows.Forms.TextBox();
             this.btnStatusUAV = new System.Windows.Forms.Button();
+            this.txtLatDemand = new System.Windows.Forms.TextBox();
+            this.txtLonDemand = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -235,7 +239,7 @@ namespace Coordinator
             // 
             // btnUpload
             // 
-            this.btnUpload.Location = new System.Drawing.Point(200, 51);
+            this.btnUpload.Location = new System.Drawing.Point(216, 122);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(122, 23);
             this.btnUpload.TabIndex = 24;
@@ -319,18 +323,48 @@ namespace Coordinator
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtLonDemand);
+            this.panel2.Controls.Add(this.txtLatDemand);
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.ltbAssignedTo);
             this.panel2.Controls.Add(this.btnLoadMission);
             this.panel2.Controls.Add(this.ltbDemands);
-            this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.btnUpload);
             this.panel2.Location = new System.Drawing.Point(12, 231);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(341, 283);
+            this.panel2.Size = new System.Drawing.Size(341, 383);
             this.panel2.TabIndex = 37;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(232, 164);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(69, 13);
+            this.label12.TabIndex = 48;
+            this.label12.Text = "Assigned To:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(32, 164);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(71, 13);
+            this.label11.TabIndex = 47;
+            this.label11.Text = "Demands List";
+            // 
+            // ltbAssignedTo
+            // 
+            this.ltbAssignedTo.FormattingEnabled = true;
+            this.ltbAssignedTo.Location = new System.Drawing.Point(199, 190);
+            this.ltbAssignedTo.Name = "ltbAssignedTo";
+            this.ltbAssignedTo.Size = new System.Drawing.Size(130, 186);
+            this.ltbAssignedTo.TabIndex = 46;
             // 
             // btnLoadMission
             // 
-            this.btnLoadMission.Location = new System.Drawing.Point(14, 22);
+            this.btnLoadMission.Location = new System.Drawing.Point(14, 122);
             this.btnLoadMission.Name = "btnLoadMission";
             this.btnLoadMission.Size = new System.Drawing.Size(122, 23);
             this.btnLoadMission.TabIndex = 45;
@@ -341,19 +375,10 @@ namespace Coordinator
             // ltbDemands
             // 
             this.ltbDemands.FormattingEnabled = true;
-            this.ltbDemands.Location = new System.Drawing.Point(6, 51);
+            this.ltbDemands.Location = new System.Drawing.Point(6, 190);
             this.ltbDemands.Name = "ltbDemands";
-            this.ltbDemands.Size = new System.Drawing.Size(180, 225);
+            this.ltbDemands.Size = new System.Drawing.Size(130, 186);
             this.ltbDemands.TabIndex = 1;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 3);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(71, 13);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Demands List";
             // 
             // panel3
             // 
@@ -425,6 +450,20 @@ namespace Coordinator
             this.btnStatusUAV.Size = new System.Drawing.Size(247, 23);
             this.btnStatusUAV.TabIndex = 48;
             this.btnStatusUAV.UseVisualStyleBackColor = true;
+            // 
+            // txtLatDemand
+            // 
+            this.txtLatDemand.Location = new System.Drawing.Point(112, 11);
+            this.txtLatDemand.Name = "txtLatDemand";
+            this.txtLatDemand.Size = new System.Drawing.Size(135, 20);
+            this.txtLatDemand.TabIndex = 49;
+            // 
+            // txtLonDemand
+            // 
+            this.txtLonDemand.Location = new System.Drawing.Point(112, 48);
+            this.txtLonDemand.Name = "txtLonDemand";
+            this.txtLonDemand.Size = new System.Drawing.Size(135, 20);
+            this.txtLonDemand.TabIndex = 49;
             // 
             // CommunicationLinks
             // 
@@ -498,7 +537,6 @@ namespace Coordinator
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnResume;
@@ -510,6 +548,11 @@ namespace Coordinator
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtWP;
         private System.Windows.Forms.Button btnStatusUAV;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ListBox ltbAssignedTo;
+        private System.Windows.Forms.TextBox txtLonDemand;
+        private System.Windows.Forms.TextBox txtLatDemand;
     }
 }
 

@@ -15,12 +15,10 @@ using static CoordinatorMap.Utils;
 using System.Drawing;
 using System.Collections;
 
-
 namespace Coordinator
 {
     public partial class CommunicationLinks : Form
     {
-
         delegate void TextBoxDelegate(string message);
 
         //Global Variables
@@ -86,6 +84,8 @@ namespace Coordinator
         private SQLiteDataAdapter DB;
         private DataSet DS = new DataSet();
         private DataTable DT = new DataTable();
+        
+        /*---------------------------------------------------------------Database Methods and Settings----------------------------------------------------------------------------------*/
 
         //Connecting with the DataBase
         private void SetConnetcion()
@@ -131,6 +131,10 @@ namespace Coordinator
             sql_con.Close();
 
         }
+        
+        /*---------------------------------------------------------------END of Database Methods and Settings---------------------------------------------------------------------------*/
+        
+        /*---------------------------------------------------------------Form Methods and Settings--------------------------------------------------------------------------------------*/
 
         //Button that calls the function which runs the DroneKit script selected
         private void btnConnect_Click(object sender, EventArgs e)
@@ -168,7 +172,7 @@ namespace Coordinator
 
             if (map.MapControl != null) map.MapControl.SelectedUavId = indexx;
 
-            
+
         }
 
         //Uploads a mission to a specific UAV (selects the file and then run the script that does that)
@@ -202,7 +206,7 @@ namespace Coordinator
                 return;
             }
             //Run_Script("upload-mission.py");
-            UploadMission(missionn,typee,IpAddress,Portt,CommName);
+            UploadMission(missionn, typee, IpAddress, Portt, CommName);
 
             /*
             map.MapControl.MissionChanged(
@@ -214,58 +218,6 @@ namespace Coordinator
             */
         }
 
-        //Function that runs a DroneKit script, it gets the arguments(such as the communication info and a mission file for example) to pass to Python using ProcessStartInfo
-        //It's made by threads, that way you can run more than one script at the same time. Everything that is printed in Phyton is showed in the RichTextBox
-        private void Run_Script(string myPythonApp)
-        {
-            var thread = new Thread(new ThreadStart(() =>
-            {
-                string python = @"C:\Python27\python.exe";
-                string mission = missionn;
-                string con = typee;
-                string ip = IpAddress;
-                string port = Portt;
-                string arg = "";
-
-                if (myPythonApp == "upload-mission.py")
-                {
-                    //In case we're sending a mission
-                    arg = myPythonApp + " " + con + " " + ip + " " + port + " " + mission;   //Final String that will passed to Dronekit
-                }
-                else
-                {
-                    arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
-                }
-
-               
-
-                ProcessStartInfo psi = new ProcessStartInfo(python, arg);
-                psi.UseShellExecute = false;
-                psi.RedirectStandardOutput = true;
-                psi.CreateNoWindow = true;
-
-                var proc = Process.Start(psi);
-
-                StreamReader sr = proc.StandardOutput;
-
-                while (!proc.HasExited)
-                {
-                    if (!sr.EndOfStream)
-                    {
-                        string procOutput = sr.ReadToEnd();
-                        this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput);
-
-                    }
-                    else Thread.Sleep(20);
-                }
-            }));
-
-            thread.Start();
-
-        }
-
-        //Does nothing, probably I double clicked on some element from the design and now if a delete this code, my design gives some error
-        //Well now it sets the timer -- NOT anymore
         private void CommunicationLinks_Load(object sender, EventArgs e)
         {
             Connection_Handler();
@@ -331,7 +283,8 @@ namespace Coordinator
         }
 
         //The dumbass code(r), I didn't figure out how to update the textbox's that shows the current state of the UAV's in one single function (because of the fact that the script ...
-        //that gets the info runs in a thread, and the textboxes belong in the main thread and some conflict is caused because of this) 
+        //that gets the info runs in a thread, and the textboxes belong in the main thread and some conflict is caused because of this)
+        //Update the value of the latitude of an UAV in the respective textbox
         public void UpdatingTextBoxLatitude(string lat)
         {
             if (this.txtLat.InvokeRequired)
@@ -344,6 +297,7 @@ namespace Coordinator
             }
         }
 
+        //Update the value of the longitude of an UAV in the respective textbox
         public void UpdatingTextBoxLongitude(string lon)
         {
             if (this.txtLon.InvokeRequired)
@@ -356,6 +310,7 @@ namespace Coordinator
             }
         }
 
+        //Update the value of the altitude of an UAV in the respective textbox
         public void UpdatingTextBoxaltitude(string alt)
         {
             if (this.txtAlt.InvokeRequired)
@@ -367,7 +322,8 @@ namespace Coordinator
                 this.txtAlt.Text = alt;
             }
         }
-
+        
+        //Update the value of the groundspeed of an UAV in the respective textbox
         public void UpdatingTextBoxGroundspeed(string gs)
         {
             if (this.txtGs.InvokeRequired)
@@ -379,7 +335,8 @@ namespace Coordinator
                 this.txtGs.Text = gs;
             }
         }
-
+        
+        //Update the value of the Waypoint that the UAV is going towards in the respective textbox
         public void UpdatingTextBoxCurrentWP(string currentwp)
         {
             if (this.txtWP.InvokeRequired)
@@ -392,7 +349,6 @@ namespace Coordinator
             }
         }
 
-        System.Timers.Timer aTimer = new System.Timers.Timer(2000);
         //Launches the UAV and gets the current state of it (latitude, longitude etc)
         private void btnLaunch_Click(object sender, EventArgs e)
         {
@@ -400,33 +356,184 @@ namespace Coordinator
             aTimer.Elapsed += new ElapsedEventHandler(TimerCall);
             aTimer.Enabled = true;
             aTimer.AutoReset = true;
+            for (int indexx = 0; indexx <= CounterUAV; indexx++)
+            {
+                UAVinfo[indexx].UAVAutomataEstate = false;
+            }
+
 
         }
 
+        //Button that pauses the mission of a selected UAV
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            PauseMission(typee, IpAddress, Portt);
+        }
+
+        //Button that sends the UAV back to the mission paused
+        private void btnResume_Click(object sender, EventArgs e)
+        {
+            ResumeMission(typee, IpAddress, Portt);
+        }
+        
+        //Button that sends the UAV to the Base
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            ReturnToHome(typee, IpAddress, Portt);
+        }
+
+        //Button that loads a mission from a diretory to coordinator
+        private void btnLoadMission_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.ShowDialog();
+            string FilePath = openFile.FileName;  //Getting the full path of the mission file
+            FileInfo fi = new FileInfo(FilePath);
+            
+            string FileName = fi.Name;
+            missionn = @"Missions\" + FileName; //This parameter will be passed to the script so it can know where the mission file is, and then, upload it to the vehicle
+
+            MissionList[CounterMission].MissionName = FileName;
+            MissionList[CounterMission].MissionPath = missionn;
+
+            ltbDemands.Items.Add(MissionList[CounterMission].MissionName);
+
+            CounterMission += 1;
+
+            ltbDemands.SelectedIndex = CounterMission - 1;
+        }
+
+        //Update the listbox of mission
+        public void UpdatingTListboxMission(string mission)
+        {
+            if (this.ltbDemands.InvokeRequired)
+            {
+                this.ltbDemands.Invoke(new TextBoxDelegate(UpdatingTListboxMission), new object[] { mission });
+            }
+            else
+            {
+                this.ltbDemands.Items.Add(mission);
+            }
+        }
+        
+        //Ends the socket when the applications is closed
+        private void CommunicationLinks_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            listenerSocket.Close();
+            Environment.Exit(0);
+        }
+
+        //Button that send the start command to the UAV to start the mission
+        private void btnStartMission_Click(object sender, EventArgs e)
+        {
+
+            Fly_UAV(typee, IpAddress, Portt, CommName);
+
+        }
+
+        //Does nothing, probably I double clicked on some element from the design and now if a delete this code, my design gives some error
+        private void rtbScript_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //Changes the visual from form that represents the automata estate of the UAV
+        public void ChangeStatusButton()
+        {
+            int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+
+            if (UAVinfo[indexx].UAVAutomataEstate == true)
+            {
+                btnStatusUAV.Text = "In Flight";
+                btnStatusUAV.BackColor = Color.Red;
+            }
+            else
+            {
+                btnStatusUAV.Text = "IDLE";
+                btnStatusUAV.BackColor = Color.Green;
+            }
+        }
+
+        /*---------------------------------------------------------------END of Form Methods and Settings-----------------------------------------------------------------------------------------*/
+
+        /*---------------------------------------------------------------General Methods and Settings-----------------------------------------------------------------------------------------*/
+
+        //Function that runs a DroneKit script, it gets the arguments(such as the communication info and a mission file for example) to pass to Python using ProcessStartInfo
+        //It's made by threads, that way you can run more than one script at the same time. Everything that is printed in Phyton is showed in the RichTextBox
+        private void Run_Script(string myPythonApp)
+        {
+            var thread = new Thread(new ThreadStart(() =>
+            {
+                string python = @"C:\Python27\python.exe";
+                string mission = missionn;
+                string con = typee;
+                string ip = IpAddress;
+                string port = Portt;
+                string arg = "";
+
+                if (myPythonApp == "upload-mission.py")
+                {
+                    //In case we're sending a mission
+                    arg = myPythonApp + " " + con + " " + ip + " " + port + " " + mission;   //Final String that will passed to Dronekit
+                }
+                else
+                {
+                    arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
+                }
+
+               
+
+                ProcessStartInfo psi = new ProcessStartInfo(python, arg);
+                psi.UseShellExecute = false;
+                psi.RedirectStandardOutput = true;
+                psi.CreateNoWindow = true;
+
+                var proc = Process.Start(psi);
+
+                StreamReader sr = proc.StandardOutput;
+
+                while (!proc.HasExited)
+                {
+                    if (!sr.EndOfStream)
+                    {
+                        string procOutput = sr.ReadToEnd();
+                        this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput);
+
+                    }
+                    else Thread.Sleep(20);
+                }
+            }));
+
+            thread.Start();
+
+        }
+        
+        System.Timers.Timer aTimer = new System.Timers.Timer(2000);   //Creation of the timer
+        
+        //Timer that runs the method to get the actual estate of the UAVs
         public void TimerCall(object sender, ElapsedEventArgs e)
         {
 
             for (int j = 0; j <= CounterUAV; j++)
             {
-
                 string con = UAVinfo[j].Type;
                 string ip = UAVinfo[j].IP;
                 string port = UAVinfo[j].Port;
                 string name = UAVinfo[j].N_UAV;
 
                 UAVEstate(con, ip, port, name);
-                //Thread.Sleep(200);
             }
 
-            Thread.Sleep(100);
+            Thread.Sleep(150);
         }
 
+        //One of the most important method, runs inside a timer e gets the actual estate os each uav listed in the coordinator
         public void UAVEstate(string t, string i, string p, string name)
         {
             //var thread = new Thread(new ThreadStart(() =>
             //{
             string script = "UAV_Current_State.py";
-
             string python = @"C:\Python27\python.exe";
             string arg = "";
 
@@ -438,7 +545,6 @@ namespace Coordinator
             psi.CreateNoWindow = true;
 
             var proc = Process.Start(psi);
-
             StreamReader sr = proc.StandardOutput;
 
             while (!proc.HasExited)
@@ -508,14 +614,8 @@ namespace Coordinator
             //thread.Start();
 
         }
-
-        //Does nothing, probably I double clicked on some element from the design and now if a delete this code, my design gives some error
-        private void rtbScript_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         
+        //Method for pausing the mission of a select UAV
         public void PauseMission(string typee, string IpAddress, string Portt)
         {
             var thread = new Thread(new ThreadStart(() =>
@@ -554,6 +654,7 @@ namespace Coordinator
 
         }
 
+        //Method that sends the UAV back to the mission paused
         public void ResumeMission(string typee, string IpAddress, string Portt)
         {
             var thread = new Thread(new ThreadStart(() =>
@@ -592,6 +693,7 @@ namespace Coordinator
 
         }
 
+        //Method that sends the UAV to the base
         public void ReturnToHome(string typee, string IpAddress, string Portt)
         {
             var thread = new Thread(new ThreadStart(() =>
@@ -629,53 +731,16 @@ namespace Coordinator
             thread.Start();
 
         }
-
-        private void btnPause_Click(object sender, EventArgs e)
-        {
-            PauseMission(typee, IpAddress, Portt);
-        }
-
-        private void btnResume_Click(object sender, EventArgs e)
-        {
-            ResumeMission(typee, IpAddress, Portt);
-        }
-
-        private void btnReturn_Click(object sender, EventArgs e)
-        {
-            ReturnToHome(typee, IpAddress, Portt);
-        }
-
-        private void btnLoadMission_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.ShowDialog();
-            string FilePath = openFile.FileName;  //Getting the full path of the mission file
-            FileInfo fi = new FileInfo(FilePath);
-
-            
-
-            string FileName = fi.Name;
-            missionn = @"Missions\" + FileName; //This parameter will be passed to the script so it can know where the mission file is, and then, upload it to the vehicle
-
-            MissionList[CounterMission].MissionName = FileName;
-            MissionList[CounterMission].MissionPath = missionn;
-
-            ltbDemands.Items.Add(MissionList[CounterMission].MissionName);
-
-            CounterMission += 1;
-
-            ltbDemands.SelectedIndex = CounterMission - 1;
-        }
-
+        
         Socket listenerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        // Creating the listener channel on the server side and implemetation of threads when therer is more than one GCS
+
+        // Creating the listener channel on the server side and implemetation of threads when there is more than one GCS
         public void Connection_Handler()
         {
-            
             var thread = new Thread(new ThreadStart(() =>
             {
 
-                IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8889);
+                IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8888);
                 listenerSocket.Bind(ipEnd);
                 listenerSocket.Listen(0);
                 
@@ -684,10 +749,10 @@ namespace Coordinator
                     Socket clientSocket = listenerSocket.Accept();
                     //THREADS
                     Thread MPthread;
-                    MPthread = new Thread(() => Request_Received(clientSocket));
+                    //MPthread = new Thread(() => Request_Received(clientSocket));
+                    MPthread = new Thread(() => test(clientSocket));
                     MPthread.Start();
                 }
-
 
             }));
 
@@ -695,8 +760,32 @@ namespace Coordinator
             
         }
 
+        public void test(Socket clientSocket)
+        {
+            byte[] clientData = new byte[1024 * 5000];
+
+            int receivedBytesLen = clientSocket.Receive(clientData);
+
+            if(receivedBytesLen != 0)
+            {
+                int fileNameLen = BitConverter.ToInt32(clientData, 0);
+                string fileName = Encoding.ASCII.GetString(clientData);
+                txtLatDemand.BeginInvoke(new MethodInvoker(() =>
+                {
+                    const string delimiter = ";";
+                    string[] StateList = fileName.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    txtLatDemand.Text = StateList[0];
+                    txtLonDemand.Text = StateList[1];
+                }));
+                
+            }
+
+        }
+
+        //Queue used for the demands
         Queue<string> RequestQueue = new Queue<string>();
 
+        //Method that receives the demand e starts the decisional algorithm
         public void Request_Received(Socket clientSocket)
         {
             byte[] clientData = new byte[1024 * 5000];
@@ -721,8 +810,7 @@ namespace Coordinator
                 Assign_Request();
 
                 UpdatingTListboxMission(MissionList[CounterMission].MissionName);
-                //ltbDemands.Items.Add(MissionList[CounterMission].MissionName);
-
+               
                 CounterMission += 1;
 
                 bWrite.Close();
@@ -732,63 +820,35 @@ namespace Coordinator
             
         }
         
+        //Decisional algorithm to select an UAV for a mission
         public void Assign_Request()
         {
             int x = 0;
             
-
             while (RequestQueue.Count > 0)
             {
                 int i = 0;
 
-                while ( (x!=1) && (i<=UAVinfo.Length) )
+                while ( (x!=1) && (i<=CounterUAV) )
                 {
                     if(UAVinfo[i].UAVAutomataEstate == false)
                     {
 
                         string request = @RequestQueue.Dequeue();
                         UploadMission(request, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port,UAVinfo[i].N_UAV);
-                        Thread.Sleep(2000);
+                        Thread.Sleep(2500);
                         Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port,UAVinfo[i].N_UAV);
                         x = 1;
+                        ltbAssignedTo.Items.Add(UAVinfo[i].N_UAV);
                     }
 
                     i++;
                 }
             }
-
-            
             
         }
-
-
-
-        public void UpdatingTListboxMission(string mission)
-        {
-            if (this.ltbDemands.InvokeRequired)
-            {
-                this.ltbDemands.Invoke(new TextBoxDelegate(UpdatingTListboxMission), new object[] { mission });
-            }
-            else
-            {
-                this.ltbDemands.Items.Add(mission);
-            }
-        }
-
-        private void CommunicationLinks_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            
-            listenerSocket.Close();
-            Environment.Exit(0);
-        }
-
-        private void btnStartMission_Click(object sender, EventArgs e)
-        {
-
-           Fly_UAV(typee,IpAddress,Portt, CommName);
-
-        }
-
+        
+        //Generates a list of waypoints of the mission to draw in the map
         public List<PointLatLng> GetWpList(string FileName)
         {
             List<PointLatLng> Listawp = new List<PointLatLng>();
@@ -824,52 +884,33 @@ namespace Coordinator
 
             return Listawp;
         }
-
-        public void ChangeStatusButton()
-        {
-            int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
-
-            if (UAVinfo[indexx].UAVAutomataEstate == true)
-            {
-                btnStatusUAV.Text = "In Flight";
-                btnStatusUAV.BackColor = Color.Red;
-            }
-            else
-            {
-                btnStatusUAV.Text = "IDLE";
-                btnStatusUAV.BackColor = Color.Green;
-            }
-        }
-        
+                
+        //Method that uploads the mission on the UAV
         public void UploadMission(string mission, string con, string ip, string port, string namee)
         {
             var thread = new Thread(new ThreadStart(() =>
             {
                 string python = @"C:\Python27\python.exe";
                 string myPythonApp = "upload-mission.py";
-                //string mission = missionn;
-                //string con = typee;
-                //string ip = IpAddress;
-                //string port = Portt;
                 string arg = "";
                 
                 arg = myPythonApp + " " + con + " " + ip + " " + port + " " + mission;   //Final String that will passed to Dronekit
 
+                /*
                 int indexUAV = Array.FindIndex(UAVinfo, s => s.N_UAV == namee);
                 if (indexUAV == -1)
                 {
                     MessageBox.Show("You must select an UAV before adding a mission", "No UAV selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-                
+                Thread.Sleep(500);
                 map.MapControl.MissionChanged(
-                    map.MapControl.GetUavById(indexUAV),
-                    GetWpList(mission)
-                );
+                       map.MapControl.GetUavById(indexUAV),
+                       GetWpList(mission)
+                   );
 
                 map.MapControl.SelectedUavId = indexUAV;
-                
+                */
 
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
@@ -901,15 +942,13 @@ namespace Coordinator
 
         }
 
+        //Method that sends the command for the UAV start a mission
         public void Fly_UAV(string con, string ip, string port, string namee)
         {
             var thread = new Thread(new ThreadStart(() =>
             {
                 string python = @"C:\Python27\python.exe";
                 string myPythonApp = "script-arm-takeoff-and-auto.py";
-                //string con = typee;
-                //string ip = IpAddress;
-                //string port = Portt;
                 string arg = "";
 
                 arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
@@ -928,7 +967,6 @@ namespace Coordinator
                 psi.CreateNoWindow = true;
 
                 var proc = Process.Start(psi);
-
                 StreamReader sr = proc.StandardOutput;
 
                 while (!proc.HasExited)
@@ -938,18 +976,16 @@ namespace Coordinator
                         string procOutput = sr.ReadToEnd();
                         this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput);
                         
-
                     }
                     else Thread.Sleep(20);
                 }
 
-
             }));
 
             thread.Start();
-
         }
 
+        //Method that changes the automata estate of an UAV
         public void End_Mission(int indexx)
         {
             UAVinfo[indexx].UAVAutomataEstate = false;
@@ -960,8 +996,8 @@ namespace Coordinator
             }));
         }
 
-
+        /*---------------------------------------------------------------END of General Methods and Settings-----------------------------------------------------------------------------------------*/
 
     }
-    
+
 }
