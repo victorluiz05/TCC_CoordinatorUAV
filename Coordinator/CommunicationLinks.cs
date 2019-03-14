@@ -47,6 +47,15 @@ namespace Coordinator
 
         }
 
+        public struct Demands
+        {
+            public string DemandLatitude;
+            public string DemandLongitude;
+        }
+
+        public Demands[] DemandsArray = new Demands[163];
+        public int CounterDemand = 0;
+
         public struct MissionInfo
         {
             public string MissionName;
@@ -739,7 +748,6 @@ namespace Coordinator
         {
             var thread = new Thread(new ThreadStart(() =>
             {
-
                 IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8888);
                 listenerSocket.Bind(ipEnd);
                 listenerSocket.Listen(0);
@@ -774,12 +782,15 @@ namespace Coordinator
                 {
                     const string delimiter = ";";
                     string[] StateList = fileName.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+                    DemandsArray[CounterDemand].DemandLatitude = StateList[0];
+                    DemandsArray[CounterDemand].DemandLongitude = StateList[1];
+
                     txtLatDemand.Text = StateList[0];
                     txtLonDemand.Text = StateList[1];
-                }));
-                
+                    CounterDemand++;
+                }));   
             }
-
         }
 
         //Queue used for the demands
@@ -937,9 +948,6 @@ namespace Coordinator
             }));
 
             thread.Start();
-
-
-
         }
 
         //Method that sends the command for the UAV start a mission
