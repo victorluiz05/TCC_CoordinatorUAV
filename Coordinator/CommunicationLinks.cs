@@ -49,12 +49,12 @@ namespace Coordinator
 
         public struct Demands
         {
-            public string DemandLatitude;
-            public string DemandLongitude;
+            public double DemandLatitude;
+            public double DemandLongitude;
         }
 
-        public Demands[] DemandsArray = new Demands[163];
-        public int CounterDemand = 0;
+        //public Demands[] DemandsArray = new Demands[163];
+        //public int CounterDemand = 0;
 
         public struct MissionInfo
         {
@@ -464,6 +464,7 @@ namespace Coordinator
             }
         }
 
+
         /*---------------------------------------------------------------END of Form Methods and Settings-----------------------------------------------------------------------------------------*/
 
         /*---------------------------------------------------------------General Methods and Settings-----------------------------------------------------------------------------------------*/
@@ -738,6 +739,7 @@ namespace Coordinator
             }));
 
             thread.Start();
+           
 
         }
         
@@ -758,7 +760,7 @@ namespace Coordinator
                     //THREADS
                     Thread MPthread;
                     //MPthread = new Thread(() => Request_Received(clientSocket));
-                    MPthread = new Thread(() => test(clientSocket));
+                    MPthread = new Thread(() => Demand_Received(clientSocket));
                     MPthread.Start();
                 }
 
@@ -768,7 +770,11 @@ namespace Coordinator
             
         }
 
-        public void test(Socket clientSocket)
+        //Queue used for the demands
+        Queue DemandsQueue = new Queue();
+        public Demands DemandInfo;
+
+        public void Demand_Received(Socket clientSocket)
         {
             byte[] clientData = new byte[1024 * 5000];
 
@@ -778,24 +784,36 @@ namespace Coordinator
             {
                 int fileNameLen = BitConverter.ToInt32(clientData, 0);
                 string fileName = Encoding.ASCII.GetString(clientData);
-                txtLatDemand.BeginInvoke(new MethodInvoker(() =>
-                {
-                    const string delimiter = ";";
-                    string[] StateList = fileName.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                                
+                const string delimiter = ";";
+                string[] StateList = fileName.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                    DemandsArray[CounterDemand].DemandLatitude = StateList[0];
-                    DemandsArray[CounterDemand].DemandLongitude = StateList[1];
+                DemandInfo.DemandLatitude = double.Parse(StateList[0]);
+                DemandInfo.DemandLongitude = double.Parse(StateList[1]);
 
-                    txtLatDemand.Text = StateList[0];
-                    txtLonDemand.Text = StateList[1];
-                    CounterDemand++;
-                }));   
+                DemandsQueue.Enqueue(DemandInfo);
             }
+
+            PlanningPath();
         }
 
+        public void PlanningPath()
+        {
+            if(DemandsQueue.Count != 0)
+            {
+                DemandInfo = (Demands)DemandsQueue.Dequeue();
+                PathPlanner path = new PathPlanner();
+
+                path.PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude);
+            }
+        }
+        
+        /*
+        //OLD ONE
         //Queue used for the demands
         Queue<string> RequestQueue = new Queue<string>();
 
+        //OLD ONE
         //Method that receives the demand e starts the decisional algorithm
         public void Request_Received(Socket clientSocket)
         {
@@ -858,6 +876,8 @@ namespace Coordinator
             }
             
         }
+         
+        */
         
         //Generates a list of waypoints of the mission to draw in the map
         public List<PointLatLng> GetWpList(string FileName)

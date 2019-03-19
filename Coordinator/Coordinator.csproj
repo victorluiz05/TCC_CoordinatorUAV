@@ -82,7 +82,7 @@
     <Compile Include="CommunicationLinks.Designer.cs">
       <DependentUpon>CommunicationLinks.cs</DependentUpon>
     </Compile>
-    <Compile Include="Control.cs" />
+    <Compile Include="PathPlanner.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
