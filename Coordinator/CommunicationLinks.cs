@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Data.SQLite;
@@ -42,6 +43,7 @@ namespace Coordinator
             public string Groundspeed;
             public string Heading;
             public bool UAVAutomataEstate; //true for IN FLIGHT false for IDLE
+            public string Estate;
             public string CurrentWP;
             public string NumberWpMission;
 
@@ -229,7 +231,7 @@ namespace Coordinator
 
         private void CommunicationLinks_Load(object sender, EventArgs e)
         {
-            Connection_Handler();
+            //Connection_Handler();
 
             if (CounterUAV > 0) dtvCommunication_CellClick(this, new DataGridViewCellEventArgs(0, 0));
         }
@@ -429,7 +431,7 @@ namespace Coordinator
         private void CommunicationLinks_FormClosed(object sender, FormClosedEventArgs e)
         {
 
-            listenerSocket.Close();
+            //listenerSocket.Close();
             Environment.Exit(0);
         }
 
@@ -464,7 +466,6 @@ namespace Coordinator
             }
         }
 
-
         /*---------------------------------------------------------------END of Form Methods and Settings-----------------------------------------------------------------------------------------*/
 
         /*---------------------------------------------------------------General Methods and Settings-----------------------------------------------------------------------------------------*/
@@ -491,8 +492,6 @@ namespace Coordinator
                 {
                     arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
                 }
-
-               
 
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
@@ -546,14 +545,12 @@ namespace Coordinator
             string script = "UAV_Current_State.py";
             string python = @"C:\Python27\python.exe";
             string arg = "";
-
             arg = script + " " + t + " " + i + " " + p;   //Final String that will be passed to Dronekit
 
             ProcessStartInfo psi = new ProcessStartInfo(python, arg);
             psi.UseShellExecute = false;
             psi.RedirectStandardOutput = true;
             psi.CreateNoWindow = true;
-
             var proc = Process.Start(psi);
             StreamReader sr = proc.StandardOutput;
 
@@ -562,7 +559,6 @@ namespace Coordinator
                 if (!sr.EndOfStream)
                 {
                     string procOutput = sr.ReadToEnd();
-
                     const string delimiter = ", ";
                     string[] StateList = procOutput.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
@@ -597,9 +593,13 @@ namespace Coordinator
 
                         if( (UAVinfo[indexx].UAVAutomataEstate == true) && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))) )
                         {
+                            UAVinfo[indexx].Estate = "IDLE";
+                            txtAutomataEstate.BeginInvoke(new MethodInvoker(() =>
+                            {
+                                txtAutomataEstate.Text = UAVinfo[indexx].Estate;
+                            }));
 
                             End_Mission(indexx);
-
                         }
 
                         int ind = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
@@ -618,7 +618,7 @@ namespace Coordinator
                     }
                     catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(250);
             }
             //}));
             //thread.Start();
@@ -742,15 +742,15 @@ namespace Coordinator
            
 
         }
-        
-        Socket listenerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
         // Creating the listener channel on the server side and implemetation of threads when there is more than one GCS
+        /*
         public void Connection_Handler()
         {
+            Socket listenerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             var thread = new Thread(new ThreadStart(() =>
             {
-                IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8888);
+                IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8891);
                 listenerSocket.Bind(ipEnd);
                 listenerSocket.Listen(0);
                 
@@ -769,6 +769,7 @@ namespace Coordinator
             thread.Start();
             
         }
+        */
 
         //Queue used for the demands
         Queue DemandsQueue = new Queue();
@@ -788,8 +789,8 @@ namespace Coordinator
                 const string delimiter = ";";
                 string[] StateList = fileName.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                DemandInfo.DemandLatitude = double.Parse(StateList[0]);
-                DemandInfo.DemandLongitude = double.Parse(StateList[1]);
+                DemandInfo.DemandLatitude = double.Parse(StateList[0], CultureInfo.InvariantCulture);
+                DemandInfo.DemandLongitude = double.Parse(StateList[1], CultureInfo.InvariantCulture);
 
                 DemandsQueue.Enqueue(DemandInfo);
             }
@@ -902,8 +903,6 @@ namespace Coordinator
                 
             }
 
-            
-
             for(int j=1;j<info.Length;j++) //// Fiz alterações aqui. Revise o que eu fiz ;)
             {
 
@@ -926,30 +925,26 @@ namespace Coordinator
                 string arg = "";
                 
                 arg = myPythonApp + " " + con + " " + ip + " " + port + " " + mission;   //Final String that will passed to Dronekit
-
-                /*
+                
                 int indexUAV = Array.FindIndex(UAVinfo, s => s.N_UAV == namee);
                 if (indexUAV == -1)
                 {
                     MessageBox.Show("You must select an UAV before adding a mission", "No UAV selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                Thread.Sleep(500);
-                map.MapControl.MissionChanged(
-                       map.MapControl.GetUavById(indexUAV),
-                       GetWpList(mission)
-                   );
-
-                map.MapControl.SelectedUavId = indexUAV;
-                */
-
+                //Thread.Sleep(500);
+                BeginInvoke(new MethodInvoker(() =>
+                {
+                    map.MapControl.MissionChanged(map.MapControl.GetUavById(indexUAV), GetWpList(mission));
+                    map.MapControl.SelectedUavId = indexUAV;
+                }));
+                
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
                 psi.RedirectStandardOutput = true;
                 psi.CreateNoWindow = true;
 
                 var proc = Process.Start(psi);
-
                 StreamReader sr = proc.StandardOutput;
 
                 while (!proc.HasExited)
@@ -957,10 +952,8 @@ namespace Coordinator
                     if (!sr.EndOfStream)
                     {
                         string procOutput = sr.ReadToEnd();
-
                         int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
                         UAVinfo[indexx].NumberWpMission = procOutput;
-
 
                     }
                     else Thread.Sleep(20);
@@ -983,6 +976,12 @@ namespace Coordinator
 
                 int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == namee);
                 UAVinfo[indexx].UAVAutomataEstate = true;
+                UAVinfo[indexx].Estate = "IN FLIGHT";
+                txtAutomataEstate.BeginInvoke(new MethodInvoker(() =>
+                {
+                    txtAutomataEstate.Text = UAVinfo[indexx].Estate;
+                }));
+
                 btnStatusUAV.BeginInvoke(new MethodInvoker(() =>
                 {
                     btnStatusUAV.Text = "IN FLIGHT";

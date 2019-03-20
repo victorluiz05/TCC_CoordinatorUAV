@@ -23,8 +23,8 @@ namespace Coordinator
             string missioname = "m" + cont.ToString();
             string path = @"Missions\" + missioname + ".txt";
 
-            if (!File.Exists(path))
-            {
+            //if (!File.Exists(path))
+            //{
                 // Create a file to write to.
                 using (StreamWriter sw = File.CreateText(path))
                 {
@@ -47,33 +47,34 @@ namespace Coordinator
                     sw.Write("\t" + "16");
                     sw.Write("\t" +
                              double.Parse("0")
-                                         .ToString("0.00000000", new CultureInfo("en-US")));
+                                         .ToString("0.000000", new CultureInfo("en-US")));
                     sw.Write("\t" +
                              double.Parse("0")
-                                 .ToString("0.00000000", new CultureInfo("en-US")));
+                                 .ToString("0.000000", new CultureInfo("en-US")));
                     sw.Write("\t" +
                              double.Parse("0")
-                                 .ToString("0.00000000", new CultureInfo("en-US")));
+                                 .ToString("0.000000", new CultureInfo("en-US")));
                     sw.Write("\t" +
                              double.Parse("0")
-                                 .ToString("0.00000000", new CultureInfo("en-US")));
+                                 .ToString("0.000000", new CultureInfo("en-US")));
                     sw.Write("\t" +
                              double.Parse(lat.ToString())
-                                 .ToString("0.00000000", new CultureInfo("en-US")));
+                                 .ToString("0.000000", new CultureInfo("en-US")));
                     sw.Write("\t" +
                              double.Parse(lon.ToString())
-                                 .ToString("0.00000000", new CultureInfo("en-US")));
+                                 .ToString("0.000000", new CultureInfo("en-US")));
                     sw.Write("\t" +
-                             (double.Parse("100")).ToString("0.000000", new CultureInfo("en-US")));
+                             (double.Parse("50")).ToString("0.000000", new CultureInfo("en-US")));
                     sw.Write("\t" + 1);
                     sw.WriteLine("");
 
+                    cont = cont + 1;
                     sw.Close();
                     cont = cont + 1;
                 }
-               
-            }
-            
+                 cont = cont + 1;
+            //}
+
         }
 
 
