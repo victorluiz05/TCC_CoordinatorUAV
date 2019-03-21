@@ -4,7 +4,7 @@ import time
 import sys
 
 # Communication Arguments received from Coordinator
-time.sleep(0.5)
+
 con = (sys.argv[1])
 ip = (sys.argv[2])
 port = (sys.argv[3])

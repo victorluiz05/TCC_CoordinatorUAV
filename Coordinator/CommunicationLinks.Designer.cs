@@ -62,8 +62,6 @@ namespace Coordinator
             this.label10 = new System.Windows.Forms.Label();
             this.txtWP = new System.Windows.Forms.TextBox();
             this.btnStatusUAV = new System.Windows.Forms.Button();
-            this.txtAutomataEstate = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -206,7 +204,7 @@ namespace Coordinator
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(42, 335);
+            this.btnConnect.Location = new System.Drawing.Point(34, 286);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(233, 23);
             this.btnConnect.TabIndex = 21;
@@ -230,7 +228,7 @@ namespace Coordinator
             "script-arm-takeoff-and-auto.py",
             "vehicle_stateC.py",
             "UAV_Current_State.py"});
-            this.cbxScript.Location = new System.Drawing.Point(42, 308);
+            this.cbxScript.Location = new System.Drawing.Point(34, 259);
             this.cbxScript.Name = "cbxScript";
             this.cbxScript.Size = new System.Drawing.Size(233, 21);
             this.cbxScript.TabIndex = 23;
@@ -422,35 +420,17 @@ namespace Coordinator
             // 
             // btnStatusUAV
             // 
-            this.btnStatusUAV.Location = new System.Drawing.Point(42, 279);
+            this.btnStatusUAV.Location = new System.Drawing.Point(34, 230);
             this.btnStatusUAV.Name = "btnStatusUAV";
             this.btnStatusUAV.Size = new System.Drawing.Size(256, 23);
             this.btnStatusUAV.TabIndex = 48;
             this.btnStatusUAV.UseVisualStyleBackColor = true;
-            // 
-            // txtAutomataEstate
-            // 
-            this.txtAutomataEstate.Location = new System.Drawing.Point(146, 220);
-            this.txtAutomataEstate.Name = "txtAutomataEstate";
-            this.txtAutomataEstate.Size = new System.Drawing.Size(144, 20);
-            this.txtAutomataEstate.TabIndex = 49;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(48, 223);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 13);
-            this.label9.TabIndex = 50;
-            this.label9.Text = "Estate:";
             // 
             // CommunicationLinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1303, 730);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.txtAutomataEstate);
             this.Controls.Add(this.btnStatusUAV);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtWP);
@@ -530,8 +510,6 @@ namespace Coordinator
         private System.Windows.Forms.TextBox txtWP;
         private System.Windows.Forms.Button btnStatusUAV;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtAutomataEstate;
-        private System.Windows.Forms.Label label9;
     }
 }
 

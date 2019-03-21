@@ -46,7 +46,6 @@ namespace Coordinator
             public string Estate;
             public string CurrentWP;
             public string NumberWpMission;
-
         }
 
         public struct Demands
@@ -131,7 +130,6 @@ namespace Coordinator
             foreach (DataRow row in DT.Rows)
             {
                 UAVinfo[CounterUAV].N_UAV = row["ConnectionName"].ToString();
-                //UAVinfo[CounterUAV].CommuName = row["ConnectionName"].ToString();
                 UAVinfo[CounterUAV].Type = row["Type"].ToString();
                 UAVinfo[CounterUAV].IP = row["IPAddress"].ToString();
                 UAVinfo[CounterUAV].Port = row["Port"].ToString();
@@ -232,6 +230,13 @@ namespace Coordinator
         private void CommunicationLinks_Load(object sender, EventArgs e)
         {
             //Connection_Handler();
+             
+
+            //Iniciating the coordinator with all UAVs IDLE
+            for (int j = 0; j <= CounterUAV; j++)
+            {
+                UAVinfo[j].UAVAutomataEstate = false;
+            }
 
             if (CounterUAV > 0) dtvCommunication_CellClick(this, new DataGridViewCellEventArgs(0, 0));
         }
@@ -244,10 +249,10 @@ namespace Coordinator
             LoadData();
 
             UAVinfo[CounterUAV].N_UAV = txtName.Text;
-            //UAVinfo[CounterUAV].CommuName = txtName.Text;
             UAVinfo[CounterUAV].Type = cbxType.Text;
             UAVinfo[CounterUAV].IP = txtIP.Text;
             UAVinfo[CounterUAV].Port = txtPort.Text;
+            UAVinfo[CounterUAV].UAVAutomataEstate = false;
 
             CounterUAV += 1;
 
@@ -493,6 +498,7 @@ namespace Coordinator
                     arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
                 }
 
+                
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
                 psi.RedirectStandardOutput = true;
@@ -575,7 +581,7 @@ namespace Coordinator
                         double lng = ParseDouble(longitude);
 
                         int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == name);
-                        UAVinfo[indexx].Lat = latitude;         //Convert to decimal or whatever later
+                        UAVinfo[indexx].Lat = latitude;         
                         UAVinfo[indexx].Lon = longitude;
                         UAVinfo[indexx].Alt = altitude;
                         UAVinfo[indexx].Groundspeed = groundspeed;
@@ -591,17 +597,12 @@ namespace Coordinator
                             map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(ParseDouble(UAVinfo[indexx].Lat), ParseDouble(UAVinfo[indexx].Lon));
                         }
 
-                        if( (UAVinfo[indexx].UAVAutomataEstate == true) && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))) )
+                        if(((Convert.ToInt32(UAVinfo[indexx].CurrentWP) >= Convert.ToInt32(UAVinfo[indexx].NumberWpMission))) )
                         {
-                            UAVinfo[indexx].Estate = "IDLE";
-                            txtAutomataEstate.BeginInvoke(new MethodInvoker(() =>
-                            {
-                                txtAutomataEstate.Text = UAVinfo[indexx].Estate;
-                            }));
-
-                            End_Mission(indexx);
+                            Automata_Estate_Changer(indexx, "UAV");
                         }
 
+                        //It must changes when a select a UAV on dtv
                         int ind = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
                         string latt = UAVinfo[ind].Lat;
                         string lonn = UAVinfo[ind].Lon;
@@ -618,7 +619,7 @@ namespace Coordinator
                     }
                     catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
                 }
-                Thread.Sleep(250);
+                
             }
             //}));
             //thread.Start();
@@ -975,19 +976,8 @@ namespace Coordinator
                 arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
 
                 int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == namee);
-                UAVinfo[indexx].UAVAutomataEstate = true;
-                UAVinfo[indexx].Estate = "IN FLIGHT";
-                txtAutomataEstate.BeginInvoke(new MethodInvoker(() =>
-                {
-                    txtAutomataEstate.Text = UAVinfo[indexx].Estate;
-                }));
+                Automata_Estate_Changer(indexx, "UAV");
 
-                btnStatusUAV.BeginInvoke(new MethodInvoker(() =>
-                {
-                    btnStatusUAV.Text = "IN FLIGHT";
-                    btnStatusUAV.BackColor = Color.Red;
-                }));
-                
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
                 psi.RedirectStandardOutput = true;
@@ -1001,8 +991,7 @@ namespace Coordinator
                     if (!sr.EndOfStream)
                     {
                         string procOutput = sr.ReadToEnd();
-                        this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput);
-                        
+                        this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput); 
                     }
                     else Thread.Sleep(20);
                 }
@@ -1012,15 +1001,46 @@ namespace Coordinator
             thread.Start();
         }
 
-        //Method that changes the automata estate of an UAV
-        public void End_Mission(int indexx)
+        //Method that changes the automata estate 
+        public void Automata_Estate_Changer(int indexx, string Automata)
         {
-            UAVinfo[indexx].UAVAutomataEstate = false;
-            btnStatusUAV.BeginInvoke(new MethodInvoker(() =>
+            switch (Automata)
             {
-                btnStatusUAV.Text = "IDLE";
-                btnStatusUAV.BackColor = Color.Green;
-            }));
+                case "UAV":
+
+                    if (UAVinfo[indexx].UAVAutomataEstate == false)
+                    {
+                        UAVinfo[indexx].UAVAutomataEstate = true;
+                        btnStatusUAV.BeginInvoke(new MethodInvoker(() =>
+                        {
+                            btnStatusUAV.Text = "IN FLIGHT";
+                            btnStatusUAV.BackColor = Color.Red;
+                        }));
+
+                    }
+                    else if (UAVinfo[indexx].UAVAutomataEstate == true)
+                    {
+                        UAVinfo[indexx].UAVAutomataEstate = false;
+                        btnStatusUAV.BeginInvoke(new MethodInvoker(() =>
+                        {
+                            btnStatusUAV.Text = "IDLE";
+                            btnStatusUAV.BackColor = Color.Green;
+                        }));
+                    }
+                    break;
+
+                case "Demand":
+
+
+
+                    break;
+            }
+
+        }
+
+        public void Initiating_Automata_Estates()
+        {
+
         }
 
         /*---------------------------------------------------------------END of General Methods and Settings-----------------------------------------------------------------------------------------*/
