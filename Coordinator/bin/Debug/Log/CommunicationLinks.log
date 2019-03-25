@@ -1893,3 +1893,288 @@
    em System.Double.Parse(String s, IFormatProvider provider)
    em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
    em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 575 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:51:57 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:51:59 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:52:03 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:52:03 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:54:49 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:55:04 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:55:06 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:55:08 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:55:10 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, 0.207069575787, 349, 0 
+25/03/2019 13:58:25 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:58:41 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:58:42 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:58:42 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:58:43 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:58:47 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:58:50 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:58:52 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 13:58:53 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 580 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 14:06:28 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 14:06:31 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 14:18:08 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 14:18:22 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 14:18:23 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 14:18:24 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 14:18:25 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, 0.12256552279, 228, 0 
+25/03/2019 14:18:26 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, 0.123905420303, 228, 0 
+25/03/2019 14:18:28 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 14:18:29 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 14:18:30 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 14:18:31 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, 0.129697412252, 228, 0 
+25/03/2019 14:20:05 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 14:20:07 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 581 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 14:33:51 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 599 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:02:52 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:05 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:06 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:07 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:08 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:09 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:10 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:11 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:12 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:13 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:14 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:15 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:16 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:17 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:18 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:19 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:20 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 15:03:20 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 578 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 16:33:34 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 583 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 16:34:51 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 583 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 16:35:28 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 583 : Invalid coordinates: None, None, None, 0.0570258311927, 353, 0 
+25/03/2019 16:35:32 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 583 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 16:35:35 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 583 : Invalid coordinates: None, None, None, None, None, 0 
+25/03/2019 16:37:14 - System.FormatException: A cadeia de caracteres de entrada não estava em um formato correto.
+   em System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   em System.Double.Parse(String s, IFormatProvider provider)
+   em CoordinatorMap.Utils.ParseDouble(String str) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\Utils\Parse.cs:linha 9
+   em Coordinator.CommunicationLinks.UAVEstate(String t, String i, String p, String name) na C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\CommunicationLinks.cs:linha 583 : Invalid coordinates: None, None, None, 0.139616623521, 354, 0 

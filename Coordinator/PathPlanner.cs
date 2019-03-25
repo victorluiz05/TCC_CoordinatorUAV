@@ -18,7 +18,7 @@ namespace Coordinator
         int cont = 1;
         int a = 0;
 
-        public void PathPlannigAlgorithm(double lat, double lon)
+        public void PathPlannigAlgorithm(double lat, double lon, int i)
         {
             string missioname = "m" + cont.ToString();
             string path = @"Missions\" + missioname + ".txt";
@@ -75,14 +75,20 @@ namespace Coordinator
                  cont = cont + 1;
             //}
 
+            DecisionalAlgorithm(path,i);
+
+
         }
 
 
-        public void DecisionalAlgorithm()
+        public void DecisionalAlgorithm(string path, int i)
         {
+            CommunicationLinks main = new CommunicationLinks();
 
-
-
+            main.UploadMission(path, main.UAVinfo[i].Type, main.UAVinfo[i].IP, main.UAVinfo[i].Port, main.UAVinfo[i].N_UAV);
+            Thread.Sleep(200);
+            main.Fly_UAV(main.UAVinfo[i].Type, main.UAVinfo[i].IP, main.UAVinfo[i].Port, main.UAVinfo[i].N_UAV);
+            Thread.Sleep(500);
 
         }
     }

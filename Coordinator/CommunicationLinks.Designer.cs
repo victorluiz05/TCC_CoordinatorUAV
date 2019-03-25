@@ -61,7 +61,14 @@ namespace Coordinator
             this.btnStartMission = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txtWP = new System.Windows.Forms.TextBox();
-            this.btnStatusUAV = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtUAVAutomataEstate = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txttestelon = new System.Windows.Forms.TextBox();
+            this.txttestelat = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btntest = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -204,7 +211,7 @@ namespace Coordinator
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(34, 286);
+            this.btnConnect.Location = new System.Drawing.Point(31, 276);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(233, 23);
             this.btnConnect.TabIndex = 21;
@@ -228,7 +235,7 @@ namespace Coordinator
             "script-arm-takeoff-and-auto.py",
             "vehicle_stateC.py",
             "UAV_Current_State.py"});
-            this.cbxScript.Location = new System.Drawing.Point(34, 259);
+            this.cbxScript.Location = new System.Drawing.Point(31, 249);
             this.cbxScript.Name = "cbxScript";
             this.cbxScript.Size = new System.Drawing.Size(233, 21);
             this.cbxScript.TabIndex = 23;
@@ -245,7 +252,7 @@ namespace Coordinator
             // 
             // btnLaunch
             // 
-            this.btnLaunch.Location = new System.Drawing.Point(42, 25);
+            this.btnLaunch.Location = new System.Drawing.Point(31, 12);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(244, 23);
             this.btnLaunch.TabIndex = 25;
@@ -255,28 +262,28 @@ namespace Coordinator
             // 
             // txtLat
             // 
-            this.txtLat.Location = new System.Drawing.Point(146, 72);
+            this.txtLat.Location = new System.Drawing.Point(135, 59);
             this.txtLat.Name = "txtLat";
             this.txtLat.Size = new System.Drawing.Size(144, 20);
             this.txtLat.TabIndex = 26;
             // 
             // txtLon
             // 
-            this.txtLon.Location = new System.Drawing.Point(146, 98);
+            this.txtLon.Location = new System.Drawing.Point(135, 85);
             this.txtLon.Name = "txtLon";
             this.txtLon.Size = new System.Drawing.Size(144, 20);
             this.txtLon.TabIndex = 27;
             // 
             // txtAlt
             // 
-            this.txtAlt.Location = new System.Drawing.Point(146, 124);
+            this.txtAlt.Location = new System.Drawing.Point(135, 111);
             this.txtAlt.Name = "txtAlt";
             this.txtAlt.Size = new System.Drawing.Size(144, 20);
             this.txtAlt.TabIndex = 28;
             // 
             // txtGs
             // 
-            this.txtGs.Location = new System.Drawing.Point(146, 150);
+            this.txtGs.Location = new System.Drawing.Point(135, 137);
             this.txtGs.Name = "txtGs";
             this.txtGs.Size = new System.Drawing.Size(144, 20);
             this.txtGs.TabIndex = 29;
@@ -284,7 +291,7 @@ namespace Coordinator
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(40, 72);
+            this.label5.Location = new System.Drawing.Point(29, 59);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 30;
@@ -293,7 +300,7 @@ namespace Coordinator
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(40, 98);
+            this.label6.Location = new System.Drawing.Point(29, 85);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(57, 13);
             this.label6.TabIndex = 31;
@@ -302,7 +309,7 @@ namespace Coordinator
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(40, 124);
+            this.label7.Location = new System.Drawing.Point(29, 111);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(62, 13);
             this.label7.TabIndex = 32;
@@ -311,7 +318,7 @@ namespace Coordinator
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(40, 153);
+            this.label8.Location = new System.Drawing.Point(29, 140);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 13);
             this.label8.TabIndex = 33;
@@ -323,7 +330,7 @@ namespace Coordinator
             this.panel2.Controls.Add(this.btnLoadMission);
             this.panel2.Controls.Add(this.ltbDemands);
             this.panel2.Controls.Add(this.btnUpload);
-            this.panel2.Location = new System.Drawing.Point(12, 391);
+            this.panel2.Location = new System.Drawing.Point(12, 305);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(341, 296);
             this.panel2.TabIndex = 37;
@@ -357,9 +364,9 @@ namespace Coordinator
             // 
             // panel3
             // 
-            this.panel3.Location = new System.Drawing.Point(682, 4);
+            this.panel3.Location = new System.Drawing.Point(648, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(609, 365);
+            this.panel3.Size = new System.Drawing.Size(643, 386);
             this.panel3.TabIndex = 38;
             // 
             // btnPause
@@ -405,7 +412,7 @@ namespace Coordinator
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(40, 185);
+            this.label10.Location = new System.Drawing.Point(29, 172);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(92, 13);
             this.label10.TabIndex = 47;
@@ -413,25 +420,93 @@ namespace Coordinator
             // 
             // txtWP
             // 
-            this.txtWP.Location = new System.Drawing.Point(146, 182);
+            this.txtWP.Location = new System.Drawing.Point(135, 169);
             this.txtWP.Name = "txtWP";
             this.txtWP.Size = new System.Drawing.Size(144, 20);
             this.txtWP.TabIndex = 46;
             // 
-            // btnStatusUAV
+            // label9
             // 
-            this.btnStatusUAV.Location = new System.Drawing.Point(34, 230);
-            this.btnStatusUAV.Name = "btnStatusUAV";
-            this.btnStatusUAV.Size = new System.Drawing.Size(256, 23);
-            this.btnStatusUAV.TabIndex = 48;
-            this.btnStatusUAV.UseVisualStyleBackColor = true;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(33, 209);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.TabIndex = 49;
+            this.label9.Text = "Status:";
+            // 
+            // txtUAVAutomataEstate
+            // 
+            this.txtUAVAutomataEstate.Location = new System.Drawing.Point(135, 202);
+            this.txtUAVAutomataEstate.Name = "txtUAVAutomataEstate";
+            this.txtUAVAutomataEstate.Size = new System.Drawing.Size(144, 20);
+            this.txtUAVAutomataEstate.TabIndex = 50;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(9, 634);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(53, 13);
+            this.label12.TabIndex = 51;
+            this.label12.Text = "Test Area";
+            // 
+            // txttestelon
+            // 
+            this.txttestelon.Location = new System.Drawing.Point(70, 698);
+            this.txttestelon.Name = "txttestelon";
+            this.txttestelon.Size = new System.Drawing.Size(144, 20);
+            this.txttestelon.TabIndex = 52;
+            this.txttestelon.Text = "149.165811";
+            // 
+            // txttestelat
+            // 
+            this.txttestelat.Location = new System.Drawing.Point(70, 660);
+            this.txttestelat.Name = "txttestelat";
+            this.txttestelat.Size = new System.Drawing.Size(144, 20);
+            this.txttestelat.TabIndex = 53;
+            this.txttestelat.Text = "-35.362953";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(9, 663);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(27, 13);
+            this.label13.TabIndex = 54;
+            this.label13.Text = "LAT";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(9, 701);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(29, 13);
+            this.label14.TabIndex = 55;
+            this.label14.Text = "LON";
+            // 
+            // btntest
+            // 
+            this.btntest.Location = new System.Drawing.Point(231, 673);
+            this.btntest.Name = "btntest";
+            this.btntest.Size = new System.Drawing.Size(122, 23);
+            this.btntest.TabIndex = 56;
+            this.btntest.Text = "Test";
+            this.btntest.UseVisualStyleBackColor = true;
+            this.btntest.Click += new System.EventHandler(this.btntest_Click);
             // 
             // CommunicationLinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1303, 730);
-            this.Controls.Add(this.btnStatusUAV);
+            this.Controls.Add(this.btntest);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.txttestelat);
+            this.Controls.Add(this.txttestelon);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtUAVAutomataEstate);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtWP);
             this.Controls.Add(this.btnStartMission);
@@ -508,8 +583,15 @@ namespace Coordinator
         private CoordinatorMap.MapSetup map;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtWP;
-        private System.Windows.Forms.Button btnStatusUAV;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtUAVAutomataEstate;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txttestelon;
+        private System.Windows.Forms.TextBox txttestelat;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btntest;
     }
 }
 

@@ -42,7 +42,7 @@ namespace Coordinator
             public string Alt;
             public string Groundspeed;
             public string Heading;
-            public bool UAVAutomataEstate; //true for IN FLIGHT false for IDLE
+            public string UAVAutomataEstate; //Estates: 'IN FLIGHT' or 'IDLE'
             public string Estate;
             public string CurrentWP;
             public string NumberWpMission;
@@ -52,6 +52,7 @@ namespace Coordinator
         {
             public double DemandLatitude;
             public double DemandLongitude;
+            public string DemandAutomataEstate; //Estates: 'UNSIGNED', 'ASSIGNED' or 'DELIVERED'
         }
 
         //public Demands[] DemandsArray = new Demands[163];
@@ -235,7 +236,8 @@ namespace Coordinator
             //Iniciating the coordinator with all UAVs IDLE
             for (int j = 0; j <= CounterUAV; j++)
             {
-                UAVinfo[j].UAVAutomataEstate = false;
+                UAVinfo[j].UAVAutomataEstate = "IDLE";
+               
             }
 
             if (CounterUAV > 0) dtvCommunication_CellClick(this, new DataGridViewCellEventArgs(0, 0));
@@ -252,7 +254,7 @@ namespace Coordinator
             UAVinfo[CounterUAV].Type = cbxType.Text;
             UAVinfo[CounterUAV].IP = txtIP.Text;
             UAVinfo[CounterUAV].Port = txtPort.Text;
-            UAVinfo[CounterUAV].UAVAutomataEstate = false;
+            UAVinfo[CounterUAV].UAVAutomataEstate = "IDLE";
 
             CounterUAV += 1;
 
@@ -365,6 +367,24 @@ namespace Coordinator
             }
         }
 
+        public void UpdatingTextBoxUAVAutoamata(string estate)
+        {
+            txtUAVAutomataEstate.BeginInvoke(new MethodInvoker(() =>
+            {
+                if (estate == "IN FLIGHT")
+                {
+                    this.txtUAVAutomataEstate.Text = "\t IN FLIGHT";
+                    this.txtUAVAutomataEstate.BackColor = Color.Red;
+                }
+                else
+                {
+                    this.txtUAVAutomataEstate.Text = "\t IDLE";
+                    this.txtUAVAutomataEstate.BackColor = Color.Green;
+                }
+            }));
+
+        }
+
         //Launches the UAV and gets the current state of it (latitude, longitude etc)
         private void btnLaunch_Click(object sender, EventArgs e)
         {
@@ -372,12 +392,7 @@ namespace Coordinator
             aTimer.Elapsed += new ElapsedEventHandler(TimerCall);
             aTimer.Enabled = true;
             aTimer.AutoReset = true;
-            for (int indexx = 0; indexx <= CounterUAV; indexx++)
-            {
-                UAVinfo[indexx].UAVAutomataEstate = false;
-            }
-
-
+            
         }
 
         //Button that pauses the mission of a selected UAV
@@ -454,21 +469,9 @@ namespace Coordinator
 
         }
 
-        //Changes the visual from form that represents the automata estate of the UAV
-        public void ChangeStatusButton()
+        private void btntest_Click(object sender, EventArgs e)
         {
-            int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
-
-            if (UAVinfo[indexx].UAVAutomataEstate == true)
-            {
-                btnStatusUAV.Text = "In Flight";
-                btnStatusUAV.BackColor = Color.Red;
-            }
-            else
-            {
-                btnStatusUAV.Text = "IDLE";
-                btnStatusUAV.BackColor = Color.Green;
-            }
+            demand_automatic_test(txttestelat.Text,txttestelon.Text);
         }
 
         /*---------------------------------------------------------------END of Form Methods and Settings-----------------------------------------------------------------------------------------*/
@@ -597,11 +600,13 @@ namespace Coordinator
                             map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(ParseDouble(UAVinfo[indexx].Lat), ParseDouble(UAVinfo[indexx].Lon));
                         }
 
-                        if(((Convert.ToInt32(UAVinfo[indexx].CurrentWP) >= Convert.ToInt32(UAVinfo[indexx].NumberWpMission))) )
+                        //Verifying when the mission is over to set free the UAV
+                        if((UAVinfo[indexx].UAVAutomataEstate== "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))) )
                         {
-                            Automata_Estate_Changer(indexx, "UAV");
+                            Mission_Has_Ended(indexx, "UAV");
+                                             
                         }
-
+                        
                         //It must changes when a select a UAV on dtv
                         int ind = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
                         string latt = UAVinfo[ind].Lat;
@@ -609,12 +614,14 @@ namespace Coordinator
                         string altt = UAVinfo[ind].Alt;
                         string groundd = UAVinfo[ind].Groundspeed;
                         string currentwpp = UAVinfo[ind].CurrentWP;
+                        string estate = UAVinfo[ind].UAVAutomataEstate;
 
                         UpdatingTextBoxLatitude(latt);
                         UpdatingTextBoxLongitude(lonn);
                         UpdatingTextBoxaltitude(altt);
-                        UpdatingTextBoxGroundspeed(groundspeed);
-                        UpdatingTextBoxCurrentWP(currentwp);
+                        UpdatingTextBoxGroundspeed(groundd);
+                        UpdatingTextBoxCurrentWP(currentwpp);
+                        UpdatingTextBoxUAVAutoamata(estate);
 
                     }
                     catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
@@ -744,14 +751,14 @@ namespace Coordinator
 
         }
 
-        // Creating the listener channel on the server side and implemetation of threads when there is more than one GCS
         /*
+        // Creating the listener channel on the server side and implemetation of threads when there is more than one GCS
         public void Connection_Handler()
         {
             Socket listenerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             var thread = new Thread(new ThreadStart(() =>
             {
-                IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8891);
+                IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8890);
                 listenerSocket.Bind(ipEnd);
                 listenerSocket.Listen(0);
                 
@@ -770,12 +777,9 @@ namespace Coordinator
             thread.Start();
             
         }
-        */
-
-        //Queue used for the demands
-        Queue DemandsQueue = new Queue();
-        public Demands DemandInfo;
-
+        
+        
+        
         public void Demand_Received(Socket clientSocket)
         {
             byte[] clientData = new byte[1024 * 5000];
@@ -792,21 +796,51 @@ namespace Coordinator
 
                 DemandInfo.DemandLatitude = double.Parse(StateList[0], CultureInfo.InvariantCulture);
                 DemandInfo.DemandLongitude = double.Parse(StateList[1], CultureInfo.InvariantCulture);
+                DemandInfo.DemandAutomataEstate = "UNSIGNED";
 
                 DemandsQueue.Enqueue(DemandInfo);
             }
 
             PlanningPath();
         }
+        */ 
+
+        //Queue used for the demands
+        Queue DemandsQueue = new Queue();
+        public Demands DemandInfo;
+
+        public void demand_automatic_test(string lat, string lon)
+        {
+            DemandInfo.DemandLatitude = double.Parse(lat, CultureInfo.InvariantCulture);
+            DemandInfo.DemandLongitude = double.Parse(lon, CultureInfo.InvariantCulture);
+            DemandInfo.DemandAutomataEstate = "UNSIGNED";
+
+            DemandsQueue.Enqueue(DemandInfo);
+
+            PlanningPath();
+        }
 
         public void PlanningPath()
         {
-            if(DemandsQueue.Count != 0)
+            int x = 0;
+            while(DemandsQueue.Count != 0)
             {
-                DemandInfo = (Demands)DemandsQueue.Dequeue();
-                PathPlanner path = new PathPlanner();
+                int i = 0;
 
-                path.PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude);
+                while ((x!=1)&&(i <= CounterUAV))
+                {
+                    if (UAVinfo[i].UAVAutomataEstate == "IDLE")
+                    {
+                        DemandInfo = (Demands)DemandsQueue.Dequeue();
+                        PathPlanner path = new PathPlanner();
+                        x = 1;
+                        path.PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude,i);
+                    }
+
+                    i++;
+                }
+
+                
             }
         }
         
@@ -933,12 +967,12 @@ namespace Coordinator
                     MessageBox.Show("You must select an UAV before adding a mission", "No UAV selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                //Thread.Sleep(500);
-                BeginInvoke(new MethodInvoker(() =>
-                {
-                    map.MapControl.MissionChanged(map.MapControl.GetUavById(indexUAV), GetWpList(mission));
-                    map.MapControl.SelectedUavId = indexUAV;
-                }));
+                Thread.Sleep(200);
+                //BeginInvoke(new MethodInvoker(() =>
+                //{
+                     //map.MapControl.MissionChanged(map.MapControl.GetUavById(indexUAV), GetWpList(mission));
+                     //map.MapControl.SelectedUavId = indexUAV;
+                //}));
                 
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
@@ -953,7 +987,7 @@ namespace Coordinator
                     if (!sr.EndOfStream)
                     {
                         string procOutput = sr.ReadToEnd();
-                        int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+                        int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == namee);
                         UAVinfo[indexx].NumberWpMission = procOutput;
 
                     }
@@ -964,7 +998,7 @@ namespace Coordinator
             thread.Start();
         }
 
-        //Method that sends the command for the UAV start a mission
+        //Event from UAV Automata/Method that sends the command for the UAV start a mission
         public void Fly_UAV(string con, string ip, string port, string namee)
         {
             var thread = new Thread(new ThreadStart(() =>
@@ -1001,6 +1035,12 @@ namespace Coordinator
             thread.Start();
         }
 
+        //Event from UAV Automata
+        public void Mission_Has_Ended(int indexx, string Automata)
+        {
+            Automata_Estate_Changer(indexx, Automata);
+        }
+
         //Method that changes the automata estate 
         public void Automata_Estate_Changer(int indexx, string Automata)
         {
@@ -1008,29 +1048,19 @@ namespace Coordinator
             {
                 case "UAV":
 
-                    if (UAVinfo[indexx].UAVAutomataEstate == false)
+                    if (UAVinfo[indexx].UAVAutomataEstate == "IDLE")
                     {
-                        UAVinfo[indexx].UAVAutomataEstate = true;
-                        btnStatusUAV.BeginInvoke(new MethodInvoker(() =>
-                        {
-                            btnStatusUAV.Text = "IN FLIGHT";
-                            btnStatusUAV.BackColor = Color.Red;
-                        }));
-
+                        UAVinfo[indexx].UAVAutomataEstate = "IN FLIGHT";
+                        
                     }
-                    else if (UAVinfo[indexx].UAVAutomataEstate == true)
+                    else if (UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT")
                     {
-                        UAVinfo[indexx].UAVAutomataEstate = false;
-                        btnStatusUAV.BeginInvoke(new MethodInvoker(() =>
-                        {
-                            btnStatusUAV.Text = "IDLE";
-                            btnStatusUAV.BackColor = Color.Green;
-                        }));
+                        UAVinfo[indexx].UAVAutomataEstate = "IDLE";
+                        
                     }
                     break;
 
                 case "Demand":
-
 
 
                     break;
@@ -1038,10 +1068,7 @@ namespace Coordinator
 
         }
 
-        public void Initiating_Automata_Estates()
-        {
-
-        }
+        
 
         /*---------------------------------------------------------------END of General Methods and Settings-----------------------------------------------------------------------------------------*/
 
