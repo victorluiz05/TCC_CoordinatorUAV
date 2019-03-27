@@ -456,7 +456,7 @@ namespace Coordinator
             this.txttestelon.Name = "txttestelon";
             this.txttestelon.Size = new System.Drawing.Size(144, 20);
             this.txttestelon.TabIndex = 52;
-            this.txttestelon.Text = "149.165811";
+            this.txttestelon.Text = "149.166808";
             // 
             // txttestelat
             // 
@@ -464,7 +464,7 @@ namespace Coordinator
             this.txttestelat.Name = "txttestelat";
             this.txttestelat.Size = new System.Drawing.Size(144, 20);
             this.txttestelat.TabIndex = 53;
-            this.txttestelat.Text = "-35.362953";
+            this.txttestelat.Text = "-35.362701";
             // 
             // label13
             // 
@@ -557,7 +557,6 @@ namespace Coordinator
         private System.Windows.Forms.ComboBox cbxType;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnConnect;
-        private System.Windows.Forms.RichTextBox rtbScript;
         private System.Windows.Forms.ComboBox cbxScript;
         private System.Windows.Forms.Button btnUpload;
         private System.Windows.Forms.Button btnDelete;
@@ -592,6 +591,7 @@ namespace Coordinator
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btntest;
+        public System.Windows.Forms.RichTextBox rtbScript;
     }
 }
 

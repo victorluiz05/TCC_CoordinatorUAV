@@ -75,15 +75,16 @@ namespace Coordinator
                  cont = cont + 1;
             //}
 
-            DecisionalAlgorithm(path,i);
+            CommunicationLinks main = new CommunicationLinks();
+            main.DecisionalAlgorithm(path,i);
 
 
         }
 
-
+        /*
         public void DecisionalAlgorithm(string path, int i)
         {
-            CommunicationLinks main = new CommunicationLinks();
+
 
             main.UploadMission(path, main.UAVinfo[i].Type, main.UAVinfo[i].IP, main.UAVinfo[i].Port, main.UAVinfo[i].N_UAV);
             Thread.Sleep(200);
@@ -91,5 +92,6 @@ namespace Coordinator
             Thread.Sleep(500);
 
         }
+        */   
     }
 }

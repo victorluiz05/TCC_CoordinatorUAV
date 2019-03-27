@@ -16,6 +16,7 @@ using static CoordinatorMap.Utils;
 using System.Drawing;
 using System.Collections;
 
+
 namespace Coordinator
 {
     public partial class CommunicationLinks : Form
@@ -464,9 +465,8 @@ namespace Coordinator
         }
 
         //Does nothing, probably I double clicked on some element from the design and now if a delete this code, my design gives some error
-        private void rtbScript_TextChanged(object sender, EventArgs e)
+        public void rtbScript_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void btntest_Click(object sender, EventArgs e)
@@ -822,28 +822,42 @@ namespace Coordinator
 
         public void PlanningPath()
         {
-            int x = 0;
-            while(DemandsQueue.Count != 0)
-            {
-                int i = 0;
-
-                while ((x!=1)&&(i <= CounterUAV))
-                {
-                    if (UAVinfo[i].UAVAutomataEstate == "IDLE")
+            
+              int x = 0;
+              while (DemandsQueue.Count != 0)
+              {
+                 int i = 0;
+                 var thread = new Thread(new ThreadStart(() =>
+                 {
+                    while ((x != 1) && (i <= CounterUAV))
                     {
-                        DemandInfo = (Demands)DemandsQueue.Dequeue();
-                        PathPlanner path = new PathPlanner();
-                        x = 1;
-                        path.PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude,i);
+                        if (UAVinfo[i].UAVAutomataEstate == "IDLE")
+                        {
+                            DemandInfo = (Demands)DemandsQueue.Dequeue();
+                            PathPlanner path = new PathPlanner();
+                            x = 1;
+
+                            PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, i);
+                        }
+
+                        i++;
                     }
-
-                    i++;
-                }
-
-                
-            }
+                 }));
+                 thread.Start();
+              }
+            
         }
-        
+
+        public void DecisionalAlgorithm(string path, int i)
+        {
+
+            UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
+            Thread.Sleep(200);
+            Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
+            Thread.Sleep(500);
+
+        }
+
         /*
         //OLD ONE
         //Queue used for the demands
@@ -914,7 +928,7 @@ namespace Coordinator
         }
          
         */
-        
+
         //Generates a list of waypoints of the mission to draw in the map
         public List<PointLatLng> GetWpList(string FileName)
         {
@@ -968,11 +982,11 @@ namespace Coordinator
                     return;
                 }
                 Thread.Sleep(200);
-                //BeginInvoke(new MethodInvoker(() =>
-                //{
-                     //map.MapControl.MissionChanged(map.MapControl.GetUavById(indexUAV), GetWpList(mission));
-                     //map.MapControl.SelectedUavId = indexUAV;
-                //}));
+                BeginInvoke(new MethodInvoker(() =>
+                {
+                     map.MapControl.MissionChanged(map.MapControl.GetUavById(indexUAV), GetWpList(mission));
+                     map.MapControl.SelectedUavId = indexUAV;
+                }));
                 
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
@@ -1010,7 +1024,7 @@ namespace Coordinator
                 arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
 
                 int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == namee);
-                Automata_Estate_Changer(indexx, "UAV");
+                
 
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
@@ -1025,16 +1039,17 @@ namespace Coordinator
                     if (!sr.EndOfStream)
                     {
                         string procOutput = sr.ReadToEnd();
-                        this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput); 
+                        this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput);
+                        
                     }
                     else Thread.Sleep(20);
                 }
+                Automata_Estate_Changer(indexx, "UAV");
 
             }));
-
             thread.Start();
         }
-
+        
         //Event from UAV Automata
         public void Mission_Has_Ended(int indexx, string Automata)
         {
@@ -1068,9 +1083,95 @@ namespace Coordinator
 
         }
 
-        
-
         /*---------------------------------------------------------------END of General Methods and Settings-----------------------------------------------------------------------------------------*/
+
+
+        double BaseLat = -35.363261;
+        double BaseLon = 149.165236;
+        double BaseAlt = 584.000000;
+        int cont = 1;
+        int a = 0;
+
+        public void PathPlannigAlgorithm(double lat, double lon, int i)
+        {
+            string missioname = "m" + cont.ToString();
+            string path = @"Missions\" + missioname + ".txt";
+
+            //if (!File.Exists(path))
+            //{
+            // Create a file to write to.
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                sw.WriteLine("QGC WPL 110");
+                try
+                {
+                    sw.WriteLine("0\t1\t0\t16\t0\t0\t0\t0\t" +
+                                 double.Parse(BaseLat.ToString()).ToString("0.000000", new CultureInfo("en-US")) +
+                                 "\t" +
+                                 double.Parse(BaseLon.ToString()).ToString("0.000000", new CultureInfo("en-US")) +
+                                 "\t" +
+                                 double.Parse(BaseAlt.ToString()).ToString("0.000000", new CultureInfo("en-US")) +
+                                 "\t1");
+                }
+                catch { }
+
+                sw.Write((a + 1)); // seq
+                sw.Write("\t" + 0); // current
+                sw.Write("\t" + "3"); //frame 
+                sw.Write("\t" + "16");
+                sw.Write("\t" +
+                         double.Parse("0")
+                                     .ToString("0.000000", new CultureInfo("en-US")));
+                sw.Write("\t" +
+                         double.Parse("0")
+                             .ToString("0.000000", new CultureInfo("en-US")));
+                sw.Write("\t" +
+                         double.Parse("0")
+                             .ToString("0.000000", new CultureInfo("en-US")));
+                sw.Write("\t" +
+                         double.Parse("0")
+                             .ToString("0.000000", new CultureInfo("en-US")));
+                sw.Write("\t" +
+                         double.Parse(lat.ToString())
+                             .ToString("0.000000", new CultureInfo("en-US")));
+                sw.Write("\t" +
+                         double.Parse(lon.ToString())
+                             .ToString("0.000000", new CultureInfo("en-US")));
+                sw.Write("\t" +
+                         (double.Parse("50")).ToString("0.000000", new CultureInfo("en-US")));
+                sw.Write("\t" + 1);
+                sw.WriteLine("");
+
+                cont = cont + 1;
+                sw.Close();
+                cont = cont + 1;
+            }
+            cont = cont + 1;
+            //}
+
+            
+            DecisionalAlgorithm(path, i);
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
