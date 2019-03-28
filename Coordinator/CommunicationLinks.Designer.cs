@@ -69,9 +69,15 @@ namespace Coordinator
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.btntest = new System.Windows.Forms.Button();
+            this.dtvDemands = new System.Windows.Forms.DataGridView();
+            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnClear = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtvDemands)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -221,7 +227,7 @@ namespace Coordinator
             // 
             // rtbScript
             // 
-            this.rtbScript.Location = new System.Drawing.Point(359, 413);
+            this.rtbScript.Location = new System.Drawing.Point(437, 413);
             this.rtbScript.Name = "rtbScript";
             this.rtbScript.Size = new System.Drawing.Size(395, 305);
             this.rtbScript.TabIndex = 22;
@@ -242,7 +248,7 @@ namespace Coordinator
             // 
             // btnUpload
             // 
-            this.btnUpload.Location = new System.Drawing.Point(208, 23);
+            this.btnUpload.Location = new System.Drawing.Point(297, 3);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(122, 23);
             this.btnUpload.TabIndex = 24;
@@ -326,19 +332,20 @@ namespace Coordinator
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.dtvDemands);
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.btnLoadMission);
             this.panel2.Controls.Add(this.ltbDemands);
             this.panel2.Controls.Add(this.btnUpload);
-            this.panel2.Location = new System.Drawing.Point(12, 305);
+            this.panel2.Location = new System.Drawing.Point(12, 335);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(341, 296);
+            this.panel2.Size = new System.Drawing.Size(419, 296);
             this.panel2.TabIndex = 37;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(32, 58);
+            this.label11.Location = new System.Drawing.Point(8, 8);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(71, 13);
             this.label11.TabIndex = 47;
@@ -346,7 +353,7 @@ namespace Coordinator
             // 
             // btnLoadMission
             // 
-            this.btnLoadMission.Location = new System.Drawing.Point(3, 23);
+            this.btnLoadMission.Location = new System.Drawing.Point(169, 3);
             this.btnLoadMission.Name = "btnLoadMission";
             this.btnLoadMission.Size = new System.Drawing.Size(122, 23);
             this.btnLoadMission.TabIndex = 45;
@@ -357,9 +364,9 @@ namespace Coordinator
             // ltbDemands
             // 
             this.ltbDemands.FormattingEnabled = true;
-            this.ltbDemands.Location = new System.Drawing.Point(3, 85);
+            this.ltbDemands.Location = new System.Drawing.Point(297, 32);
             this.ltbDemands.Name = "ltbDemands";
-            this.ltbDemands.Size = new System.Drawing.Size(130, 186);
+            this.ltbDemands.Size = new System.Drawing.Size(119, 43);
             this.ltbDemands.TabIndex = 1;
             // 
             // panel3
@@ -371,7 +378,7 @@ namespace Coordinator
             // 
             // btnPause
             // 
-            this.btnPause.Location = new System.Drawing.Point(467, 71);
+            this.btnPause.Location = new System.Drawing.Point(510, 53);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(122, 23);
             this.btnPause.TabIndex = 42;
@@ -381,7 +388,7 @@ namespace Coordinator
             // 
             // btnResume
             // 
-            this.btnResume.Location = new System.Drawing.Point(467, 118);
+            this.btnResume.Location = new System.Drawing.Point(510, 100);
             this.btnResume.Name = "btnResume";
             this.btnResume.Size = new System.Drawing.Size(122, 23);
             this.btnResume.TabIndex = 43;
@@ -391,7 +398,7 @@ namespace Coordinator
             // 
             // btnReturn
             // 
-            this.btnReturn.Location = new System.Drawing.Point(467, 165);
+            this.btnReturn.Location = new System.Drawing.Point(510, 147);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(122, 23);
             this.btnReturn.TabIndex = 44;
@@ -401,7 +408,7 @@ namespace Coordinator
             // 
             // btnStartMission
             // 
-            this.btnStartMission.Location = new System.Drawing.Point(467, 25);
+            this.btnStartMission.Location = new System.Drawing.Point(510, 7);
             this.btnStartMission.Name = "btnStartMission";
             this.btnStartMission.Size = new System.Drawing.Size(122, 23);
             this.btnStartMission.TabIndex = 45;
@@ -494,11 +501,55 @@ namespace Coordinator
             this.btntest.UseVisualStyleBackColor = true;
             this.btntest.Click += new System.EventHandler(this.btntest_Click);
             // 
+            // dtvDemands
+            // 
+            this.dtvDemands.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dtvDemands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtvDemands.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Latitude,
+            this.Longitude,
+            this.Estate});
+            this.dtvDemands.Location = new System.Drawing.Point(11, 145);
+            this.dtvDemands.MultiSelect = false;
+            this.dtvDemands.Name = "dtvDemands";
+            this.dtvDemands.ReadOnly = true;
+            this.dtvDemands.Size = new System.Drawing.Size(387, 120);
+            this.dtvDemands.TabIndex = 48;
+            // 
+            // Latitude
+            // 
+            this.Latitude.HeaderText = "Latitude";
+            this.Latitude.Name = "Latitude";
+            this.Latitude.ReadOnly = true;
+            // 
+            // Longitude
+            // 
+            this.Longitude.HeaderText = "Longitude";
+            this.Longitude.Name = "Longitude";
+            this.Longitude.ReadOnly = true;
+            // 
+            // Estate
+            // 
+            this.Estate.HeaderText = "Estate";
+            this.Estate.Name = "Estate";
+            this.Estate.ReadOnly = true;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(510, 182);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(122, 23);
+            this.btnClear.TabIndex = 57;
+            this.btnClear.Text = "Clear Mission";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // CommunicationLinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1303, 730);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btntest);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
@@ -539,6 +590,7 @@ namespace Coordinator
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtvDemands)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -592,6 +644,11 @@ namespace Coordinator
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btntest;
         public System.Windows.Forms.RichTextBox rtbScript;
+        private System.Windows.Forms.DataGridView dtvDemands;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Latitude;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Longitude;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estate;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 

@@ -16,7 +16,7 @@ def arm_and_takeoff(aTargetAltitude):
     Arms vehicle and fly to aTargetAltitude.
     """
 
-    print ("Basic pre-arm checks")
+    #print ("Basic pre-arm checks")
     # Don't try to arm until autopilot is ready
     while not vehicle.is_armable:
         print (" Waiting for vehicle to initialise...")
@@ -39,7 +39,7 @@ def arm_and_takeoff(aTargetAltitude):
     #  after Vehicle.simple_takeoff will execute immediately).
     while True:
         #Break and return from function just below target altitude.
-        if vehicle.location.global_relative_frame.alt>=aTargetAltitude*0.95:
+        if vehicle.location.global_relative_frame.alt>=aTargetAltitude*0.90:
             print ("Reached target altitude")
             break
         time.sleep(1)

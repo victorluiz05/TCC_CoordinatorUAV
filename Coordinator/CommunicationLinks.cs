@@ -33,7 +33,6 @@ namespace Coordinator
 
         public struct UAVStatus
         {
-            //public string CommuName;
             public string Type;
             public string IP;
             public string Port;
@@ -56,9 +55,8 @@ namespace Coordinator
             public string DemandAutomataEstate; //Estates: 'UNSIGNED', 'ASSIGNED' or 'DELIVERED'
         }
 
-        //public Demands[] DemandsArray = new Demands[163];
-        //public int CounterDemand = 0;
-
+        public Demands[] DemandsArray = new Demands[163];
+        
         public struct MissionInfo
         {
             public string MissionName;
@@ -71,7 +69,7 @@ namespace Coordinator
             public string Lon;
         }
 
-        public MissionInfo[] MissionList = new MissionInfo[163];
+        public MissionInfo[] MissionList = new MissionInfo[163];       //Still used in the upload button
         public int CounterMission = 0;
 
         public UAVStatus[] UAVinfo = new UAVStatus[163];     //From this array we'll know the state of every UAV to pass to map 
@@ -242,6 +240,7 @@ namespace Coordinator
             }
 
             if (CounterUAV > 0) dtvCommunication_CellClick(this, new DataGridViewCellEventArgs(0, 0));
+
         }
 
         //Adds to DataBase a communication info 
@@ -474,6 +473,11 @@ namespace Coordinator
             demand_automatic_test(txttestelat.Text,txttestelon.Text);
         }
 
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            Clear_Mission(typee,IpAddress,Portt,CommName);
+        }
+
         /*---------------------------------------------------------------END of Form Methods and Settings-----------------------------------------------------------------------------------------*/
 
         /*---------------------------------------------------------------General Methods and Settings-----------------------------------------------------------------------------------------*/
@@ -603,8 +607,14 @@ namespace Coordinator
                         //Verifying when the mission is over to set free the UAV
                         if((UAVinfo[indexx].UAVAutomataEstate== "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))) )
                         {
+
                             Mission_Has_Ended(indexx, "UAV");
-                                             
+
+                            Clear_Mission(t,i,p,name);
+                            UAVinfo[indexx].CurrentWP = "0";
+                            UAVinfo[indexx].NumberWpMission = "0";
+
+
                         }
                         
                         //It must changes when a select a UAV on dtv
@@ -822,112 +832,45 @@ namespace Coordinator
 
         public void PlanningPath()
         {
-            
-              int x = 0;
-              while (DemandsQueue.Count != 0)
+          int x = 0;
+          while (DemandsQueue.Count != 0)
+          {
+            int i = 0;
+            var thread = new Thread(new ThreadStart(() =>
+            {
+              while ((x != 1) && (i <= CounterUAV))
               {
-                 int i = 0;
-                 var thread = new Thread(new ThreadStart(() =>
-                 {
-                    while ((x != 1) && (i <= CounterUAV))
-                    {
-                        if (UAVinfo[i].UAVAutomataEstate == "IDLE")
-                        {
-                            DemandInfo = (Demands)DemandsQueue.Dequeue();
-                            PathPlanner path = new PathPlanner();
-                            x = 1;
+                if (UAVinfo[i].UAVAutomataEstate == "IDLE")
+                {
+                  DemandInfo = (Demands)DemandsQueue.Dequeue();
+                  x = 1;
 
-                            PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, i);
-                        }
+                  DemandsArray[i].DemandLatitude = DemandInfo.DemandLatitude;
+                  DemandsArray[i].DemandLongitude = DemandInfo.DemandLongitude;
+                  DemandsArray[i].DemandAutomataEstate = DemandInfo.DemandAutomataEstate;
 
-                        i++;
-                    }
-                 }));
-                 thread.Start();
+                  Automata_Estate_Changer(i, "DEMAND");
+
+                  PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, i);
+                             
+                }
+
+                i++;
               }
+            }));
+            thread.Start();
+          }
             
         }
 
         public void DecisionalAlgorithm(string path, int i)
         {
-
+            Thread.Sleep(1200);
             UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
-            Thread.Sleep(200);
+            Thread.Sleep(1200);
             Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
-            Thread.Sleep(500);
-
-        }
-
-        /*
-        //OLD ONE
-        //Queue used for the demands
-        Queue<string> RequestQueue = new Queue<string>();
-
-        //OLD ONE
-        //Method that receives the demand e starts the decisional algorithm
-        public void Request_Received(Socket clientSocket)
-        {
-            byte[] clientData = new byte[1024 * 5000];
-            string receivedPath = @"Missions\";
-            int receivedBytesLen;
-
-            receivedBytesLen = clientSocket.Receive(clientData);
-
-            if (receivedBytesLen != 0)
-            {
-                int fileNameLen = BitConverter.ToInt32(clientData, 0);
-                string fileName = Encoding.ASCII.GetString(clientData, 4, fileNameLen);
-                BinaryWriter bWrite = new BinaryWriter(File.Open(receivedPath + fileName, FileMode.Append)); ;
-                bWrite.Write(clientData, 4 + fileNameLen, receivedBytesLen - 4 - fileNameLen);
-
-                missionn = @"Missions\" + fileName; //This parameter will be passed to the script so it can know where the mission file is, and then, upload it to the vehicle
-
-                MissionList[CounterMission].MissionName = fileName;
-                MissionList[CounterMission].MissionPath = missionn;
-
-                RequestQueue.Enqueue(MissionList[CounterMission].MissionPath);
-                Assign_Request();
-
-                UpdatingTListboxMission(MissionList[CounterMission].MissionName);
-               
-                CounterMission += 1;
-
-                bWrite.Close();
-                clientSocket.Close();
-
-            }
             
         }
-        
-        //Decisional algorithm to select an UAV for a mission
-        public void Assign_Request()
-        {
-            int x = 0;
-            
-            while (RequestQueue.Count > 0)
-            {
-                int i = 0;
-
-                while ( (x!=1) && (i<=CounterUAV) )
-                {
-                    if(UAVinfo[i].UAVAutomataEstate == false)
-                    {
-
-                        string request = @RequestQueue.Dequeue();
-                        UploadMission(request, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port,UAVinfo[i].N_UAV);
-                        Thread.Sleep(2500);
-                        Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port,UAVinfo[i].N_UAV);
-                        x = 1;
-                        ltbAssignedTo.Items.Add(UAVinfo[i].N_UAV);
-                    }
-
-                    i++;
-                }
-            }
-            
-        }
-         
-        */
 
         //Generates a list of waypoints of the mission to draw in the map
         public List<PointLatLng> GetWpList(string FileName)
@@ -1024,7 +967,42 @@ namespace Coordinator
                 arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
 
                 int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == namee);
+
+                Automata_Estate_Changer(indexx, "UAV");
+
+                ProcessStartInfo psi = new ProcessStartInfo(python, arg);
+                psi.UseShellExecute = false;
+                psi.RedirectStandardOutput = true;
+                psi.CreateNoWindow = true;
+
+            
+                var proc = Process.Start(psi);
+                StreamReader sr = proc.StandardOutput;
+
+                while (!proc.HasExited)
+                {
+                    if (!sr.EndOfStream)
+                    {
+                        string procOutput = sr.ReadToEnd();
+                        this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput);
+                        
+                    }
+                    else Thread.Sleep(20);
+                }
                 
+            }));
+            thread.Start();
+        }
+
+        public void Clear_Mission(string con, string ip, string port, string namee)
+        {
+            var thread = new Thread(new ThreadStart(() =>
+            {
+                string python = @"C:\Python27\python.exe";
+                string myPythonApp = "ClearMission.py";
+                string arg = "";
+
+                arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
 
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
@@ -1040,11 +1018,10 @@ namespace Coordinator
                     {
                         string procOutput = sr.ReadToEnd();
                         this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput);
-                        
+
                     }
                     else Thread.Sleep(20);
                 }
-                Automata_Estate_Changer(indexx, "UAV");
 
             }));
             thread.Start();
@@ -1052,6 +1029,12 @@ namespace Coordinator
         
         //Event from UAV Automata
         public void Mission_Has_Ended(int indexx, string Automata)
+        {
+            Automata_Estate_Changer(indexx, Automata);
+        }
+
+        //Event from Demand Automata
+        public void Demand_Answered(int indexx, string Automata)
         {
             Automata_Estate_Changer(indexx, Automata);
         }
@@ -1075,8 +1058,16 @@ namespace Coordinator
                     }
                     break;
 
-                case "Demand":
+                case "DEMAND":
 
+                    if(DemandsArray[indexx].DemandAutomataEstate == "UNSIGNED")
+                    {
+                        DemandsArray[indexx].DemandAutomataEstate = "ASSIGNED";
+                    }
+                    else if(DemandsArray[indexx].DemandAutomataEstate == "ASSIGNED")
+                    {
+                        DemandsArray[indexx].DemandAutomataEstate = "ANSWERED";
+                    }
 
                     break;
             }
@@ -1084,7 +1075,6 @@ namespace Coordinator
         }
 
         /*---------------------------------------------------------------END of General Methods and Settings-----------------------------------------------------------------------------------------*/
-
 
         double BaseLat = -35.363261;
         double BaseLon = 149.165236;
@@ -1155,24 +1145,7 @@ namespace Coordinator
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     }
 
 }
