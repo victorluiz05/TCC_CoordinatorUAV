@@ -11,7 +11,7 @@ port = (sys.argv[3])
 connection_string = con + ':'+ ip + ':' + port
 
 # Connect to the Vehicle.
-vehicle = connect(connection_string, wait_ready=False)
+vehicle = connect(connection_string, wait_ready=True)
 
 currentLocation = vehicle.location.global_relative_frame
 currentGroundspeed = vehicle.groundspeed

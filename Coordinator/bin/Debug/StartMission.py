@@ -9,7 +9,7 @@ port = (sys.argv[3])
 connection_string = con + ':'+ ip + ':' + port
 
 # Connect to the Vehicle.
-vehicle = connect(connection_string, wait_ready=False)
+vehicle = connect(connection_string, wait_ready=True)
 
 def arm_and_takeoff(aTargetAltitude):
     """
@@ -24,6 +24,7 @@ def arm_and_takeoff(aTargetAltitude):
 
     print ("Arming motors")
     # Copter should arm in GUIDED mode
+    vehicle.commands.clear()
     vehicle.mode    = VehicleMode("GUIDED")
     vehicle.armed   = True
 

@@ -475,7 +475,7 @@ namespace Coordinator
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            Clear_Mission(typee,IpAddress,Portt,CommName);
+            //Clear_Mission(typee,IpAddress,Portt,CommName);
         }
 
         /*---------------------------------------------------------------END of Form Methods and Settings-----------------------------------------------------------------------------------------*/
@@ -610,9 +610,9 @@ namespace Coordinator
 
                             Mission_Has_Ended(indexx, "UAV");
 
-                            Clear_Mission(t,i,p,name);
-                            UAVinfo[indexx].CurrentWP = "0";
-                            UAVinfo[indexx].NumberWpMission = "0";
+                            //Clear_Mission(t,i,p,name);
+                            //UAVinfo[indexx].CurrentWP = "0";
+                            //UAVinfo[indexx].NumberWpMission = "0";
 
 
                         }
@@ -826,8 +826,11 @@ namespace Coordinator
             DemandInfo.DemandAutomataEstate = "UNSIGNED";
 
             DemandsQueue.Enqueue(DemandInfo);
-
-            PlanningPath();
+            if(DemandsQueue.Count>0)
+            {
+                PlanningPath();
+            }
+            
         }
 
         public void PlanningPath()
@@ -838,22 +841,25 @@ namespace Coordinator
             int i = 0;
             var thread = new Thread(new ThreadStart(() =>
             {
-              while ((x != 1) && (i <= CounterUAV))
+              while (x != 1)
               {
-                if (UAVinfo[i].UAVAutomataEstate == "IDLE")
-                {
-                  DemandInfo = (Demands)DemandsQueue.Dequeue();
-                  x = 1;
+                    if(i <= CounterUAV)
+                    {
+                        if (UAVinfo[i].UAVAutomataEstate == "IDLE")
+                        {
+                            DemandInfo = (Demands)DemandsQueue.Dequeue();
+                            x = 1;
 
-                  DemandsArray[i].DemandLatitude = DemandInfo.DemandLatitude;
-                  DemandsArray[i].DemandLongitude = DemandInfo.DemandLongitude;
-                  DemandsArray[i].DemandAutomataEstate = DemandInfo.DemandAutomataEstate;
+                            DemandsArray[i].DemandLatitude = DemandInfo.DemandLatitude;
+                            DemandsArray[i].DemandLongitude = DemandInfo.DemandLongitude;
+                            DemandsArray[i].DemandAutomataEstate = DemandInfo.DemandAutomataEstate;
 
-                  Automata_Estate_Changer(i, "DEMAND");
+                            Automata_Estate_Changer(i, "DEMAND");
 
-                  PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, i);
-                             
-                }
+                            PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, i);
+
+                        }
+                    }
 
                 i++;
               }
@@ -865,9 +871,9 @@ namespace Coordinator
 
         public void DecisionalAlgorithm(string path, int i)
         {
-            Thread.Sleep(1200);
+            Thread.Sleep(2000);
             UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
-            Thread.Sleep(1200);
+            Thread.Sleep(2000);
             Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
             
         }

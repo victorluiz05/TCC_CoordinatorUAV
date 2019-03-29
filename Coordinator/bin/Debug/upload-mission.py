@@ -11,7 +11,7 @@ connection_string = con + ':'+ ip + ':' + port
 
 # Connect to the Vehicle
 #print('Connecting to vehicle on: %s' % connection_string)
-vehicle = connect(connection_string, wait_ready=False)
+vehicle = connect(connection_string, wait_ready=True)
 
 # Check that vehicle is armable. 
 # This ensures home_location is set (needed when saving WP file)
