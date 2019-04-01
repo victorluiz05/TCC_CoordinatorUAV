@@ -51,7 +51,8 @@ namespace Coordinator
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.txtTest = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtQueue = new System.Windows.Forms.TextBox();
             this.dtvDemands = new System.Windows.Forms.DataGridView();
             this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,8 +77,6 @@ namespace Coordinator
             this.btntest = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.txtQueue = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -338,7 +337,6 @@ namespace Coordinator
             // 
             this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.txtQueue);
-            this.panel2.Controls.Add(this.txtTest);
             this.panel2.Controls.Add(this.dtvDemands);
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.btnLoadMission);
@@ -349,12 +347,21 @@ namespace Coordinator
             this.panel2.Size = new System.Drawing.Size(419, 296);
             this.panel2.TabIndex = 37;
             // 
-            // txtTest
+            // label15
             // 
-            this.txtTest.Location = new System.Drawing.Point(11, 69);
-            this.txtTest.Name = "txtTest";
-            this.txtTest.Size = new System.Drawing.Size(144, 20);
-            this.txtTest.TabIndex = 58;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(153, 109);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(42, 13);
+            this.label15.TabIndex = 60;
+            this.label15.Text = "Queue:";
+            // 
+            // txtQueue
+            // 
+            this.txtQueue.Location = new System.Drawing.Point(254, 102);
+            this.txtQueue.Name = "txtQueue";
+            this.txtQueue.Size = new System.Drawing.Size(144, 20);
+            this.txtQueue.TabIndex = 59;
             // 
             // dtvDemands
             // 
@@ -425,7 +432,7 @@ namespace Coordinator
             // 
             // btnPause
             // 
-            this.btnPause.Location = new System.Drawing.Point(510, 53);
+            this.btnPause.Location = new System.Drawing.Point(510, 36);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(122, 23);
             this.btnPause.TabIndex = 42;
@@ -435,7 +442,7 @@ namespace Coordinator
             // 
             // btnResume
             // 
-            this.btnResume.Location = new System.Drawing.Point(510, 100);
+            this.btnResume.Location = new System.Drawing.Point(510, 65);
             this.btnResume.Name = "btnResume";
             this.btnResume.Size = new System.Drawing.Size(122, 23);
             this.btnResume.TabIndex = 43;
@@ -445,7 +452,7 @@ namespace Coordinator
             // 
             // btnReturn
             // 
-            this.btnReturn.Location = new System.Drawing.Point(510, 147);
+            this.btnReturn.Location = new System.Drawing.Point(510, 94);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(122, 23);
             this.btnReturn.TabIndex = 44;
@@ -550,7 +557,7 @@ namespace Coordinator
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(510, 182);
+            this.btnClear.Location = new System.Drawing.Point(510, 123);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(122, 23);
             this.btnClear.TabIndex = 57;
@@ -567,22 +574,6 @@ namespace Coordinator
             this.button1.Text = "Reset State";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // txtQueue
-            // 
-            this.txtQueue.Location = new System.Drawing.Point(254, 102);
-            this.txtQueue.Name = "txtQueue";
-            this.txtQueue.Size = new System.Drawing.Size(144, 20);
-            this.txtQueue.TabIndex = 59;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(153, 109);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(42, 13);
-            this.label15.TabIndex = 60;
-            this.label15.Text = "Queue:";
             // 
             // CommunicationLinks
             // 
@@ -690,7 +681,6 @@ namespace Coordinator
         private System.Windows.Forms.DataGridViewTextBoxColumn Longitude;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estate;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.TextBox txtTest;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtQueue;

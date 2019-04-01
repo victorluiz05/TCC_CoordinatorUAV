@@ -557,14 +557,11 @@ namespace Coordinator
                 UAVEstate(con, ip, port, name);
             }
 
-            Thread.Sleep(150);
         }
 
         //One of the most important method, runs inside a timer e gets the actual estate os each uav listed in the coordinator
         public void UAVEstate(string t, string i, string p, string name)
         {
-            //var thread = new Thread(new ThreadStart(() =>
-            //{
             string script = "UAV_Current_State.py";
             string python = @"C:\Python27\python.exe";
             string arg = "";
@@ -579,12 +576,13 @@ namespace Coordinator
 
             while (!proc.HasExited)
             {
+               
                 if (!sr.EndOfStream)
                 {
                     string procOutput = sr.ReadToEnd();
                     const string delimiter = ", ";
                     string[] StateList = procOutput.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-
+                   
                     try
                     {
                         string latitude = StateList[0];
@@ -617,9 +615,11 @@ namespace Coordinator
                         //Verifying when the mission is over to set free the UAV
                         if ((UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))))
                         {
-
-                            Mission_Has_Ended(indexx, "UAV");
-
+                            if(ParseDouble(UAVinfo[indexx].Alt)  <= 1.5)
+                            {
+                                Mission_Has_Ended(indexx, "UAV");
+                            }
+                            
                         }
 
                         //It must changes when a select a UAV on dtv
@@ -637,15 +637,14 @@ namespace Coordinator
                         UpdatingTextBoxGroundspeed(groundd);
                         UpdatingTextBoxCurrentWP(currentwpp);
                         UpdatingTextBoxUAVAutoamata(estate);
-
+                        
                     }
                     catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
+                   
                 }
-
-            }
-            //}));
-            //thread.Start();
-
+                
+            }proc.WaitForExit(10);
+           
         }
 
         //Method for pausing the mission of a select UAV
@@ -793,8 +792,6 @@ namespace Coordinator
             
         }
         
-        
-        
         public void Demand_Received(Socket clientSocket)
         {
             byte[] clientData = new byte[1024 * 5000];
@@ -835,7 +832,7 @@ namespace Coordinator
 
         }
 
-        System.Timers.Timer aTimer2 = new System.Timers.Timer(1500);   //Creation of the timer
+        System.Timers.Timer aTimer2 = new System.Timers.Timer(1000);   //Creation of the timer
 
         public void TimerCall2(object sender, ElapsedEventArgs e)
         {
@@ -845,14 +842,13 @@ namespace Coordinator
                 PlanningPath(j, automataestate);
             }
 
-            Thread.Sleep(150);
         }
 
         public void PlanningPath(int j, string automataestate)
         {
             if (DemandsQueue.Count != 0)
             {
-                if (automataestate == "IDLE")
+                if ((automataestate == "IDLE") && (UAVinfo[j].UAVAutomataEstate == "IDLE"))
                 {
                     DemandInfo = (Demands)DemandsQueue.Dequeue();
 
@@ -860,15 +856,13 @@ namespace Coordinator
                     DemandsArray[j].DemandLongitude = DemandInfo.DemandLongitude;
                     DemandsArray[j].DemandAutomataEstate = DemandInfo.DemandAutomataEstate;
 
-                    //Automata_Estate_Changer(j, "UAV");
+                    Automata_Estate_Changer(j, "DEMAND");
                     BeginInvoke(new MethodInvoker(() =>
                     {
-                        //txtTest.Text = "GOT IN";
-                        txtQueue.Text = DemandsQueue.Count.ToString();
+                       txtQueue.Text = DemandsQueue.Count.ToString();
                     }));
 
                     PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, j);
-
                 }
 
             }
@@ -877,9 +871,8 @@ namespace Coordinator
 
         public void DecisionalAlgorithm(string path, int i)
         {
-            Thread.Sleep(1000);
             UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
 
         }
