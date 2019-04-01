@@ -75,8 +75,8 @@ namespace Coordinator
                  cont = cont + 1;
             //}
 
-            CommunicationLinks main = new CommunicationLinks();
-            main.DecisionalAlgorithm(path,i);
+            //CommunicationLinks main = new CommunicationLinks();
+            //main.DecisionalAlgorithm(path,i);
 
 
         }

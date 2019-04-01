@@ -51,6 +51,11 @@ namespace Coordinator
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtTest = new System.Windows.Forms.TextBox();
+            this.dtvDemands = new System.Windows.Forms.DataGridView();
+            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label11 = new System.Windows.Forms.Label();
             this.btnLoadMission = new System.Windows.Forms.Button();
             this.ltbDemands = new System.Windows.Forms.ListBox();
@@ -69,11 +74,10 @@ namespace Coordinator
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.btntest = new System.Windows.Forms.Button();
-            this.dtvDemands = new System.Windows.Forms.DataGridView();
-            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnClear = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.txtQueue = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -332,6 +336,9 @@ namespace Coordinator
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label15);
+            this.panel2.Controls.Add(this.txtQueue);
+            this.panel2.Controls.Add(this.txtTest);
             this.panel2.Controls.Add(this.dtvDemands);
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.btnLoadMission);
@@ -341,6 +348,46 @@ namespace Coordinator
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(419, 296);
             this.panel2.TabIndex = 37;
+            // 
+            // txtTest
+            // 
+            this.txtTest.Location = new System.Drawing.Point(11, 69);
+            this.txtTest.Name = "txtTest";
+            this.txtTest.Size = new System.Drawing.Size(144, 20);
+            this.txtTest.TabIndex = 58;
+            // 
+            // dtvDemands
+            // 
+            this.dtvDemands.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dtvDemands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtvDemands.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Latitude,
+            this.Longitude,
+            this.Estate});
+            this.dtvDemands.Location = new System.Drawing.Point(11, 145);
+            this.dtvDemands.MultiSelect = false;
+            this.dtvDemands.Name = "dtvDemands";
+            this.dtvDemands.ReadOnly = true;
+            this.dtvDemands.Size = new System.Drawing.Size(387, 120);
+            this.dtvDemands.TabIndex = 48;
+            // 
+            // Latitude
+            // 
+            this.Latitude.HeaderText = "Latitude";
+            this.Latitude.Name = "Latitude";
+            this.Latitude.ReadOnly = true;
+            // 
+            // Longitude
+            // 
+            this.Longitude.HeaderText = "Longitude";
+            this.Longitude.Name = "Longitude";
+            this.Longitude.ReadOnly = true;
+            // 
+            // Estate
+            // 
+            this.Estate.HeaderText = "Estate";
+            this.Estate.Name = "Estate";
+            this.Estate.ReadOnly = true;
             // 
             // label11
             // 
@@ -501,39 +548,6 @@ namespace Coordinator
             this.btntest.UseVisualStyleBackColor = true;
             this.btntest.Click += new System.EventHandler(this.btntest_Click);
             // 
-            // dtvDemands
-            // 
-            this.dtvDemands.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dtvDemands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtvDemands.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Latitude,
-            this.Longitude,
-            this.Estate});
-            this.dtvDemands.Location = new System.Drawing.Point(11, 145);
-            this.dtvDemands.MultiSelect = false;
-            this.dtvDemands.Name = "dtvDemands";
-            this.dtvDemands.ReadOnly = true;
-            this.dtvDemands.Size = new System.Drawing.Size(387, 120);
-            this.dtvDemands.TabIndex = 48;
-            // 
-            // Latitude
-            // 
-            this.Latitude.HeaderText = "Latitude";
-            this.Latitude.Name = "Latitude";
-            this.Latitude.ReadOnly = true;
-            // 
-            // Longitude
-            // 
-            this.Longitude.HeaderText = "Longitude";
-            this.Longitude.Name = "Longitude";
-            this.Longitude.ReadOnly = true;
-            // 
-            // Estate
-            // 
-            this.Estate.HeaderText = "Estate";
-            this.Estate.Name = "Estate";
-            this.Estate.ReadOnly = true;
-            // 
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(510, 182);
@@ -544,11 +558,38 @@ namespace Coordinator
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(306, 199);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(122, 23);
+            this.button1.TabIndex = 58;
+            this.button1.Text = "Reset State";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // txtQueue
+            // 
+            this.txtQueue.Location = new System.Drawing.Point(254, 102);
+            this.txtQueue.Name = "txtQueue";
+            this.txtQueue.Size = new System.Drawing.Size(144, 20);
+            this.txtQueue.TabIndex = 59;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(153, 109);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(42, 13);
+            this.label15.TabIndex = 60;
+            this.label15.Text = "Queue:";
+            // 
             // CommunicationLinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1303, 730);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btntest);
             this.Controls.Add(this.label14);
@@ -649,6 +690,10 @@ namespace Coordinator
         private System.Windows.Forms.DataGridViewTextBoxColumn Longitude;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estate;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.TextBox txtTest;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtQueue;
     }
 }
 

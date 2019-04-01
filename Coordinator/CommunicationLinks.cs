@@ -56,7 +56,7 @@ namespace Coordinator
         }
 
         public Demands[] DemandsArray = new Demands[163];
-        
+
         public struct MissionInfo
         {
             public string MissionName;
@@ -94,7 +94,7 @@ namespace Coordinator
         private SQLiteDataAdapter DB;
         private DataSet DS = new DataSet();
         private DataTable DT = new DataTable();
-        
+
         /*---------------------------------------------------------------Database Methods and Settings----------------------------------------------------------------------------------*/
 
         //Connecting with the DataBase
@@ -140,9 +140,9 @@ namespace Coordinator
             sql_con.Close();
 
         }
-        
+
         /*---------------------------------------------------------------END of Database Methods and Settings---------------------------------------------------------------------------*/
-        
+
         /*---------------------------------------------------------------Form Methods and Settings--------------------------------------------------------------------------------------*/
 
         //Button that calls the function which runs the DroneKit script selected
@@ -230,13 +230,13 @@ namespace Coordinator
         private void CommunicationLinks_Load(object sender, EventArgs e)
         {
             //Connection_Handler();
-             
+
 
             //Iniciating the coordinator with all UAVs IDLE
             for (int j = 0; j <= CounterUAV; j++)
             {
                 UAVinfo[j].UAVAutomataEstate = "IDLE";
-               
+
             }
 
             if (CounterUAV > 0) dtvCommunication_CellClick(this, new DataGridViewCellEventArgs(0, 0));
@@ -340,7 +340,7 @@ namespace Coordinator
                 this.txtAlt.Text = alt;
             }
         }
-        
+
         //Update the value of the groundspeed of an UAV in the respective textbox
         public void UpdatingTextBoxGroundspeed(string gs)
         {
@@ -353,7 +353,7 @@ namespace Coordinator
                 this.txtGs.Text = gs;
             }
         }
-        
+
         //Update the value of the Waypoint that the UAV is going towards in the respective textbox
         public void UpdatingTextBoxCurrentWP(string currentwp)
         {
@@ -392,7 +392,11 @@ namespace Coordinator
             aTimer.Elapsed += new ElapsedEventHandler(TimerCall);
             aTimer.Enabled = true;
             aTimer.AutoReset = true;
-            
+
+            aTimer2.Elapsed += new ElapsedEventHandler(TimerCall2);
+            aTimer2.Enabled = true;
+            aTimer2.AutoReset = true;
+
         }
 
         //Button that pauses the mission of a selected UAV
@@ -406,7 +410,7 @@ namespace Coordinator
         {
             ResumeMission(typee, IpAddress, Portt);
         }
-        
+
         //Button that sends the UAV to the Base
         private void btnReturn_Click(object sender, EventArgs e)
         {
@@ -420,7 +424,7 @@ namespace Coordinator
             openFile.ShowDialog();
             string FilePath = openFile.FileName;  //Getting the full path of the mission file
             FileInfo fi = new FileInfo(FilePath);
-            
+
             string FileName = fi.Name;
             missionn = @"Missions\" + FileName; //This parameter will be passed to the script so it can know where the mission file is, and then, upload it to the vehicle
 
@@ -446,7 +450,7 @@ namespace Coordinator
                 this.ltbDemands.Items.Add(mission);
             }
         }
-        
+
         //Ends the socket when the applications is closed
         private void CommunicationLinks_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -470,12 +474,19 @@ namespace Coordinator
 
         private void btntest_Click(object sender, EventArgs e)
         {
-            demand_automatic_test(txttestelat.Text,txttestelon.Text);
+            demand_automatic_test(txttestelat.Text, txttestelon.Text);
+            txtQueue.Text = DemandsQueue.Count.ToString();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
             //Clear_Mission(typee,IpAddress,Portt,CommName);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Mission_Has_Ended(0, "UAV");
+            txtQueue.Text = DemandsQueue.Count.ToString();
         }
 
         /*---------------------------------------------------------------END of Form Methods and Settings-----------------------------------------------------------------------------------------*/
@@ -505,7 +516,7 @@ namespace Coordinator
                     arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
                 }
 
-                
+
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
                 psi.RedirectStandardOutput = true;
@@ -530,13 +541,12 @@ namespace Coordinator
             thread.Start();
 
         }
-        
+
         System.Timers.Timer aTimer = new System.Timers.Timer(2000);   //Creation of the timer
-        
+
         //Timer that runs the method to get the actual estate of the UAVs
         public void TimerCall(object sender, ElapsedEventArgs e)
         {
-
             for (int j = 0; j <= CounterUAV; j++)
             {
                 string con = UAVinfo[j].Type;
@@ -588,7 +598,7 @@ namespace Coordinator
                         double lng = ParseDouble(longitude);
 
                         int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == name);
-                        UAVinfo[indexx].Lat = latitude;         
+                        UAVinfo[indexx].Lat = latitude;
                         UAVinfo[indexx].Lon = longitude;
                         UAVinfo[indexx].Alt = altitude;
                         UAVinfo[indexx].Groundspeed = groundspeed;
@@ -605,18 +615,13 @@ namespace Coordinator
                         }
 
                         //Verifying when the mission is over to set free the UAV
-                        if((UAVinfo[indexx].UAVAutomataEstate== "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))) )
+                        if ((UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))))
                         {
 
                             Mission_Has_Ended(indexx, "UAV");
 
-                            //Clear_Mission(t,i,p,name);
-                            //UAVinfo[indexx].CurrentWP = "0";
-                            //UAVinfo[indexx].NumberWpMission = "0";
-
-
                         }
-                        
+
                         //It must changes when a select a UAV on dtv
                         int ind = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
                         string latt = UAVinfo[ind].Lat;
@@ -636,13 +641,13 @@ namespace Coordinator
                     }
                     catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
                 }
-                
+
             }
             //}));
             //thread.Start();
 
         }
-        
+
         //Method for pausing the mission of a select UAV
         public void PauseMission(string typee, string IpAddress, string Portt)
         {
@@ -757,7 +762,7 @@ namespace Coordinator
             }));
 
             thread.Start();
-           
+
 
         }
 
@@ -813,7 +818,7 @@ namespace Coordinator
 
             PlanningPath();
         }
-        */ 
+        */
 
         //Queue used for the demands
         Queue DemandsQueue = new Queue();
@@ -826,59 +831,60 @@ namespace Coordinator
             DemandInfo.DemandAutomataEstate = "UNSIGNED";
 
             DemandsQueue.Enqueue(DemandInfo);
-            if(DemandsQueue.Count>0)
-            {
-                PlanningPath();
-            }
-            
+
+
         }
 
-        public void PlanningPath()
+        System.Timers.Timer aTimer2 = new System.Timers.Timer(1500);   //Creation of the timer
+
+        public void TimerCall2(object sender, ElapsedEventArgs e)
         {
-          int x = 0;
-          while (DemandsQueue.Count != 0)
-          {
-            int i = 0;
-            var thread = new Thread(new ThreadStart(() =>
+            for (int j = 0; j <= CounterUAV; j++)
             {
-              while (x != 1)
-              {
-                    if(i <= CounterUAV)
+                string automataestate = UAVinfo[j].UAVAutomataEstate;
+                PlanningPath(j, automataestate);
+            }
+
+            Thread.Sleep(150);
+        }
+
+        public void PlanningPath(int j, string automataestate)
+        {
+            if (DemandsQueue.Count != 0)
+            {
+                if (automataestate == "IDLE")
+                {
+                    DemandInfo = (Demands)DemandsQueue.Dequeue();
+
+                    DemandsArray[j].DemandLatitude = DemandInfo.DemandLatitude;
+                    DemandsArray[j].DemandLongitude = DemandInfo.DemandLongitude;
+                    DemandsArray[j].DemandAutomataEstate = DemandInfo.DemandAutomataEstate;
+
+                    //Automata_Estate_Changer(j, "UAV");
+                    BeginInvoke(new MethodInvoker(() =>
                     {
-                        if (UAVinfo[i].UAVAutomataEstate == "IDLE")
-                        {
-                            DemandInfo = (Demands)DemandsQueue.Dequeue();
-                            x = 1;
+                        //txtTest.Text = "GOT IN";
+                        txtQueue.Text = DemandsQueue.Count.ToString();
+                    }));
 
-                            DemandsArray[i].DemandLatitude = DemandInfo.DemandLatitude;
-                            DemandsArray[i].DemandLongitude = DemandInfo.DemandLongitude;
-                            DemandsArray[i].DemandAutomataEstate = DemandInfo.DemandAutomataEstate;
+                    PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, j);
 
-                            Automata_Estate_Changer(i, "DEMAND");
+                }
 
-                            PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, i);
-
-                        }
-                    }
-
-                i++;
-              }
-            }));
-            thread.Start();
-          }
+            }
             
         }
 
         public void DecisionalAlgorithm(string path, int i)
         {
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
             Thread.Sleep(2000);
             Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
-            
+
         }
 
-        //Generates a list of waypoints of the mission to draw in the map
+        //creates a list of waypoints of the mission to draw in the map
         public List<PointLatLng> GetWpList(string FileName)
         {
             List<PointLatLng> Listawp = new List<PointLatLng>();
