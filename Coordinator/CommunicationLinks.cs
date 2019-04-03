@@ -643,7 +643,7 @@ namespace Coordinator
                    
                 }
                 
-            }proc.WaitForExit(10);
+            }
            
         }
 
