@@ -11,14 +11,14 @@ connection_string = con + ':'+ ip + ':' + port
 
 # Connect to the Vehicle
 #print('Connecting to vehicle on: %s' % connection_string)
-vehicle = connect(connection_string, wait_ready=False)
+vehicle = connect(connection_string, wait_ready=False, heartbeat_timeout=5)
 
 # Check that vehicle is armable. 
 # This ensures home_location is set (needed when saving WP file)
 
-while not vehicle.is_armable:
+#while not vehicle.is_armable:
     #print(" Waiting for vehicle to initialise...")
-    time.sleep(1)
+    #time.sleep(1)
 
 def readmission(aFileName):
     """
@@ -56,8 +56,8 @@ def readmission(aFileName):
        #VICTOR'S MODIFICATION
     wp_Last_Latitude = vehicle.location.global_relative_frame.lat
     wp_Last_Longitude = vehicle.location.global_relative_frame.lon
-    #wp_Last_Altitude =  vehicle.location.global_relative_frame.alt
-    wp_Last_Altitude = 0.50
+    wp_Last_Altitude =  vehicle.location.global_relative_frame.alt
+    #wp_Last_Altitude = 0.50
     wpLastObject = Command( 0, 0, 0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 0, 0, 0, 0, 0, 
                            wp_Last_Latitude, wp_Last_Longitude, wp_Last_Altitude)
     missionlist.append(wpLastObject)

@@ -454,7 +454,6 @@ namespace Coordinator
         //Ends the socket when the applications is closed
         private void CommunicationLinks_FormClosed(object sender, FormClosedEventArgs e)
         {
-
             //listenerSocket.Close();
             Environment.Exit(0);
         }
@@ -579,72 +578,70 @@ namespace Coordinator
                
                 if (!sr.EndOfStream)
                 {
-                    string procOutput = sr.ReadToEnd();
-                    const string delimiter = ", ";
-                    string[] StateList = procOutput.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                   
-                    try
-                    {
-                        string latitude = StateList[0];
-                        string longitude = StateList[1];
-                        string altitude = StateList[2];
-                        string groundspeed = StateList[3];
-                        string heading = StateList[4];
-                        string currentwp = StateList[5];
+                      string procOutput = sr.ReadToEnd();
+                      const string delimiter = ", ";
+                      string[] StateList = procOutput.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    
+                      try
+                      {
+                          string latitude = StateList[0];
+                          string longitude = StateList[1];
+                          string altitude = StateList[2];
+                          string groundspeed = StateList[3];
+                          string heading = StateList[4];
+                          string currentwp = StateList[5];
 
-                        double lat = ParseDouble(latitude);
-                        double lng = ParseDouble(longitude);
+                          double lat = ParseDouble(latitude);
+                          double lng = ParseDouble(longitude);
 
-                        int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == name);
-                        UAVinfo[indexx].Lat = latitude;
-                        UAVinfo[indexx].Lon = longitude;
-                        UAVinfo[indexx].Alt = altitude;
-                        UAVinfo[indexx].Groundspeed = groundspeed;
-                        UAVinfo[indexx].Heading = heading;
-                        UAVinfo[indexx].CurrentWP = currentwp;
+                          int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == name);
+                          UAVinfo[indexx].Lat = latitude;
+                          UAVinfo[indexx].Lon = longitude;
+                          UAVinfo[indexx].Alt = altitude;
+                          UAVinfo[indexx].Groundspeed = groundspeed;
+                          UAVinfo[indexx].Heading = heading;
+                          UAVinfo[indexx].CurrentWP = currentwp;
 
-                        if ((UAVinfo[indexx].Lat == "None") || (UAVinfo[indexx].Lon == "None"))
-                        {
-                            //Can't do Nothing
-                        }
-                        else
-                        {
-                            map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(ParseDouble(UAVinfo[indexx].Lat), ParseDouble(UAVinfo[indexx].Lon));
-                        }
+                          if ((UAVinfo[indexx].Lat == "None") || (UAVinfo[indexx].Lon == "None"))
+                          {
+                              //Can't do Nothing
+                          }
+                          else
+                          {
+                              map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(ParseDouble(UAVinfo[indexx].Lat), ParseDouble(UAVinfo[indexx].Lon));
+                          }
 
-                        //Verifying when the mission is over to set free the UAV
-                        if ((UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))))
-                        {
-                            if(ParseDouble(UAVinfo[indexx].Alt)  <= 1.5)
+                            //Verifying when the mission is over to set free the UAV
+                            if ((UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))))
                             {
-                                Mission_Has_Ended(indexx, "UAV");
+                                if (ParseDouble(UAVinfo[indexx].Alt)  <= 1.5)
+                                {
+                                    Mission_Has_Ended(indexx, "UAV");
+                                }
+
                             }
-                            
-                        }
 
-                        //It must changes when a select a UAV on dtv
-                        int ind = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
-                        string latt = UAVinfo[ind].Lat;
-                        string lonn = UAVinfo[ind].Lon;
-                        string altt = UAVinfo[ind].Alt;
-                        string groundd = UAVinfo[ind].Groundspeed;
-                        string currentwpp = UAVinfo[ind].CurrentWP;
-                        string estate = UAVinfo[ind].UAVAutomataEstate;
+                            //It must changes when a select a UAV on dtv
+                            int ind = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+                            string latt = UAVinfo[ind].Lat;
+                            string lonn = UAVinfo[ind].Lon;
+                            string altt = UAVinfo[ind].Alt;
+                            string groundd = UAVinfo[ind].Groundspeed;
+                            string currentwpp = UAVinfo[ind].CurrentWP;
+                            string estate = UAVinfo[ind].UAVAutomataEstate;
 
-                        UpdatingTextBoxLatitude(latt);
-                        UpdatingTextBoxLongitude(lonn);
-                        UpdatingTextBoxaltitude(altt);
-                        UpdatingTextBoxGroundspeed(groundd);
-                        UpdatingTextBoxCurrentWP(currentwpp);
-                        UpdatingTextBoxUAVAutoamata(estate);
-                        
-                    }
-                    catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
+                            UpdatingTextBoxLatitude(latt);
+                            UpdatingTextBoxLongitude(lonn);
+                            UpdatingTextBoxaltitude(altt);
+                            UpdatingTextBoxGroundspeed(groundd);
+                            UpdatingTextBoxCurrentWP(currentwpp);
+                            UpdatingTextBoxUAVAutoamata(estate);
+
+                      }
+                      catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
                    
-                }
-                
-            }
-           
+                }Thread.Sleep(525);
+            }           
         }
 
         //Method for pausing the mission of a select UAV
@@ -861,7 +858,7 @@ namespace Coordinator
                     {
                        txtQueue.Text = DemandsQueue.Count.ToString();
                     }));
-
+                    Thread.Sleep(150);
                     PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, j);
                 }
 
@@ -872,7 +869,7 @@ namespace Coordinator
         public void DecisionalAlgorithm(string path, int i)
         {
             UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
 
         }

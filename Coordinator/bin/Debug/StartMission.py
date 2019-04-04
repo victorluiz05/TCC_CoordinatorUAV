@@ -9,7 +9,7 @@ port = (sys.argv[3])
 connection_string = con + ':'+ ip + ':' + port
 
 # Connect to the Vehicle.
-vehicle = connect(connection_string, wait_ready=False)
+vehicle = connect(connection_string, wait_ready=True,heartbeat_timeout=5)
 
 def arm_and_takeoff(aTargetAltitude):
     """
@@ -27,11 +27,12 @@ def arm_and_takeoff(aTargetAltitude):
     vehicle.commands.clear()
     vehicle.mode    = VehicleMode("GUIDED")
     vehicle.armed   = True
-
+    vehicle.simple_takeoff(aTargetAltitude)
+    
     # Confirm vehicle armed before attempting to take off
-    while not vehicle.armed:
-        print (" Waiting for arming...")
-        time.sleep(1)
+    #while not vehicle.armed:
+     #   print (" Waiting for arming...")
+      #  time.sleep(1)
 
     print ("Taking off!")
     vehicle.simple_takeoff(aTargetAltitude) # Take off to target altitude

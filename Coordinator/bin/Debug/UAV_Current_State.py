@@ -11,19 +11,19 @@ port = (sys.argv[3])
 connection_string = con + ':'+ ip + ':' + port
 
 # Connect to the Vehicle.
-vehicle = connect(connection_string)
-vehicle.wait_ready(True, timeout=5, raise_exception=False)
+vehicle = connect(connection_string, wait_ready = False, heartbeat_timeout=3)
+vehicle.wait_ready(raise_exception=False)
 
-if vehicle.last_heartbeat > 0.3:
-    vehicle.close() 
-    sys.exit()
+#if vehicle.last_heartbeat > 0.3:
+ #   vehicle.close() 
+  #  sys.exit()
 #else:
 currentLocation = vehicle.location.global_relative_frame
 currentGroundspeed = vehicle.groundspeed
 currentHeading = vehicle.heading
 cmds = vehicle.commands
 currentWP = cmds.next
-#CurrentState = currentLocation.lat + ":" + currentLocation.lon + " " + currentLocation.alt + " " + currentGroundspeed 
+
 print("%s, %s, %s, %s, %s, %s " %(currentLocation.lat, currentLocation.lon, currentLocation.alt, currentGroundspeed, currentHeading, currentWP))
 
 # Close vehicle object before exiting script
