@@ -869,6 +869,7 @@ namespace Coordinator
         public void DecisionalAlgorithm(string path, int i)
         {
             UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
+            
             Thread.Sleep(2000);
             Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
 
@@ -957,6 +958,41 @@ namespace Coordinator
             thread.Start();
         }
 
+        public void ResetUAV(string con, string ip, string port, string namee)
+        {
+            var thread = new Thread(new ThreadStart(() =>
+            {
+                string python = @"C:\Python27\python.exe";
+                string myPythonApp = "ResetUAV.py";
+                string arg = "";
+
+                arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
+
+                int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == namee);
+
+                ProcessStartInfo psi = new ProcessStartInfo(python, arg);
+                psi.UseShellExecute = false;
+                psi.RedirectStandardOutput = true;
+                psi.CreateNoWindow = true;
+
+                var proc = Process.Start(psi);
+                StreamReader sr = proc.StandardOutput;
+
+                while (!proc.HasExited)
+                {
+                    if (!sr.EndOfStream)
+                    {
+                        string procOutput = sr.ReadToEnd();
+                        this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput);
+
+                    }
+                    else Thread.Sleep(20);
+                }
+
+            }));
+            thread.Start();
+        }
+
         //Event from UAV Automata/Method that sends the command for the UAV start a mission
         public void Fly_UAV(string con, string ip, string port, string namee)
         {
@@ -1032,6 +1068,7 @@ namespace Coordinator
         //Event from UAV Automata
         public void Mission_Has_Ended(int indexx, string Automata)
         {
+            ResetUAV(UAVinfo[indexx].Type, UAVinfo[indexx].IP, UAVinfo[indexx].Port, UAVinfo[indexx].N_UAV);
             Automata_Estate_Changer(indexx, Automata);
         }
 
