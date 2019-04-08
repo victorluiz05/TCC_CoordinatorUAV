@@ -1,6 +1,6 @@
 from __future__ import print_function
 import sys
-from dronekit import connect, Command
+from dronekit import connect, Command, VehicleMode
 import time
 from pymavlink import mavutil
 
@@ -16,21 +16,25 @@ vehicle = connect(connection_string, wait_ready=False)
 # Check that vehicle is armable. 
 # This ensures home_location is set (needed when saving WP file)
 
-while not vehicle.is_armable:
+#while not vehicle.is_armable:
     #print(" Waiting for vehicle to initialise...")
-    time.sleep(1)
+ #   time.sleep(1)
 
 print("Clearing Mission")
 #vehicle.commands.clear()
-cmds = vehicle.commands
-vehicle.commands.clear()
-vehicle.flush()
+#vehicle.commands.clear()
+#vehicle.flush()
+#vehicle.upload()
+
+vehicle.mode = VehicleMode("GUIDED")
+time.sleep(1)
+vehicle.armed = False
 
 # After clearing the mission you MUST re-download the mission from the vehicle
 # before vehicle.commands can be used again
-cmds = vehicle.commands
-cmds.download()
-cmds.wait_ready()
+#cmds = vehicle.commands
+#cmds.download()
+#cmds.wait_ready()
 
 #print("Close vehicle object %s" % NN)
 vehicle.close()

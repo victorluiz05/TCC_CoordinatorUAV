@@ -52,12 +52,12 @@ def readmission(aFileName):
                 cmd = Command( 0, 0, 0, ln_frame, ln_command, ln_currentwp, ln_autocontinue, ln_param1, ln_param2, ln_param3, ln_param4, ln_param5, ln_param6, ln_param7)
                 missionlist.append(cmd)
 
-
+    time.sleep(1)
        #VICTOR'S MODIFICATION
     wp_Last_Latitude = vehicle.location.global_relative_frame.lat
     wp_Last_Longitude = vehicle.location.global_relative_frame.lon
-    wp_Last_Altitude =  vehicle.location.global_relative_frame.alt
-    #wp_Last_Altitude = 0.50
+    #wp_Last_Altitude =  vehicle.location.global_relative_frame.alt
+    wp_Last_Altitude = 0.30
     wpLastObject = Command( 0, 0, 0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 0, 0, 0, 0, 0, 
                            wp_Last_Latitude, wp_Last_Longitude, wp_Last_Altitude)
     missionlist.append(wpLastObject)
@@ -100,6 +100,7 @@ def printfile(aFileName):
 
 path = (sys.argv[4])
 import_mission_filename = path
+time.sleep(1)
 #import_mission_filename = 'Missions\M1.txt'   #VICTOR - Here is where the path os the mission file is written    
 
 

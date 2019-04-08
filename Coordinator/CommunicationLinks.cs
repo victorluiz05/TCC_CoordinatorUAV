@@ -479,7 +479,7 @@ namespace Coordinator
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            //Clear_Mission(typee,IpAddress,Portt,CommName);
+            Clear_Mission(typee,IpAddress,Portt,CommName);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -614,10 +614,10 @@ namespace Coordinator
                             //Verifying when the mission is over to set free the UAV
                             if ((UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))))
                             {
-                                if (ParseDouble(UAVinfo[indexx].Alt)  <= 1.5)
-                                {
+                                //if (ParseDouble(UAVinfo[indexx].Alt)  <= 1.5)
+                                //{
                                     Mission_Has_Ended(indexx, "UAV");
-                                }
+                                //}
 
                             }
 
@@ -859,7 +859,11 @@ namespace Coordinator
                        txtQueue.Text = DemandsQueue.Count.ToString();
                     }));
                     Thread.Sleep(150);
-                    PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, j);
+                    if(UAVinfo[j].UAVAutomataEstate == "IDLE")
+                    {
+                        PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, j);
+                    }
+                    
                 }
 
             }
@@ -868,9 +872,11 @@ namespace Coordinator
 
         public void DecisionalAlgorithm(string path, int i)
         {
+            //Clear_Mission(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
+            Thread.Sleep(1500);
             UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
             
-            Thread.Sleep(2000);
+            Thread.Sleep(1500);
             Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
 
         }
@@ -999,7 +1005,7 @@ namespace Coordinator
             var thread = new Thread(new ThreadStart(() =>
             {
                 string python = @"C:\Python27\python.exe";
-                string myPythonApp = "script-arm-takeoff-and-auto.py";
+                string myPythonApp = "StartMission.py";
                 string arg = "";
 
                 arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
@@ -1068,7 +1074,7 @@ namespace Coordinator
         //Event from UAV Automata
         public void Mission_Has_Ended(int indexx, string Automata)
         {
-            ResetUAV(UAVinfo[indexx].Type, UAVinfo[indexx].IP, UAVinfo[indexx].Port, UAVinfo[indexx].N_UAV);
+            //ResetUAV(UAVinfo[indexx].Type, UAVinfo[indexx].IP, UAVinfo[indexx].Port, UAVinfo[indexx].N_UAV);
             Automata_Estate_Changer(indexx, Automata);
         }
 

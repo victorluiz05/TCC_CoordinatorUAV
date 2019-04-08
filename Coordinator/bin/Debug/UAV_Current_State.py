@@ -11,7 +11,7 @@ port = (sys.argv[3])
 connection_string = con + ':'+ ip + ':' + port
 
 # Connect to the Vehicle.
-vehicle = connect(connection_string, wait_ready = False, heartbeat_timeout=3)
+vehicle = connect(connection_string, wait_ready = False, heartbeat_timeout=5)
 vehicle.wait_ready(raise_exception=False)
 
 #if vehicle.last_heartbeat > 0.3:
