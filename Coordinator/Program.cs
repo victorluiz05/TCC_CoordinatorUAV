@@ -10,7 +10,7 @@ namespace Coordinator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CommunicationLinks());
+            Application.Run(new Bases());
         }
     }
 }

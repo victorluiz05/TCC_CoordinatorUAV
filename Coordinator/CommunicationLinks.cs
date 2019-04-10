@@ -15,6 +15,7 @@ using GMap.NET;
 using static CoordinatorMap.Utils;
 using System.Drawing;
 using System.Collections;
+using System.Linq;
 
 
 namespace Coordinator
@@ -482,12 +483,6 @@ namespace Coordinator
             Clear_Mission(typee,IpAddress,Portt,CommName);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Mission_Has_Ended(0, "UAV");
-            txtQueue.Text = DemandsQueue.Count.ToString();
-        }
-
         /*---------------------------------------------------------------END of Form Methods and Settings-----------------------------------------------------------------------------------------*/
 
         /*---------------------------------------------------------------General Methods and Settings-----------------------------------------------------------------------------------------*/
@@ -614,10 +609,10 @@ namespace Coordinator
                             //Verifying when the mission is over to set free the UAV
                             if ((UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))))
                             {
-                                //if (ParseDouble(UAVinfo[indexx].Alt)  <= 1.5)
-                                //{
+                                if (ParseDouble(UAVinfo[indexx].Alt)  <= 2.0)
+                                {
                                     Mission_Has_Ended(indexx, "UAV");
-                                //}
+                                }
 
                             }
 
@@ -847,23 +842,27 @@ namespace Coordinator
             {
                 if ((automataestate == "IDLE") && (UAVinfo[j].UAVAutomataEstate == "IDLE"))
                 {
-                    DemandInfo = (Demands)DemandsQueue.Dequeue();
-
-                    DemandsArray[j].DemandLatitude = DemandInfo.DemandLatitude;
-                    DemandsArray[j].DemandLongitude = DemandInfo.DemandLongitude;
-                    DemandsArray[j].DemandAutomataEstate = DemandInfo.DemandAutomataEstate;
-
-                    Automata_Estate_Changer(j, "DEMAND");
-                    BeginInvoke(new MethodInvoker(() =>
+                    if (UAVinfo[j].UAVAutomataEstate == "IDLE")
                     {
-                       txtQueue.Text = DemandsQueue.Count.ToString();
-                    }));
-                    Thread.Sleep(150);
-                    if(UAVinfo[j].UAVAutomataEstate == "IDLE")
-                    {
-                        PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, j);
+                        DemandInfo = (Demands)DemandsQueue.Dequeue();
+                        DemandsArray[j].DemandLatitude = DemandInfo.DemandLatitude;
+                        DemandsArray[j].DemandLongitude = DemandInfo.DemandLongitude;
+                        DemandsArray[j].DemandAutomataEstate = DemandInfo.DemandAutomataEstate;
+
+
+                        Automata_Estate_Changer(j, "DEMAND");
+                        BeginInvoke(new MethodInvoker(() =>
+                        {
+                            txtQueue.Text = DemandsQueue.Count.ToString();
+                            //Update_DemandsDTV();
+                        }));
+
+                        if (UAVinfo[j].UAVAutomataEstate == "IDLE")
+                        {
+                            PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, j);
+                        }
                     }
-                    
+
                 }
 
             }
@@ -873,7 +872,7 @@ namespace Coordinator
         public void DecisionalAlgorithm(string path, int i)
         {
             //Clear_Mission(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
-            Thread.Sleep(1500);
+            Thread.Sleep(1000);
             UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
             
             Thread.Sleep(1500);
@@ -1082,6 +1081,18 @@ namespace Coordinator
         public void Demand_Answered(int indexx, string Automata)
         {
             Automata_Estate_Changer(indexx, Automata);
+        }
+        
+        public void Update_DemandsDTV()
+        {
+           foreach(Demands k in DemandsArray)
+           {
+                if ((k.DemandAutomataEstate !="") && (k.DemandLatitude != 0) && (k.DemandLongitude != 0))
+                {
+                    dtvDemands.Rows.Add(k.DemandLatitude, k.DemandLongitude, k.DemandAutomataEstate);
+                }
+           }
+                 
         }
 
         //Method that changes the automata estate 

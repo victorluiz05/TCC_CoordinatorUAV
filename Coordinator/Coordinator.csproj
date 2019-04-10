@@ -76,6 +76,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bases.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bases.Designer.cs">
+      <DependentUpon>Bases.cs</DependentUpon>
+    </Compile>
     <Compile Include="CommunicationLinks.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,9 @@
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Bases.resx">
+      <DependentUpon>Bases.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CommunicationLinks.resx">
       <DependentUpon>CommunicationLinks.cs</DependentUpon>
     </EmbeddedResource>
