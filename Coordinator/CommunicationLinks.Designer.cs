@@ -99,16 +99,16 @@ namespace Coordinator
             this.panel1.Controls.Add(this.txtIP);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(1030, 558);
+            this.panel1.Location = new System.Drawing.Point(763, 624);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(261, 196);
+            this.panel1.Size = new System.Drawing.Size(528, 122);
             this.panel1.TabIndex = 19;
             // 
             // txtBase
             // 
-            this.txtBase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBase.Location = new System.Drawing.Point(113, 133);
+            this.txtBase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtBase.Location = new System.Drawing.Point(359, 37);
             this.txtBase.Name = "txtBase";
             this.txtBase.Size = new System.Drawing.Size(136, 20);
             this.txtBase.TabIndex = 28;
@@ -116,7 +116,7 @@ namespace Coordinator
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(15, 136);
+            this.label16.Location = new System.Drawing.Point(261, 40);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(34, 13);
             this.label16.TabIndex = 29;
@@ -124,7 +124,7 @@ namespace Coordinator
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(172, 165);
+            this.btnDelete.Location = new System.Drawing.Point(434, 70);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(88, 23);
             this.btnDelete.TabIndex = 27;
@@ -134,7 +134,7 @@ namespace Coordinator
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(87, 165);
+            this.btnEdit.Location = new System.Drawing.Point(345, 70);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(79, 23);
             this.btnEdit.TabIndex = 26;
@@ -144,7 +144,7 @@ namespace Coordinator
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(6, 165);
+            this.btnAdd.Location = new System.Drawing.Point(264, 70);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 25;
@@ -158,7 +158,7 @@ namespace Coordinator
             this.cbxType.Items.AddRange(new object[] {
             "udp",
             "tcp"});
-            this.cbxType.Location = new System.Drawing.Point(114, 40);
+            this.cbxType.Location = new System.Drawing.Point(114, 44);
             this.cbxType.Name = "cbxType";
             this.cbxType.Size = new System.Drawing.Size(135, 21);
             this.cbxType.TabIndex = 21;
@@ -166,7 +166,7 @@ namespace Coordinator
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 43);
+            this.label4.Location = new System.Drawing.Point(16, 47);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(34, 13);
             this.label4.TabIndex = 8;
@@ -178,7 +178,7 @@ namespace Coordinator
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 14);
+            this.label1.Location = new System.Drawing.Point(13, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 13);
             this.label1.TabIndex = 4;
@@ -188,23 +188,23 @@ namespace Coordinator
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtName.Location = new System.Drawing.Point(114, 11);
+            this.txtName.Location = new System.Drawing.Point(114, 15);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(135, 20);
             this.txtName.TabIndex = 1;
             // 
             // txtPort
             // 
-            this.txtPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPort.Location = new System.Drawing.Point(114, 107);
+            this.txtPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtPort.Location = new System.Drawing.Point(360, 11);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(136, 20);
+            this.txtPort.Size = new System.Drawing.Size(135, 20);
             this.txtPort.TabIndex = 2;
             // 
             // txtIP
             // 
-            this.txtIP.Location = new System.Drawing.Point(114, 72);
+            this.txtIP.Location = new System.Drawing.Point(114, 76);
             this.txtIP.Name = "txtIP";
             this.txtIP.Size = new System.Drawing.Size(135, 20);
             this.txtIP.TabIndex = 3;
@@ -212,7 +212,7 @@ namespace Coordinator
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 72);
+            this.label2.Location = new System.Drawing.Point(16, 76);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 5;
@@ -221,7 +221,7 @@ namespace Coordinator
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 110);
+            this.label3.Location = new System.Drawing.Point(262, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 13);
             this.label3.TabIndex = 6;
@@ -235,7 +235,7 @@ namespace Coordinator
             this.dtvCommunication.MultiSelect = false;
             this.dtvCommunication.Name = "dtvCommunication";
             this.dtvCommunication.ReadOnly = true;
-            this.dtvCommunication.Size = new System.Drawing.Size(528, 120);
+            this.dtvCommunication.Size = new System.Drawing.Size(528, 160);
             this.dtvCommunication.TabIndex = 20;
             this.dtvCommunication.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtvCommunication_CellClick);
             // 
@@ -253,7 +253,7 @@ namespace Coordinator
             // 
             this.rtbScript.Location = new System.Drawing.Point(432, 441);
             this.rtbScript.Name = "rtbScript";
-            this.rtbScript.Size = new System.Drawing.Size(302, 305);
+            this.rtbScript.Size = new System.Drawing.Size(325, 305);
             this.rtbScript.TabIndex = 22;
             this.rtbScript.Text = "";
             this.rtbScript.TextChanged += new System.EventHandler(this.rtbScript_TextChanged);
@@ -365,7 +365,7 @@ namespace Coordinator
             this.panel2.Controls.Add(this.btnUpload);
             this.panel2.Location = new System.Drawing.Point(3, 289);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(419, 330);
+            this.panel2.Size = new System.Drawing.Size(419, 292);
             this.panel2.TabIndex = 37;
             // 
             // label15

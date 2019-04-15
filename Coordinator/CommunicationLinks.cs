@@ -499,9 +499,10 @@ namespace Coordinator
             BasesArrayComm = BasesArray;
 
             //Drawing the Bases at the Map - LOADING 
+            
 
             //Counting how many UAVs are in each base
-            for(int i=0; i<BasesArrayComm.Length; i++)
+            for (int i=0; i<BasesArrayComm.Length; i++)
             {
                 for(int j=0; j<CounterUAV; j++)
                 {
@@ -564,7 +565,7 @@ namespace Coordinator
 
         }
 
-        System.Timers.Timer aTimer = new System.Timers.Timer(2000);   //Creation of the timer
+        System.Timers.Timer aTimer = new System.Timers.Timer(3000);   //Creation of the timer
 
         //Timer that runs the method to get the actual estate of the UAVs
         public void TimerCall(object sender, ElapsedEventArgs e)
@@ -665,7 +666,7 @@ namespace Coordinator
                       }
                       catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
                    
-                }Thread.Sleep(525);
+                }Thread.Sleep(325);
             }           
         }
 
