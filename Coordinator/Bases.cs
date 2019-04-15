@@ -23,6 +23,7 @@ namespace Coordinator
             public int BaseNumber;
             public string BaseLat;
             public string BaseLon;
+            public int NumberUAV;
         }
         public Base[] BasesArray = new Base[10];
 
@@ -85,8 +86,10 @@ namespace Coordinator
             }
 
             CommunicationLinks comm = new CommunicationLinks();
-            
+            comm.Bases_Initializer(BasesArray);
+
             this.Hide();
+            
             comm.Show();
             
         }

@@ -29,6 +29,7 @@ namespace Coordinator
         string typee = "";
         string IpAddress = "";
         string Portt = "";
+        string Basee = "";
         string missionn = "";
         private Logger log = new Logger("CommunicationLinks");
 
@@ -38,6 +39,7 @@ namespace Coordinator
             public string IP;
             public string Port;
             public string N_UAV;
+            public string N_Base;
             public string Lat;
             public string Lon;
             public string Alt;
@@ -48,7 +50,7 @@ namespace Coordinator
             public string CurrentWP;
             public string NumberWpMission;
         }
-
+        
         public struct Demands
         {
             public double DemandLatitude;
@@ -69,6 +71,8 @@ namespace Coordinator
             public string Lat;
             public string Lon;
         }
+
+        public Bases.Base[] BasesArrayComm = new Bases.Base[10];
 
         public MissionInfo[] MissionList = new MissionInfo[163];       //Still used in the upload button
         public int CounterMission = 0;
@@ -134,7 +138,7 @@ namespace Coordinator
                 UAVinfo[CounterUAV].Type = row["Type"].ToString();
                 UAVinfo[CounterUAV].IP = row["IPAddress"].ToString();
                 UAVinfo[CounterUAV].Port = row["Port"].ToString();
-
+                UAVinfo[CounterUAV].N_Base = row["Base"].ToString();
                 CounterUAV += 1;
             }
 
@@ -164,6 +168,7 @@ namespace Coordinator
             cbxType.Text = dtvCommunication.Rows[Index].Cells[1].Value.ToString();
             txtIP.Text = dtvCommunication.Rows[Index].Cells[2].Value.ToString();
             txtPort.Text = dtvCommunication.Rows[Index].Cells[3].Value.ToString();
+            txtBase.Text = dtvCommunication.Rows[Index].Cells[4].Value.ToString();
 
             DataGridViewRow selectedRow = dtvCommunication.Rows[Index];
 
@@ -172,7 +177,7 @@ namespace Coordinator
             typee = selectedRow.Cells[1].Value.ToString();
             IpAddress = selectedRow.Cells[2].Value.ToString();
             Portt = selectedRow.Cells[3].Value.ToString();
-
+            Basee = selectedRow.Cells[4].Value.ToString();
 
             int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
             txtLat.Text = UAVinfo[indexx].Lat;
@@ -247,7 +252,7 @@ namespace Coordinator
         //Adds to DataBase a communication info 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string txtQuery = "insert into tbcomm (ConnectionName,Type, IPAddress, Port)values('" + txtName.Text + "','" + cbxType.Text + "','" + txtIP.Text + "','" + txtPort.Text + "')";
+            string txtQuery = "insert into tbcomm (ConnectionName,Type, IPAddress, Port, Base)values('" + txtName.Text + "','" + cbxType.Text + "','" + txtIP.Text + "','" + txtPort.Text + "','" + txtBase.Text + "')";
             ExecuteQuery(txtQuery);
             LoadData();
 
@@ -255,6 +260,7 @@ namespace Coordinator
             UAVinfo[CounterUAV].Type = cbxType.Text;
             UAVinfo[CounterUAV].IP = txtIP.Text;
             UAVinfo[CounterUAV].Port = txtPort.Text;
+            UAVinfo[CounterUAV].N_Base = txtBase.Text;
             UAVinfo[CounterUAV].UAVAutomataEstate = "IDLE";
 
             CounterUAV += 1;
@@ -262,6 +268,7 @@ namespace Coordinator
             txtName.Clear();
             txtIP.Clear();
             txtPort.Clear();
+            txtBase.Clear();
 
             dtvCommunication_CellClick(this, new DataGridViewCellEventArgs(0, dtvCommunication.RowCount - 2));
         }
@@ -269,7 +276,7 @@ namespace Coordinator
         //Updates an info in the DataBase
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            string txtQuery = "update tbcomm set ConnectionName='" + txtName.Text + "', Type='" + cbxType.Text + "', IPAddress='" + txtIP.Text + "', Port='" + txtPort.Text + "' where ConnectionName='" + CommName + "' and IPAddress='" + IpAddress + "' ";
+            string txtQuery = "update tbcomm set ConnectionName='" + txtName.Text + "', Type='" + cbxType.Text + "', IPAddress='" + txtIP.Text + "', Port='" + txtPort.Text + "', Base='" + txtBase.Text + "' where ConnectionName='" + CommName + "' and IPAddress='" + IpAddress + "' ";
             ExecuteQuery(txtQuery);
             LoadData();
 
@@ -487,6 +494,27 @@ namespace Coordinator
 
         /*---------------------------------------------------------------General Methods and Settings-----------------------------------------------------------------------------------------*/
 
+        public void Bases_Initializer(Bases.Base[] BasesArray)
+        {
+            BasesArrayComm = BasesArray;
+
+            //Drawing the Bases at the Map - LOADING 
+
+            //Counting how many UAVs are in each base
+            for(int i=0; i<BasesArrayComm.Length; i++)
+            {
+                for(int j=0; j<CounterUAV; j++)
+                {
+                    if(BasesArrayComm[i].BaseNumber == Convert.ToInt32(UAVinfo[j].N_Base))
+                    {
+                        BasesArrayComm[i].NumberUAV = BasesArrayComm[i].NumberUAV + 1;
+                    }
+                }
+            }
+
+            
+        }
+
         //Function that runs a DroneKit script, it gets the arguments(such as the communication info and a mission file for example) to pass to Python using ProcessStartInfo
         //It's made by threads, that way you can run more than one script at the same time. Everything that is printed in Phyton is showed in the RichTextBox
         private void Run_Script(string myPythonApp)
@@ -604,6 +632,8 @@ namespace Coordinator
                           else
                           {
                               map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(ParseDouble(UAVinfo[indexx].Lat), ParseDouble(UAVinfo[indexx].Lon));
+                              
+                              
                           }
 
                             //Verifying when the mission is over to set free the UAV

@@ -30,7 +30,7 @@ namespace CoordinatorMap
         {
             PointLatLng position = new PointLatLng();
             float[] cellSize = new float[2];
-
+            
             position.Lat = ParseDouble(textBox1.Text);
             position.Lng = ParseDouble(textBox2.Text);
 

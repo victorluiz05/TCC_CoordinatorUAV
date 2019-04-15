@@ -25,6 +25,8 @@ namespace Coordinator
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommunicationLinks));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtBase = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -84,6 +86,8 @@ namespace Coordinator
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txtBase);
+            this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.btnDelete);
             this.panel1.Controls.Add(this.btnEdit);
             this.panel1.Controls.Add(this.btnAdd);
@@ -97,12 +101,30 @@ namespace Coordinator
             this.panel1.Controls.Add(this.label3);
             this.panel1.Location = new System.Drawing.Point(1030, 558);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(261, 179);
+            this.panel1.Size = new System.Drawing.Size(261, 196);
             this.panel1.TabIndex = 19;
+            // 
+            // txtBase
+            // 
+            this.txtBase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBase.Location = new System.Drawing.Point(113, 133);
+            this.txtBase.Name = "txtBase";
+            this.txtBase.Size = new System.Drawing.Size(136, 20);
+            this.txtBase.TabIndex = 28;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(15, 136);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(34, 13);
+            this.label16.TabIndex = 29;
+            this.label16.Text = "Base:";
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(169, 143);
+            this.btnDelete.Location = new System.Drawing.Point(172, 165);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(88, 23);
             this.btnDelete.TabIndex = 27;
@@ -112,7 +134,7 @@ namespace Coordinator
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(84, 143);
+            this.btnEdit.Location = new System.Drawing.Point(87, 165);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(79, 23);
             this.btnEdit.TabIndex = 26;
@@ -122,7 +144,7 @@ namespace Coordinator
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(3, 143);
+            this.btnAdd.Location = new System.Drawing.Point(6, 165);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 25;
@@ -209,11 +231,11 @@ namespace Coordinator
             // 
             this.dtvCommunication.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dtvCommunication.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtvCommunication.Location = new System.Drawing.Point(848, 432);
+            this.dtvCommunication.Location = new System.Drawing.Point(763, 432);
             this.dtvCommunication.MultiSelect = false;
             this.dtvCommunication.Name = "dtvCommunication";
             this.dtvCommunication.ReadOnly = true;
-            this.dtvCommunication.Size = new System.Drawing.Size(443, 120);
+            this.dtvCommunication.Size = new System.Drawing.Size(528, 120);
             this.dtvCommunication.TabIndex = 20;
             this.dtvCommunication.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtvCommunication_CellClick);
             // 
@@ -231,7 +253,7 @@ namespace Coordinator
             // 
             this.rtbScript.Location = new System.Drawing.Point(432, 441);
             this.rtbScript.Name = "rtbScript";
-            this.rtbScript.Size = new System.Drawing.Size(395, 305);
+            this.rtbScript.Size = new System.Drawing.Size(302, 305);
             this.rtbScript.TabIndex = 22;
             this.rtbScript.Text = "";
             this.rtbScript.TextChanged += new System.EventHandler(this.rtbScript_TextChanged);
@@ -568,7 +590,7 @@ namespace Coordinator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1303, 749);
+            this.ClientSize = new System.Drawing.Size(1303, 755);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btntest);
             this.Controls.Add(this.label14);
@@ -671,6 +693,8 @@ namespace Coordinator
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtQueue;
+        private System.Windows.Forms.TextBox txtBase;
+        private System.Windows.Forms.Label label16;
     }
 }
 
