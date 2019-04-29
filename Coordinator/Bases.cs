@@ -21,8 +21,8 @@ namespace Coordinator
         public struct Base
         {
             public int BaseNumber;
-            public string BaseLat;
-            public string BaseLon;
+            public double BaseLat;
+            public double BaseLon;
             public int NumberUAV;
         }
         public Base[] BasesArray = new Base[10];
@@ -47,12 +47,12 @@ namespace Coordinator
             labell.Location = new Point(164, 54);
             Controls.Add(labell);
 
-            int xlat=12;
-            int ylat=82;
+            int xlat = 12;
+            int ylat = 82;
             int xlon = 164;
             int ylon = 82;
-            double lat = -35.360356;
-            double lon = 149.165862;
+            double lat = -35.345168;
+            double lon = 149.130011;
 
             for (int i=0; i<Nbases; i++)
             {
@@ -61,7 +61,7 @@ namespace Coordinator
                 textboxlat.Text = lat.ToString();
                 textboxlat.Location = new Point(xlat,ylat);
                 Controls.Add(textboxlat);
-                lat = lat + 0.000150;
+                lat = lat + 0.000950;
                 ylat = ylat + 25;
 
                 TextBox textboxlon = new TextBox();
@@ -69,7 +69,7 @@ namespace Coordinator
                 textboxlon.Text = lon.ToString();
                 textboxlon.Location = new Point(xlon, ylon);
                 Controls.Add(textboxlon);
-                lon = lon + 0.000150;
+                lon = lon + 0.001350;
                 ylon = ylon + 25;
 
             }
@@ -80,8 +80,8 @@ namespace Coordinator
         {
             for (int i = 0; i < Nbases; i++)
             {
-                BasesArray[i].BaseLat = ((TextBox)Controls["txtbaseLat" + (i).ToString()]).Text;
-                BasesArray[i].BaseLon = ((TextBox)Controls["txtbaseLon" + (i).ToString()]).Text;
+                BasesArray[i].BaseLat = Convert.ToDouble(((TextBox)Controls["txtbaseLat" + (i).ToString()]).Text);
+                BasesArray[i].BaseLon = Convert.ToDouble(((TextBox)Controls["txtbaseLon" + (i).ToString()]).Text);
                 BasesArray[i].BaseNumber = i;
             }
 

@@ -16,7 +16,8 @@ using static CoordinatorMap.Utils;
 using System.Drawing;
 using System.Collections;
 using System.Linq;
-
+using CoordinateSharp;
+using System.Drawing.Drawing2D;
 
 namespace Coordinator
 {
@@ -92,6 +93,28 @@ namespace Coordinator
             panel3.Controls.Add(map);
 
             LoadData();
+
+            map.button1.Click += OpenMap;
+        }
+
+        //Drawing the locations of the bases on the map
+        private void OpenMap(object sender, EventArgs e)
+        {
+            foreach (Bases.Base i in BasesArrayComm)
+            {
+                Bitmap bmp = new Bitmap(80, 80);
+                Graphics g = Graphics.FromImage(bmp);
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                Pen p = new Pen(Color.Black);
+                p.Width = 2;
+                g.DrawEllipse(p, 2, 2, bmp.Width-4, bmp.Height-4);
+                StringFormat sf = new StringFormat();
+                sf.Alignment = StringAlignment.Center;
+                sf.LineAlignment = StringAlignment.Center;
+                g.DrawString("BASE "+i.BaseNumber.ToString(), new Font("Arial", 10), Brushes.Black, 0,0);
+
+                map.MapControl.DrawMarker(new PointLatLng(i.BaseLat, i.BaseLon), bmp);
+            }
         }
 
         private SQLiteConnection sql_con;
@@ -375,6 +398,7 @@ namespace Coordinator
             }
         }
 
+        //Update the estate of the UAV in the respective textbox
         public void UpdatingTextBoxUAVAutoamata(string estate)
         {
             txtUAVAutomataEstate.BeginInvoke(new MethodInvoker(() =>
@@ -497,9 +521,6 @@ namespace Coordinator
         public void Bases_Initializer(Bases.Base[] BasesArray)
         {
             BasesArrayComm = BasesArray;
-
-            //Drawing the Bases at the Map - LOADING 
-            
 
             //Counting how many UAVs are in each base
             for (int i=0; i<BasesArrayComm.Length; i++)
@@ -880,24 +901,23 @@ namespace Coordinator
                         DemandsArray[j].DemandLongitude = DemandInfo.DemandLongitude;
                         DemandsArray[j].DemandAutomataEstate = DemandInfo.DemandAutomataEstate;
 
+                        Coordinate coord2 = new Coordinate(DemandsArray[j].DemandLatitude, DemandsArray[j].DemandLongitude);
+                        double distance = DistanceCalculation(coord2);
 
                         Automata_Estate_Changer(j, "DEMAND");
                         BeginInvoke(new MethodInvoker(() =>
                         {
+                            txtDistance.Text = distance.ToString();
                             txtQueue.Text = DemandsQueue.Count.ToString();
                             //Update_DemandsDTV();
                         }));
 
-                        if (UAVinfo[j].UAVAutomataEstate == "IDLE")
-                        {
-                            PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, j);
-                        }
+                        //PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, j);
+                        
                     }
-
                 }
-
             }
-            
+       
         }
 
         public void DecisionalAlgorithm(string path, int i)
@@ -909,6 +929,22 @@ namespace Coordinator
             Thread.Sleep(1500);
             Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
 
+        }
+
+        //Method to calculate the distance between each base and the location of the demand 
+        public double DistanceCalculation(Coordinate coord2)
+        {
+            double distance=0;
+            //for(int i = 0; i < BasesArrayComm.Length; i++)
+            //{
+                Coordinate coord1 = new Coordinate(BasesArrayComm[1].BaseLat, BasesArrayComm[1].BaseLon);
+
+                Distance d = new Distance(coord1, coord2);
+
+                distance = d.Meters;
+            //}
+
+            return distance;
         }
 
         //creates a list of waypoints of the mission to draw in the map

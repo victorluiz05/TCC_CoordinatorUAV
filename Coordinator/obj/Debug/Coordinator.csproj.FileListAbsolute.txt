@@ -327,3 +327,5 @@ C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\Sys
 C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\obj\Debug\Coordinator.csproj.CopyComplete
 C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\obj\Debug\Coordinator.Bases.resources
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\CoordinateSharp.dll
+C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Coordinator\bin\Debug\CoordinateSharp.xml

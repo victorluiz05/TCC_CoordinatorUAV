@@ -8,6 +8,7 @@ using System.Threading;
 using System.Windows.Forms;
 using CoordinatorMap.Grid;
 using static CoordinatorMap.Utils;
+using GMap.NET.WindowsForms.Markers;
 
 namespace CoordinatorMap
 {
@@ -357,6 +358,13 @@ namespace CoordinatorMap
 
                 if (_selectedUavId != -1) GetUavById(_selectedUavId).Selected = true;
             }
+        }
+
+        public void DrawMarker(PointLatLng p, Bitmap bmp)
+        {
+            GMapMarker marker = new GMarkerGoogle(p, bmp);
+            marker.Offset = new Point(-bmp.Width/2, -bmp.Height/2);
+            Overlay.Markers.Add(marker);
         }
     }
 }

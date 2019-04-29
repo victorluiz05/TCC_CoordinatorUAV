@@ -78,6 +78,8 @@ namespace Coordinator
             this.label14 = new System.Windows.Forms.Label();
             this.btntest = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.txtDistance = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -356,6 +358,8 @@ namespace Coordinator
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label17);
+            this.panel2.Controls.Add(this.txtDistance);
             this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.txtQueue);
             this.panel2.Controls.Add(this.dtvDemands);
@@ -586,6 +590,22 @@ namespace Coordinator
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // txtDistance
+            // 
+            this.txtDistance.Location = new System.Drawing.Point(117, 96);
+            this.txtDistance.Name = "txtDistance";
+            this.txtDistance.Size = new System.Drawing.Size(144, 20);
+            this.txtDistance.TabIndex = 61;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(9, 103);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(49, 13);
+            this.label17.TabIndex = 62;
+            this.label17.Text = "Distance";
+            // 
             // CommunicationLinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -695,6 +715,8 @@ namespace Coordinator
         private System.Windows.Forms.TextBox txtQueue;
         private System.Windows.Forms.TextBox txtBase;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtDistance;
     }
 }
 

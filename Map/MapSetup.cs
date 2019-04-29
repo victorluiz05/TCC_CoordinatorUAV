@@ -49,6 +49,8 @@ namespace CoordinatorMap
             Controls.Add(MapControl);
             MapControl.Location = new Point(0, 0);
             MapControl.ClientSize = ClientSize;
+
+
         }
 
         public new Size ClientSize
@@ -63,6 +65,11 @@ namespace CoordinatorMap
                 base.ClientSize = value;
                 if (MapControl != null) MapControl.ClientSize = value;
             }
+        }
+
+        public void DrawMarker(PointLatLng pointLatLng, Bitmap bmp)
+        {
+            throw new NotImplementedException();
         }
     }
 }
