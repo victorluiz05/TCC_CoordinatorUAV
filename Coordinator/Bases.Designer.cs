@@ -37,24 +37,24 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 17);
+            this.label2.Location = new System.Drawing.Point(0, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 13);
+            this.label2.Size = new System.Drawing.Size(153, 13);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Number of Bases:";
+            this.label2.Text = "Number of Distribution Centers:";
             // 
             // txtNumber
             // 
-            this.txtNumber.Location = new System.Drawing.Point(115, 14);
+            this.txtNumber.Location = new System.Drawing.Point(159, 8);
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(66, 20);
             this.txtNumber.TabIndex = 1;
             // 
             // btnEnterCoordinates
             // 
-            this.btnEnterCoordinates.Location = new System.Drawing.Point(187, 12);
+            this.btnEnterCoordinates.Location = new System.Drawing.Point(231, 6);
             this.btnEnterCoordinates.Name = "btnEnterCoordinates";
-            this.btnEnterCoordinates.Size = new System.Drawing.Size(118, 23);
+            this.btnEnterCoordinates.Size = new System.Drawing.Size(106, 23);
             this.btnEnterCoordinates.TabIndex = 2;
             this.btnEnterCoordinates.Text = "Enter Coordinates";
             this.btnEnterCoordinates.UseVisualStyleBackColor = true;
@@ -72,7 +72,7 @@
             // 
             // Bases
             // 
-            this.ClientSize = new System.Drawing.Size(317, 261);
+            this.ClientSize = new System.Drawing.Size(339, 261);
             this.Controls.Add(this.btnStartCoord);
             this.Controls.Add(this.btnEnterCoordinates);
             this.Controls.Add(this.txtNumber);
