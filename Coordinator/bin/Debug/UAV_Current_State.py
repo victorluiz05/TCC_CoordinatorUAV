@@ -21,10 +21,11 @@ vehicle.wait_ready(raise_exception=False)
 currentLocation = vehicle.location.global_relative_frame
 currentGroundspeed = vehicle.groundspeed
 currentHeading = vehicle.heading
+battery = vehicle.battery.level
 cmds = vehicle.commands
 currentWP = cmds.next
 
-print("%s, %s, %s, %s, %s, %s " %(currentLocation.lat, currentLocation.lon, currentLocation.alt, currentGroundspeed, currentHeading, currentWP))
+print("%s, %s, %s, %s, %s, %s, %s " %(currentLocation.lat, currentLocation.lon, currentLocation.alt, currentGroundspeed, currentHeading, currentWP, battery))
 
 # Close vehicle object before exiting script
 vehicle.close() 

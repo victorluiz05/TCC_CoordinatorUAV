@@ -25,13 +25,23 @@ namespace Coordinator
             public double BaseLon;
             public int NumberUAV;
         }
+
+        public struct Warehouse
+        {
+            public int WarehouseNumber;
+            public double WarehouseLat;
+            public double WarehouseLon;
+            public int NumberUAV;
+        }
         public Base[] BasesArray = new Base[10];
 
-        int Nbases;
+        public Warehouse[] WarehouseArray = new Warehouse[10];
+
+        int Nwarehouses;
 
         private void btnEnterCoordinates_Click(object sender, EventArgs e)
         {
-            Nbases = Convert.ToInt32(txtNumber.Text);
+            Nwarehouses = Convert.ToInt32(txtNumber.Text);
 
             Label label = new Label();
             label.Name = "Latitude";
@@ -47,46 +57,50 @@ namespace Coordinator
             labell.Location = new Point(164, 54);
             Controls.Add(labell);
 
+            WarehouseArray[0].WarehouseLat = -35.342437;
+            WarehouseArray[0].WarehouseLon = 149.126881;
+            WarehouseArray[1].WarehouseLat = -35.338778;
+            WarehouseArray[1].WarehouseLon = 149.128005;
+            WarehouseArray[2].WarehouseLat = -35.337535;
+            WarehouseArray[2].WarehouseLon = 149.135191;
+
             int xlat = 12;
             int ylat = 82;
             int xlon = 164;
             int ylon = 82;
-            double lat = -35.345168;
-            double lon = 149.130011;
-
-            for (int i=0; i<Nbases; i++)
+            
+            for (int i=0; i<Nwarehouses; i++)
             {
                 TextBox textboxlat = new TextBox();
                 textboxlat.Name = "txtbaseLat" + i.ToString();
-                textboxlat.Text = lat.ToString();
+                textboxlat.Text = WarehouseArray[i].WarehouseLat.ToString();
                 textboxlat.Location = new Point(xlat,ylat);
                 Controls.Add(textboxlat);
-                lat = lat + 0.000950;
                 ylat = ylat + 25;
 
                 TextBox textboxlon = new TextBox();
                 textboxlon.Name = "txtbaseLon" + i.ToString();
-                textboxlon.Text = lon.ToString();
+                textboxlon.Text = WarehouseArray[i].WarehouseLon.ToString();
                 textboxlon.Location = new Point(xlon, ylon);
                 Controls.Add(textboxlon);
-                lon = lon + 0.001350;
                 ylon = ylon + 25;
-
             }
 
         }
 
         private void btnStartCoord_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Nbases; i++)
+           
+
+            for (int i = 0; i < Nwarehouses; i++)
             {
-                BasesArray[i].BaseLat = Convert.ToDouble(((TextBox)Controls["txtbaseLat" + (i).ToString()]).Text);
-                BasesArray[i].BaseLon = Convert.ToDouble(((TextBox)Controls["txtbaseLon" + (i).ToString()]).Text);
-                BasesArray[i].BaseNumber = i;
+                WarehouseArray[i].WarehouseLat = Convert.ToDouble(((TextBox)Controls["txtbaseLat" + (i).ToString()]).Text);
+                WarehouseArray[i].WarehouseLon = Convert.ToDouble(((TextBox)Controls["txtbaseLon" + (i).ToString()]).Text);
+                WarehouseArray[i].WarehouseNumber = i;
             }
 
             CommunicationLinks comm = new CommunicationLinks();
-            comm.Bases_Initializer(BasesArray);
+            comm.Warehouses_Initializer(WarehouseArray);
 
             this.Hide();
             

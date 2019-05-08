@@ -51,7 +51,7 @@ namespace Coordinator
             public string CurrentWP;
             public string NumberWpMission;
         }
-        
+
         public struct Demands
         {
             public double DemandLatitude;
@@ -67,13 +67,21 @@ namespace Coordinator
             public string MissionPath;
         }
 
+        public struct DeliveryBases
+        {
+          public double DeliveyBaseLat;
+          public double DeliveyBaseLon;
+        }
+
+        public DeliveryBases[] DeliveryBasesArray = new DeliveryBases[5];
+
         public struct WPLatLon
         {
             public string Lat;
             public string Lon;
         }
 
-        public Bases.Base[] BasesArrayComm = new Bases.Base[10];
+        public Bases.Warehouse[] BasesArrayComm = new Bases.Warehouse[10];
 
         public MissionInfo[] MissionList = new MissionInfo[163];       //Still used in the upload button
         public int CounterMission = 0;
@@ -100,7 +108,7 @@ namespace Coordinator
         //Drawing the locations of the bases on the map
         private void OpenMap(object sender, EventArgs e)
         {
-            foreach (Bases.Base i in BasesArrayComm)
+            foreach (Bases.Warehouse i in BasesArrayComm)
             {
                 Bitmap bmp = new Bitmap(80, 80);
                 Graphics g = Graphics.FromImage(bmp);
@@ -111,9 +119,9 @@ namespace Coordinator
                 StringFormat sf = new StringFormat();
                 sf.Alignment = StringAlignment.Center;
                 sf.LineAlignment = StringAlignment.Center;
-                g.DrawString("BASE "+i.BaseNumber.ToString(), new Font("Arial", 10), Brushes.Black, 0,0);
+                g.DrawString("BASE "+i.WarehouseNumber.ToString(), new Font("Arial", 10), Brushes.Black, 0,0);
 
-                map.MapControl.DrawMarker(new PointLatLng(i.BaseLat, i.BaseLon), bmp);
+                map.MapControl.DrawMarker(new PointLatLng(i.WarehouseLat, i.WarehouseLon), bmp);
             }
         }
 
@@ -259,8 +267,7 @@ namespace Coordinator
         private void CommunicationLinks_Load(object sender, EventArgs e)
         {
             //Connection_Handler();
-
-
+            
             //Iniciating the coordinator with all UAVs IDLE
             for (int j = 0; j <= CounterUAV; j++)
             {
@@ -514,27 +521,70 @@ namespace Coordinator
             Clear_Mission(typee,IpAddress,Portt,CommName);
         }
 
+        private void btnGenerateDemand_Click(object sender, EventArgs e)
+        {
+            if (cbxDemand.Text == "Delivery Base 1")
+            {
+                DemandInfo.DemandLatitude = DeliveryBasesArray[0].DeliveyBaseLat;
+                DemandInfo.DemandLongitude = DeliveryBasesArray[0].DeliveyBaseLon;
+            }
+            else if (cbxDemand.Text == "Delivery Base 2")
+            {
+                DemandInfo.DemandLatitude = DeliveryBasesArray[1].DeliveyBaseLat;
+                DemandInfo.DemandLongitude = DeliveryBasesArray[1].DeliveyBaseLon;
+            }
+            else if (cbxDemand.Text == "Delivery Base 3")
+            {
+                DemandInfo.DemandLatitude = DeliveryBasesArray[2].DeliveyBaseLat;
+                DemandInfo.DemandLongitude = DeliveryBasesArray[2].DeliveyBaseLon;
+            }
+            else if (cbxDemand.Text == "Delivery Base 4")
+            {
+                DemandInfo.DemandLatitude = DeliveryBasesArray[3].DeliveyBaseLat;
+                DemandInfo.DemandLongitude = DeliveryBasesArray[3].DeliveyBaseLon;
+            }
+            else
+            {
+                DemandInfo.DemandLatitude = DeliveryBasesArray[4].DeliveyBaseLat;
+                DemandInfo.DemandLongitude = DeliveryBasesArray[4].DeliveyBaseLon;
+            }
+
+            DemandsQueue.Enqueue(DemandInfo);
+            txtQueue.Text = DemandsQueue.Count.ToString();
+        }
+
         /*---------------------------------------------------------------END of Form Methods and Settings-----------------------------------------------------------------------------------------*/
 
         /*---------------------------------------------------------------General Methods and Settings-----------------------------------------------------------------------------------------*/
 
-        public void Bases_Initializer(Bases.Base[] BasesArray)
+        public void Warehouses_Initializer(Bases.Warehouse[] WarehouseArray)
         {
-            BasesArrayComm = BasesArray;
+            BasesArrayComm = WarehouseArray;
 
             //Counting how many UAVs are in each base
             for (int i=0; i<BasesArrayComm.Length; i++)
             {
                 for(int j=0; j<CounterUAV; j++)
                 {
-                    if(BasesArrayComm[i].BaseNumber == Convert.ToInt32(UAVinfo[j].N_Base))
+                    if(BasesArrayComm[i].WarehouseNumber == Convert.ToInt32(UAVinfo[j].N_Base))
                     {
                         BasesArrayComm[i].NumberUAV = BasesArrayComm[i].NumberUAV + 1;
                     }
                 }
             }
 
-            
+            //Adding the coordinates of the delivery bases to the array of delivery bases
+            DeliveryBasesArray[0].DeliveyBaseLat = -35.341583;
+            DeliveryBasesArray[0].DeliveyBaseLon = 149.135051;
+            DeliveryBasesArray[1].DeliveyBaseLat = -35.339708;
+            DeliveryBasesArray[1].DeliveyBaseLon = 149.123068;
+            DeliveryBasesArray[2].DeliveyBaseLat = -35.335846;
+            DeliveryBasesArray[2].DeliveyBaseLon = 149.131441;
+            DeliveryBasesArray[3].DeliveyBaseLat = -35.342576;
+            DeliveryBasesArray[3].DeliveyBaseLon = 149.131159;
+            DeliveryBasesArray[4].DeliveyBaseLat = -35.336118;
+            DeliveryBasesArray[4].DeliveyBaseLon = 149.124383;
+
         }
 
         //Function that runs a DroneKit script, it gets the arguments(such as the communication info and a mission file for example) to pass to Python using ProcessStartInfo
@@ -635,6 +685,7 @@ namespace Coordinator
                           string groundspeed = StateList[3];
                           string heading = StateList[4];
                           string currentwp = StateList[5];
+                          string battery = StateList[6];
 
                           double lat = ParseDouble(latitude);
                           double lng = ParseDouble(longitude);
@@ -909,7 +960,7 @@ namespace Coordinator
                         {
                             txtDistance.Text = distance.ToString();
                             txtQueue.Text = DemandsQueue.Count.ToString();
-                            //Update_DemandsDTV();
+                            
                         }));
 
                         //PathPlannigAlgorithm(DemandInfo.DemandLatitude, DemandInfo.DemandLongitude, j);
@@ -937,7 +988,7 @@ namespace Coordinator
             double distance=0;
             //for(int i = 0; i < BasesArrayComm.Length; i++)
             //{
-                Coordinate coord1 = new Coordinate(BasesArrayComm[1].BaseLat, BasesArrayComm[1].BaseLon);
+                Coordinate coord1 = new Coordinate(BasesArrayComm[1].WarehouseLat, BasesArrayComm[1].WarehouseLon);
 
                 Distance d = new Distance(coord1, coord2);
 
@@ -1150,18 +1201,6 @@ namespace Coordinator
             Automata_Estate_Changer(indexx, Automata);
         }
         
-        public void Update_DemandsDTV()
-        {
-           foreach(Demands k in DemandsArray)
-           {
-                if ((k.DemandAutomataEstate !="") && (k.DemandLatitude != 0) && (k.DemandLongitude != 0))
-                {
-                    dtvDemands.Rows.Add(k.DemandLatitude, k.DemandLongitude, k.DemandAutomataEstate);
-                }
-           }
-                 
-        }
-
         //Method that changes the automata estate 
         public void Automata_Estate_Changer(int indexx, string Automata)
         {
