@@ -34,6 +34,13 @@ namespace Coordinator
         string missionn = "";
         private Logger log = new Logger("CommunicationLinks");
 
+        public struct DistanceCalculus
+        {
+            public double Distance;
+            public int WarehouseNumber;
+        }
+
+        public DistanceCalculus[] DistanceArray = new DistanceCalculus[10];
         public struct UAVStatus
         {
             public string Type;
@@ -81,7 +88,7 @@ namespace Coordinator
             public string Lon;
         }
 
-        public Bases.Warehouse[] BasesArrayComm = new Bases.Warehouse[10];
+        public Bases.Warehouse[] WarehouseArrayComm = new Bases.Warehouse[10];
 
         public MissionInfo[] MissionList = new MissionInfo[163];       //Still used in the upload button
         public int CounterMission = 0;
@@ -108,7 +115,7 @@ namespace Coordinator
         //Drawing the locations of the bases on the map
         private void OpenMap(object sender, EventArgs e)
         {
-            foreach (Bases.Warehouse i in BasesArrayComm)
+            foreach (Bases.Warehouse i in WarehouseArrayComm)
             {
                 Bitmap bmp = new Bitmap(80, 80);
                 Graphics g = Graphics.FromImage(bmp);
@@ -543,7 +550,7 @@ namespace Coordinator
                 DemandInfo.DemandLatitude = DeliveryBasesArray[3].DeliveyBaseLat;
                 DemandInfo.DemandLongitude = DeliveryBasesArray[3].DeliveyBaseLon;
             }
-            else
+            else if(cbxDemand.Text == "Delivery Base 5")
             {
                 DemandInfo.DemandLatitude = DeliveryBasesArray[4].DeliveyBaseLat;
                 DemandInfo.DemandLongitude = DeliveryBasesArray[4].DeliveyBaseLon;
@@ -551,24 +558,30 @@ namespace Coordinator
 
             DemandsQueue.Enqueue(DemandInfo);
             txtQueue.Text = DemandsQueue.Count.ToString();
+            txtDeliverybase.Text = DemandInfo.DemandLatitude.ToString();
+            SelectingNearestWarehouse();
         }
 
         /*---------------------------------------------------------------END of Form Methods and Settings-----------------------------------------------------------------------------------------*/
 
         /*---------------------------------------------------------------General Methods and Settings-----------------------------------------------------------------------------------------*/
 
+        //Queue used for the demands
+        Queue DemandsQueue = new Queue();
+        public Demands DemandInfo, DemandInfo2;
+
         public void Warehouses_Initializer(Bases.Warehouse[] WarehouseArray)
         {
-            BasesArrayComm = WarehouseArray;
+            WarehouseArrayComm = WarehouseArray;
 
             //Counting how many UAVs are in each base
-            for (int i=0; i<BasesArrayComm.Length; i++)
+            for (int i=0; i< WarehouseArrayComm.Length; i++)
             {
                 for(int j=0; j<CounterUAV; j++)
                 {
-                    if(BasesArrayComm[i].WarehouseNumber == Convert.ToInt32(UAVinfo[j].N_Base))
+                    if(WarehouseArrayComm[i].WarehouseNumber == Convert.ToInt32(UAVinfo[j].N_Base))
                     {
-                        BasesArrayComm[i].NumberUAV = BasesArrayComm[i].NumberUAV + 1;
+                        WarehouseArrayComm[i].NumberUAV = WarehouseArrayComm[i].NumberUAV + 1;
                     }
                 }
             }
@@ -912,10 +925,6 @@ namespace Coordinator
         }
         */
 
-        //Queue used for the demands
-        Queue DemandsQueue = new Queue();
-        public Demands DemandInfo;
-
         public void demand_automatic_test(string lat, string lon)
         {
             DemandInfo.DemandLatitude = double.Parse(lat, CultureInfo.InvariantCulture);
@@ -931,12 +940,45 @@ namespace Coordinator
 
         public void TimerCall2(object sender, ElapsedEventArgs e)
         {
-            for (int j = 0; j <= CounterUAV; j++)
-            {
-                string automataestate = UAVinfo[j].UAVAutomataEstate;
-                PlanningPath(j, automataestate);
-            }
+            //for (int j = 0; j <= CounterUAV; j++)
+            //{
+            //  string automataestate = UAVinfo[j].UAVAutomataEstate;
+            // PlanningPath(j, automataestate);
+            //}
+            SelectingNearestWarehouse();
+        }
 
+        public void SelectingNearestWarehouse()
+        {
+            if (DemandsQueue.Count != 0)
+            {
+                double DeliveryBaseLat, DeliveyBaseLon;
+                double distance = 78;
+                
+
+                DemandInfo = (Demands)DemandsQueue.Dequeue();
+                DeliveryBaseLat = DemandInfo.DemandLatitude;
+                DeliveyBaseLon = DemandInfo.DemandLongitude;
+
+                Coordinate coord2 = new Coordinate(DeliveryBaseLat, DeliveyBaseLon);
+                for (int i = 0; i < WarehouseArrayComm.Length; i++)
+                {
+                    Coordinate coord1 = new Coordinate(WarehouseArrayComm[i].WarehouseLat, WarehouseArrayComm[i].WarehouseLon);
+                    Distance d = new Distance(coord1, coord2);
+                    distance = d.Meters;
+
+                    DistanceArray[i].Distance = distance;
+                    DistanceArray[i].WarehouseNumber = WarehouseArrayComm[i].WarehouseNumber;
+                }
+
+               
+                Array.Sort(DistanceArray, (x, y) => x.Distance.CompareTo(y.Distance));
+
+               
+                //int warehousenumber = DistanceCalculation(coord2);
+                txtWarehouseNumber.Text = DistanceArray[0].WarehouseNumber.ToString();
+                txtQueue.Text = DemandsQueue.Count.ToString();
+            }
         }
 
         public void PlanningPath(int j, string automataestate)
@@ -958,7 +1000,7 @@ namespace Coordinator
                         Automata_Estate_Changer(j, "DEMAND");
                         BeginInvoke(new MethodInvoker(() =>
                         {
-                            txtDistance.Text = distance.ToString();
+                            
                             txtQueue.Text = DemandsQueue.Count.ToString();
                             
                         }));
@@ -982,20 +1024,28 @@ namespace Coordinator
 
         }
 
-        //Method to calculate the distance between each base and the location of the demand 
-        public double DistanceCalculation(Coordinate coord2)
+        //Method to calculate the distance between each warehouse and the location of the demand 
+        public int DistanceCalculation(Coordinate coord2)
         {
-            double distance=0;
-            //for(int i = 0; i < BasesArrayComm.Length; i++)
-            //{
-                Coordinate coord1 = new Coordinate(BasesArrayComm[1].WarehouseLat, BasesArrayComm[1].WarehouseLon);
+            double testdistance=0, finaldistance=10000000;
+            int warehousenumber=0;
+
+            for (int i = 0; i < WarehouseArrayComm.Length; i++)
+            {
+                Coordinate coord1 = new Coordinate(WarehouseArrayComm[i].WarehouseLat, WarehouseArrayComm[i].WarehouseLon);
 
                 Distance d = new Distance(coord1, coord2);
+                testdistance = d.Meters;
 
-                distance = d.Meters;
-            //}
+                if(testdistance <= finaldistance)
+                {
+                    finaldistance = testdistance;
+                    warehousenumber = WarehouseArrayComm[i].NumberUAV;
 
-            return distance;
+                }
+            }
+
+            return warehousenumber;
         }
 
         //creates a list of waypoints of the mission to draw in the map

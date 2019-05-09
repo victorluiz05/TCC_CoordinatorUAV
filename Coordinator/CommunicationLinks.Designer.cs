@@ -53,8 +53,7 @@ namespace Coordinator
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtDistance = new System.Windows.Forms.TextBox();
+            this.txtWarehouseNumber = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.txtQueue = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -79,6 +78,7 @@ namespace Coordinator
             this.label18 = new System.Windows.Forms.Label();
             this.cbxDemand = new System.Windows.Forms.ComboBox();
             this.btnGenerateDemand = new System.Windows.Forms.Button();
+            this.txtDeliverybase = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -356,8 +356,8 @@ namespace Coordinator
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label17);
-            this.panel2.Controls.Add(this.txtDistance);
+            this.panel2.Controls.Add(this.txtDeliverybase);
+            this.panel2.Controls.Add(this.txtWarehouseNumber);
             this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.txtQueue);
             this.panel2.Controls.Add(this.label11);
@@ -369,21 +369,12 @@ namespace Coordinator
             this.panel2.Size = new System.Drawing.Size(419, 104);
             this.panel2.TabIndex = 37;
             // 
-            // label17
+            // txtWarehouseNumber
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(9, 81);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(49, 13);
-            this.label17.TabIndex = 62;
-            this.label17.Text = "Distance";
-            // 
-            // txtDistance
-            // 
-            this.txtDistance.Location = new System.Drawing.Point(117, 74);
-            this.txtDistance.Name = "txtDistance";
-            this.txtDistance.Size = new System.Drawing.Size(144, 20);
-            this.txtDistance.TabIndex = 61;
+            this.txtWarehouseNumber.Location = new System.Drawing.Point(196, 84);
+            this.txtWarehouseNumber.Name = "txtWarehouseNumber";
+            this.txtWarehouseNumber.Size = new System.Drawing.Size(72, 20);
+            this.txtWarehouseNumber.TabIndex = 61;
             // 
             // label15
             // 
@@ -583,11 +574,11 @@ namespace Coordinator
             // 
             this.cbxDemand.FormattingEnabled = true;
             this.cbxDemand.Items.AddRange(new object[] {
-            "Delivey Base 1",
-            "Delivey Base 2",
-            "Delivey Base 3",
-            "Delivey Base 4",
-            "Delivey Base 5"});
+            "Delivery Base 1",
+            "Delivery Base 2",
+            "Delivery Base 3",
+            "Delivery Base 4",
+            "Delivery Base 5"});
             this.cbxDemand.Location = new System.Drawing.Point(86, 732);
             this.cbxDemand.Name = "cbxDemand";
             this.cbxDemand.Size = new System.Drawing.Size(133, 21);
@@ -602,6 +593,13 @@ namespace Coordinator
             this.btnGenerateDemand.Text = "Generate Demand";
             this.btnGenerateDemand.UseVisualStyleBackColor = true;
             this.btnGenerateDemand.Click += new System.EventHandler(this.btnGenerateDemand_Click);
+            // 
+            // txtDeliverybase
+            // 
+            this.txtDeliverybase.Location = new System.Drawing.Point(36, 81);
+            this.txtDeliverybase.Name = "txtDeliverybase";
+            this.txtDeliverybase.Size = new System.Drawing.Size(114, 20);
+            this.txtDeliverybase.TabIndex = 62;
             // 
             // CommunicationLinks
             // 
@@ -710,11 +708,11 @@ namespace Coordinator
         private System.Windows.Forms.TextBox txtQueue;
         private System.Windows.Forms.TextBox txtBase;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox txtDistance;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox cbxDemand;
         private System.Windows.Forms.Button btnGenerateDemand;
+        private System.Windows.Forms.TextBox txtWarehouseNumber;
+        private System.Windows.Forms.TextBox txtDeliverybase;
     }
 }
 
