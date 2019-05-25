@@ -38,11 +38,12 @@ namespace Coordinator
         {
             public double Distance;
             public int WarehouseNumber;
+            public int BaseNumber;
             public string NameUAVAssigned;
         }
 
         public DistanceCalculus[] DistanceArray = new DistanceCalculus[10];
-        
+
 
         public struct UAVStatus
         {
@@ -80,8 +81,8 @@ namespace Coordinator
 
         public struct DeliveryBases
         {
-          public double DeliveyBaseLat;
-          public double DeliveyBaseLon;
+            public double DeliveyBaseLat;
+            public double DeliveyBaseLon;
         }
 
         public DeliveryBases[] DeliveryBasesArray = new DeliveryBases[5];
@@ -126,11 +127,11 @@ namespace Coordinator
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 Pen p = new Pen(Color.Black);
                 p.Width = 2;
-                g.DrawEllipse(p, 2, 2, bmp.Width-4, bmp.Height-4);
+                g.DrawEllipse(p, 2, 2, bmp.Width - 4, bmp.Height - 4);
                 StringFormat sf = new StringFormat();
                 sf.Alignment = StringAlignment.Center;
                 sf.LineAlignment = StringAlignment.Center;
-                g.DrawString("BASE "+i.WarehouseNumber.ToString(), new Font("Arial", 10), Brushes.Black, 0,0);
+                g.DrawString("BASE " + i.WarehouseNumber.ToString(), new Font("Arial", 10), Brushes.Black, 0, 0);
 
                 map.MapControl.DrawMarker(new PointLatLng(i.WarehouseLat, i.WarehouseLon), bmp);
             }
@@ -278,7 +279,7 @@ namespace Coordinator
         private void CommunicationLinks_Load(object sender, EventArgs e)
         {
             //Connection_Handler();
-            
+
             //Iniciating the coordinator with all UAVs IDLE
             for (int j = 0; j <= CounterUAV; j++)
             {
@@ -529,12 +530,12 @@ namespace Coordinator
         private void btntest_Click(object sender, EventArgs e)
         {
             demand_automatic_test(txttestelat.Text, txttestelon.Text);
-            txtQueue.Text = DemandsQueueWarehouse.Count.ToString();
+            //txtQueue.Text = DemandsQueueWarehouse.Count.ToString();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            Clear_Mission(typee,IpAddress,Portt,CommName);
+            Clear_Mission(typee, IpAddress, Portt, CommName);
         }
 
         //Queue used for the demands
@@ -576,7 +577,7 @@ namespace Coordinator
                 DemandsQueueWarehouse.Enqueue(DemandInfoWarehouse);
                 txtQueue.Text = DemandsQueueWarehouse.Count.ToString();
             }
-            else if(cbxDemand.Text == "Delivery Base 5")
+            else if (cbxDemand.Text == "Delivery Base 5")
             {
                 DemandInfoWarehouse.DemandLatitude = DeliveryBasesArray[4].DeliveyBaseLat;
                 DemandInfoWarehouse.DemandLongitude = DeliveryBasesArray[4].DeliveyBaseLon;
@@ -595,12 +596,6 @@ namespace Coordinator
 
         }
 
-        private void btnsubtrai_Click(object sender, EventArgs e)
-        {
-            WarehouseArrayComm[2].NumberUAV = WarehouseArrayComm[2].NumberUAV - 1;
-        }
-
-
         /*---------------------------------------------------------------END of Form Methods and Settings-----------------------------------------------------------------------------------------*/
 
         /*---------------------------------------------------------------General Methods and Settings-----------------------------------------------------------------------------------------*/
@@ -610,11 +605,11 @@ namespace Coordinator
             WarehouseArrayComm = WarehouseArray;
 
             //Counting how many UAVs are in each base
-            for (int i=0; i< WarehouseArrayComm.Length; i++)
+            for (int i = 0; i < WarehouseArrayComm.Length; i++)
             {
-                for(int j=0; j<CounterUAV; j++)
+                for (int j = 0; j < CounterUAV; j++)
                 {
-                    if(WarehouseArrayComm[i].WarehouseNumber == Convert.ToInt32(UAVinfo[j].N_Warehouse))
+                    if (WarehouseArrayComm[i].WarehouseNumber == Convert.ToInt32(UAVinfo[j].N_Warehouse))
                     {
                         WarehouseArrayComm[i].NumberUAV = WarehouseArrayComm[i].NumberUAV + 1;
                     }
@@ -688,7 +683,7 @@ namespace Coordinator
 
         }
 
-        System.Timers.Timer aTimer = new System.Timers.Timer(3000);   //Creation of the timer
+        System.Timers.Timer aTimer = new System.Timers.Timer(2500);   //Creation of the timer
 
         //Timer that runs the method to get the actual estate of the UAVs
         public void TimerCall(object sender, ElapsedEventArgs e)
@@ -722,78 +717,88 @@ namespace Coordinator
 
             while (!proc.HasExited)
             {
-               
                 if (!sr.EndOfStream)
                 {
-                      string procOutput = sr.ReadToEnd();
-                      const string delimiter = ", ";
-                      string[] StateList = procOutput.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                    
-                      try
-                      {
-                          string latitude = StateList[0];
-                          string longitude = StateList[1];
-                          string altitude = StateList[2];
-                          string groundspeed = StateList[3];
-                          string heading = StateList[4];
-                          string currentwp = StateList[5];
-                          string battery = StateList[6];
+                    string procOutput = sr.ReadToEnd();
+                    const string delimiter = ", ";
+                    string[] StateList = procOutput.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                          double lat = ParseDouble(latitude);
-                          double lng = ParseDouble(longitude);
+                    try
+                    {
+                        string latitude = StateList[0];
+                        string longitude = StateList[1];
+                        string altitude = StateList[2];
+                        string groundspeed = StateList[3];
+                        string heading = StateList[4];
+                        string currentwp = StateList[5];
+                        string battery = StateList[6];
 
-                          int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == name);
-                          UAVinfo[indexx].Lat = latitude;
-                          UAVinfo[indexx].Lon = longitude;
-                          UAVinfo[indexx].Alt = altitude;
-                          UAVinfo[indexx].Groundspeed = groundspeed;
-                          UAVinfo[indexx].Heading = heading;
-                          UAVinfo[indexx].CurrentWP = currentwp;
+                        double lat = ParseDouble(latitude);
+                        double lng = ParseDouble(longitude);
 
-                          if ((UAVinfo[indexx].Lat == "None") || (UAVinfo[indexx].Lon == "None"))
-                          {
-                              //Can't do Nothing
-                          }
-                          else
-                          {
-                              map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(ParseDouble(UAVinfo[indexx].Lat), ParseDouble(UAVinfo[indexx].Lon));
-                              
-                              
-                          }
+                        int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == name);
+                        UAVinfo[indexx].Lat = latitude;
+                        UAVinfo[indexx].Lon = longitude;
+                        UAVinfo[indexx].Alt = altitude;
+                        UAVinfo[indexx].Groundspeed = groundspeed;
+                        UAVinfo[indexx].Heading = heading;
+                        UAVinfo[indexx].CurrentWP = currentwp;
 
-                            //Verifying when the mission is over to set free the UAV
-                            if ((UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) >=1)))
+                        if ((UAVinfo[indexx].Lat == "None") || (UAVinfo[indexx].Lon == "None"))
+                        {
+                            //Can't do Nothing
+                        }
+                        else
+                        {
+                            map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(ParseDouble(UAVinfo[indexx].Lat), ParseDouble(UAVinfo[indexx].Lon));
+
+
+                        }
+                        /*
+                        if ((UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))))
+                        {
+                            Loiter(UAVinfo[indexx].Type, UAVinfo[indexx].IP, UAVinfo[indexx].Port);
+
+                        }
+                        
+                        else if((UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission)))&& ((Convert.ToInt32(UAVinfo[indexx].Alt) <= 5)))
+                        {
+                            ResumeMission(UAVinfo[indexx].Type, UAVinfo[indexx].IP, UAVinfo[indexx].Port);
+                        }
+                        */
+                        //Verifying when the mission is over to set free the UAV
+                        if ((UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) >= 1)))
+                        {
+                            if (ParseDouble(UAVinfo[indexx].Alt) <= 2.0)
                             {
-                                  if (ParseDouble(UAVinfo[indexx].Alt)  <= 2.0)
-                                  {
-                                     UAVinfo[indexx].UAVAutomataEstate ="IDLE";
-                                     UAV_arrived(UAVinfo[indexx].N_Warehouse);
-                                     // Mission_Has_Ended(indexx, "UAV");
-                                  }
-                                   
+                                UAVinfo[indexx].UAVAutomataEstate = "IDLE";
+                                UAV_arrived(UAVinfo[indexx].N_Warehouse);
+                                // Mission_Has_Ended(indexx, "UAV");
                             }
-                            
-                            //It must changes when a select a UAV on dtv
-                            int ind = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
-                            string latt = UAVinfo[ind].Lat;
-                            string lonn = UAVinfo[ind].Lon;
-                            string altt = UAVinfo[ind].Alt;
-                            string groundd = UAVinfo[ind].Groundspeed;
-                            string currentwpp = UAVinfo[ind].CurrentWP;
-                            string estate = UAVinfo[ind].UAVAutomataEstate;
 
-                            UpdatingTextBoxLatitude(latt);
-                            UpdatingTextBoxLongitude(lonn);
-                            UpdatingTextBoxaltitude(altt);
-                            UpdatingTextBoxGroundspeed(groundd);
-                            UpdatingTextBoxCurrentWP(currentwpp);
-                            UpdatingTextBoxUAVAutoamata(estate);
+                        }
 
-                      }
-                      catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
-                   
-                }Thread.Sleep(325);
-            }           
+                        //It must changes when a select a UAV on dtv
+                        int ind = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
+                        string latt = UAVinfo[ind].Lat;
+                        string lonn = UAVinfo[ind].Lon;
+                        string altt = UAVinfo[ind].Alt;
+                        string groundd = UAVinfo[ind].Groundspeed;
+                        string currentwpp = UAVinfo[ind].CurrentWP;
+                        string estate = UAVinfo[ind].UAVAutomataEstate;
+
+                        UpdatingTextBoxLatitude(latt);
+                        UpdatingTextBoxLongitude(lonn);
+                        UpdatingTextBoxaltitude(altt);
+                        UpdatingTextBoxGroundspeed(groundd);
+                        UpdatingTextBoxCurrentWP(currentwpp);
+                        UpdatingTextBoxUAVAutoamata(estate);
+
+                    }
+                    catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
+
+                } Thread.Sleep(325);
+            }
         }
 
         //Method for pausing the mission of a select UAV
@@ -803,6 +808,44 @@ namespace Coordinator
             {
                 string python = @"C:\Python27\python.exe";
                 string myPythonApp = "PauseMission.py";
+                string con = typee;
+                string ip = IpAddress;
+                string port = Portt;
+                string arg = "";
+
+                arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
+
+                ProcessStartInfo psi = new ProcessStartInfo(python, arg);
+                psi.UseShellExecute = false;
+                psi.RedirectStandardOutput = true;
+                psi.CreateNoWindow = true;
+
+                var proc = Process.Start(psi);
+
+                StreamReader sr = proc.StandardOutput;
+
+                while (!proc.HasExited)
+                {
+                    if (!sr.EndOfStream)
+                    {
+                        string procOutput = sr.ReadToEnd();
+                        this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput);
+
+                    }
+                    else Thread.Sleep(20);
+                }
+            }));
+
+            thread.Start();
+
+        }
+
+        public void Loiter(string typee, string IpAddress, string Portt)
+        {
+            var thread = new Thread(new ThreadStart(() =>
+            {
+                string python = @"C:\Python27\python.exe";
+                string myPythonApp = "Loiter.py";
                 string con = typee;
                 string ip = IpAddress;
                 string port = Portt;
@@ -977,34 +1020,101 @@ namespace Coordinator
 
         }
 
-        System.Timers.Timer aTimer2 = new System.Timers.Timer(1500);   //Creation of the timer
+        System.Timers.Timer aTimer2 = new System.Timers.Timer(2500);   //Creation of the timer
 
         public void TimerCall2(object sender, ElapsedEventArgs e)
         {
-            SelectingUAV();
+            CalculatingDistances();
         }
 
+        List<DistanceCalculus> ListDistance = new List<DistanceCalculus>();
+        DistanceCalculus distances = new DistanceCalculus();
+
         int BaseNUmber;
-        int warehousenumber;
-        double DeliveryBaseLat, DeliveyBaseLon;
-        double distance ;
-        
-        public void SelectingUAV()
+        public void CalculatingDistances()
         {
+            int warehousenumber;
+            double DeliveryBaseLat=0, DeliveyBaseLon=0;
+            double distance;
+
             if (DemandsQueueWarehouse.Count != 0)
-            {   
-                for (int i = 0; i < CounterUAV; i++)
+            {
+                for(int i = 0; i < CounterUAV; i++)
                 {
-                    if((UAVinfo[i].UAVAutomataEstate == "IDLE"))
+                    if ((UAVinfo[i].UAVAutomataEstate == "IDLE"))
                     {
-                        if(i == 0)//Dequeue only on the first iteration, the others the values are already in the respective variables
+                        if (i == 0)//Dequeue only on the first iteration, the others the values are already in the respective variables
                         {
                             DemandInfoWarehouse = (Demands)DemandsQueueWarehouse.Dequeue();
                             DeliveryBaseLat = DemandInfoWarehouse.DemandLatitude;
                             DeliveyBaseLon = DemandInfoWarehouse.DemandLongitude;
                             BaseNUmber = DemandInfoWarehouse.NumberoftheBase;
+
                         }
+                        Coordinate coord2 = new Coordinate(DeliveryBaseLat, DeliveyBaseLon);
+                        Coordinate coord1 = new Coordinate(Double.Parse(UAVinfo[i].Lat, CultureInfo.InvariantCulture), Double.Parse(UAVinfo[i].Lon, CultureInfo.InvariantCulture));
+                        Distance d = new Distance(coord1, coord2);
+                        distance = d.Meters;
+
+                        distances.BaseNumber = BaseNUmber;
+                        distances.Distance = distance;
+                        distances.WarehouseNumber = Convert.ToInt16(UAVinfo[i].N_Warehouse);
+                        distances.NameUAVAssigned = UAVinfo[i].N_UAV;
+                        ListDistance.Add(distances);
+
+                    }
+                }
+         
+            }
+            ListDistance.Sort((x,y)=>x.Distance.CompareTo(y.Distance));
+            
+            BeginInvoke(new MethodInvoker(() =>
+            {
+                txtdistance1.Text = ListDistance.Count.ToString();
+                txtQueue.Text = DemandsQueueWarehouse.Count.ToString();
+                if(ListDistance.Count > 0)
+                {
+                    txtdistance2.Text = ListDistance[0].NameUAVAssigned;
+                }
+            }));
+
+            if(ListDistance.Count > 0)
+            {
+                warehousenumber = ListDistance[0].WarehouseNumber;
+                string path = @"Missions\" + "CD" + warehousenumber.ToString() + "B" + ListDistance[0].BaseNumber.ToString() + ".txt";
+                int j = Array.FindIndex(UAVinfo, s => s.N_UAV == ListDistance[0].NameUAVAssigned);
+               
+                if ((UAVinfo[j].UAVAutomataEstate == "IDLE"))
+                {
+                    UAV_left(UAVinfo[j].N_Warehouse);
+                    BeginInvoke(new MethodInvoker(() =>
+                    {
+                        txtdistance3.Text = path;
+                        txtdistance4.Text = j.ToString();
+                    }));
+                    DecisionalAlgorithm(path, j);
+                }
+            }
+
+            ListDistance.Clear();
+        }
+        /*
+        public void SelectingUAV()
+        {
+            if (DemandsQueueWarehouse.Count != 0)
+            {
+                DemandInfoWarehouse = (Demands)DemandsQueueWarehouse.Dequeue();
+                DeliveryBaseLat = DemandInfoWarehouse.DemandLatitude;
+                DeliveyBaseLon = DemandInfoWarehouse.DemandLongitude;
+                BaseNUmber = DemandInfoWarehouse.NumberoftheBase;
+
+                int i = 0;
+                while (i < CounterUAV)
+                {
+                    if ((UAVinfo[i].UAVAutomataEstate == "IDLE"))
+                    {
                         
+
                         Coordinate coord2 = new Coordinate(DeliveryBaseLat, DeliveyBaseLon);
                         Coordinate coord1 = new Coordinate(Double.Parse(UAVinfo[i].Lat, CultureInfo.InvariantCulture), Double.Parse(UAVinfo[i].Lon, CultureInfo.InvariantCulture));
                         Distance d = new Distance(coord1, coord2);
@@ -1014,23 +1124,28 @@ namespace Coordinator
                         DistanceArray[i].NameUAVAssigned = UAVinfo[i].N_UAV;
 
                     }
+                    i++;
                 }
-                
+
                 Array.Sort(DistanceArray, (x, y) => x.Distance.CompareTo(y.Distance));
                 //Here we have all the available UAVs in an array and at the first position of it, we have the nearest UAV from the demand location
-                
+
                 if ((DistanceArray[0].NameUAVAssigned != null) || (DistanceArray[0].Distance != 0))
-                { 
+                {
                     warehousenumber = DistanceArray[0].WarehouseNumber;
                     string path = @"Missions\" + "CD" + warehousenumber.ToString() + "B" + BaseNUmber.ToString() + ".txt";
                     int j = Array.FindIndex(UAVinfo, s => s.N_UAV == DistanceArray[0].NameUAVAssigned);
+                    BeginInvoke(new MethodInvoker(() =>
+                    {
+                        txtdistance1.Text = "ENTREI 1";
+                    }));
 
                     if ((UAVinfo[j].UAVAutomataEstate == "IDLE"))
                     {
                         UAV_left(UAVinfo[j].N_Warehouse);
-                        UAVinfo[j].UAVAutomataEstate = "IN FLIGHT";
+
                         DecisionalAlgorithm(path, j);
-                        
+
                     }
                     else if ((DistanceArray[1].NameUAVAssigned != null) || (DistanceArray[1].Distance != 0))
                     {
@@ -1041,13 +1156,9 @@ namespace Coordinator
                         if ((UAVinfo[j].UAVAutomataEstate == "IDLE"))
                         {
                             UAV_left(UAVinfo[j].N_Warehouse);
-                            UAVinfo[j].UAVAutomataEstate = "IN FLIGHT";
-                            
                             DecisionalAlgorithm(path, j);
-                            
                         }
                     }
-
 
                     BeginInvoke(new MethodInvoker(() =>
                     {
@@ -1062,13 +1173,13 @@ namespace Coordinator
             }
 
         }
-        
+        */
         public void DecisionalAlgorithm(string path, int i)
-        {  
+        {
+            UAVinfo[i].UAVAutomataEstate = "IN FLIGHT";
             UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
             Thread.Sleep(1000);
             Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
-
 
         }
 
@@ -1107,7 +1218,7 @@ namespace Coordinator
         public void lastUAV_left(int i, string numberwarehouseofuav)
         {
             WarehouseArrayComm[i].NumberUAV = WarehouseArrayComm[i].NumberUAV - 1;
-            request_UAV(numberwarehouseofuav);
+            //request_UAV(numberwarehouseofuav);
         }
 
         public void UAV_arrived(string numberwarehouseofuav)
@@ -1117,7 +1228,6 @@ namespace Coordinator
                 if (WarehouseArrayComm[i].WarehouseNumber == Convert.ToInt32(numberwarehouseofuav))
                 {
                     WarehouseArrayComm[i].NumberUAV = WarehouseArrayComm[i].NumberUAV + 1;
-                    
                 }
             }
         }
@@ -1141,51 +1251,33 @@ namespace Coordinator
         {
             if(RequestsQueue.Count != 0)
             {
-                for (int i = 0; i < WarehouseArrayComm.Length; i++)
+                int i = 0;
+                while (i < WarehouseArrayComm.Length)
                 {
-                    if (WarehouseArrayComm[i].NumberUAV > 2)
+                    if (WarehouseArrayComm[i].NumberUAV >= 2)
                     {
-                        string numberwarehouse = (string)RequestsQueue.Dequeue();
-                        string path = @"Missions\" + "CD" + WarehouseArrayComm[i].WarehouseNumber.ToString() + "CD" + numberwarehouse + ".txt";
-                        int j = 0;
-                        while (j < CounterUAV)
+
+                      string numberwarehouse = (string)RequestsQueue.Dequeue();
+                      string path = @"Missions\" + "CD" + WarehouseArrayComm[i].WarehouseNumber.ToString() + "CD" + numberwarehouse + ".txt";
+
+                      int j = 0;
+                      while (j < CounterUAV)
+                      {
+                        if ((UAVinfo[j].UAVAutomataEstate == "IDLE") && (UAVinfo[j].N_Warehouse == WarehouseArrayComm[i].WarehouseNumber.ToString()))
                         {
-                            if((UAVinfo[j].UAVAutomataEstate == "IDLE") && (UAVinfo[j].N_Warehouse == WarehouseArrayComm[i].WarehouseNumber.ToString()))
-                            {
-                                DecisionalAlgorithm(path, j);
-                                j = CounterUAV;
-                            }
-                            j++;
+                           DecisionalAlgorithm(path, j);
+                           j = CounterUAV;
                         }
+                         j++;
+                      }
+                      i = WarehouseArrayComm.Length;
                     }
+                    
                 }
+                    
                 
             }
 
-        }
-
-        //Method to calculate the distance between each warehouse and the location of the demand 
-        public int DistanceCalculation(Coordinate coord2)
-        {
-            double testdistance=0, finaldistance=10000000;
-            int warehousenumber=0;
-
-            for (int i = 0; i < WarehouseArrayComm.Length; i++)
-            {
-                Coordinate coord1 = new Coordinate(WarehouseArrayComm[i].WarehouseLat, WarehouseArrayComm[i].WarehouseLon);
-
-                Distance d = new Distance(coord1, coord2);
-                testdistance = d.Meters;
-
-                if(testdistance <= finaldistance)
-                {
-                    finaldistance = testdistance;
-                    warehousenumber = WarehouseArrayComm[i].NumberUAV;
-
-                }
-            }
-
-            return warehousenumber;
         }
 
         //creates a list of waypoints of the mission to draw in the map
@@ -1436,8 +1528,6 @@ namespace Coordinator
         double BaseAlt = 584.000000;
         int cont = 1;
         int a = 0;
-
-       
 
         public void PathPlannigAlgorithm(double lat, double lon, int i)
         {

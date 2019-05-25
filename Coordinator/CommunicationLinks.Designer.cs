@@ -83,7 +83,10 @@ namespace Coordinator
             this.txtnumberuav2 = new System.Windows.Forms.TextBox();
             this.txtnumberuav3 = new System.Windows.Forms.TextBox();
             this.btnrefresh = new System.Windows.Forms.Button();
-            this.btnsubtrai = new System.Windows.Forms.Button();
+            this.txtdistance1 = new System.Windows.Forms.TextBox();
+            this.txtdistance2 = new System.Windows.Forms.TextBox();
+            this.txtdistance3 = new System.Windows.Forms.TextBox();
+            this.txtdistance4 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -637,22 +640,43 @@ namespace Coordinator
             this.btnrefresh.UseVisualStyleBackColor = true;
             this.btnrefresh.Click += new System.EventHandler(this.btnrefresh_Click);
             // 
-            // btnsubtrai
+            // txtdistance1
             // 
-            this.btnsubtrai.Location = new System.Drawing.Point(12, 282);
-            this.btnsubtrai.Name = "btnsubtrai";
-            this.btnsubtrai.Size = new System.Drawing.Size(122, 23);
-            this.btnsubtrai.TabIndex = 66;
-            this.btnsubtrai.Text = "subtrair";
-            this.btnsubtrai.UseVisualStyleBackColor = true;
-            this.btnsubtrai.Click += new System.EventHandler(this.btnsubtrai_Click);
+            this.txtdistance1.Location = new System.Drawing.Point(12, 283);
+            this.txtdistance1.Name = "txtdistance1";
+            this.txtdistance1.Size = new System.Drawing.Size(72, 20);
+            this.txtdistance1.TabIndex = 66;
+            // 
+            // txtdistance2
+            // 
+            this.txtdistance2.Location = new System.Drawing.Point(12, 307);
+            this.txtdistance2.Name = "txtdistance2";
+            this.txtdistance2.Size = new System.Drawing.Size(72, 20);
+            this.txtdistance2.TabIndex = 67;
+            // 
+            // txtdistance3
+            // 
+            this.txtdistance3.Location = new System.Drawing.Point(12, 330);
+            this.txtdistance3.Name = "txtdistance3";
+            this.txtdistance3.Size = new System.Drawing.Size(72, 20);
+            this.txtdistance3.TabIndex = 68;
+            // 
+            // txtdistance4
+            // 
+            this.txtdistance4.Location = new System.Drawing.Point(12, 353);
+            this.txtdistance4.Name = "txtdistance4";
+            this.txtdistance4.Size = new System.Drawing.Size(72, 20);
+            this.txtdistance4.TabIndex = 69;
             // 
             // CommunicationLinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1487, 911);
-            this.Controls.Add(this.btnsubtrai);
+            this.Controls.Add(this.txtdistance4);
+            this.Controls.Add(this.txtdistance3);
+            this.Controls.Add(this.txtdistance2);
+            this.Controls.Add(this.txtdistance1);
             this.Controls.Add(this.btnrefresh);
             this.Controls.Add(this.txtnumberuav3);
             this.Controls.Add(this.txtnumberuav2);
@@ -768,7 +792,10 @@ namespace Coordinator
         private System.Windows.Forms.TextBox txtnumberuav2;
         private System.Windows.Forms.TextBox txtnumberuav3;
         private System.Windows.Forms.Button btnrefresh;
-        private System.Windows.Forms.Button btnsubtrai;
+        private System.Windows.Forms.TextBox txtdistance1;
+        private System.Windows.Forms.TextBox txtdistance2;
+        private System.Windows.Forms.TextBox txtdistance3;
+        private System.Windows.Forms.TextBox txtdistance4;
     }
 }
 
