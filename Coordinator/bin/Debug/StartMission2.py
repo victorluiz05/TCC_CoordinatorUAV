@@ -27,12 +27,12 @@ while not vehicle.armed:
         print (" Waiting for arming...")
         time.sleep(1)
 
-aTargetAltitude = 10
+aTargetAltitude = 9
 vehicle.simple_takeoff(aTargetAltitude)
 
 while True:
         #Break and return from function just below target altitude.
-        if vehicle.location.global_relative_frame.alt>=aTargetAltitude*0.90:
+        if vehicle.location.global_relative_frame.alt>=aTargetAltitude*0.70:
             print ("Reached target altitude")
             break
         time.sleep(1)

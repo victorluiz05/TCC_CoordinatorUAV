@@ -102,3 +102,29 @@ C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\obj\Debug\Map.csproj.
 C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\obj\Debug\Map.csproj.CopyComplete
 C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\obj\Debug\Map.exe
 C:\Users\Victor Luiz\Desktop\Victor\TCC_CoordinatorUAV\Map\obj\Debug\Map.pdb
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\Map.exe.config
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\Map.exe
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\Map.pdb
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\EntityFramework.dll
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\GMap.NET.Core.dll
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\GMap.NET.WindowsForms.dll
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\System.Data.SQLite.dll
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\EntityFramework.xml
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\System.Data.SQLite.xml
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\obj\Debug\Map.csprojAssemblyReference.cache
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\obj\Debug\CoordinatorMap.CoordinatorMap.resources
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\obj\Debug\CoordinatorMap.MapSetup.resources
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\obj\Debug\CoordinatorMap.Properties.Resources.resources
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\obj\Debug\Map.csproj.GenerateResource.cache
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\obj\Debug\Map.csproj.CoreCompileInputs.cache
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\obj\Debug\Map.csproj.CopyComplete
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\obj\Debug\Map.exe
+C:\Users\Victor Luiz\Google Drive\TCC\GitHub Versions\TCC_CoordinatorUAV\Map\obj\Debug\Map.pdb

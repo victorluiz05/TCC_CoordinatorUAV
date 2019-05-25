@@ -53,8 +53,9 @@ namespace Coordinator
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.txtWarehouseNumber = new System.Windows.Forms.TextBox();
+            this.txtPath = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.txtUAV = new System.Windows.Forms.TextBox();
             this.txtQueue = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btnLoadMission = new System.Windows.Forms.Button();
@@ -78,7 +79,11 @@ namespace Coordinator
             this.label18 = new System.Windows.Forms.Label();
             this.cbxDemand = new System.Windows.Forms.ComboBox();
             this.btnGenerateDemand = new System.Windows.Forms.Button();
-            this.txtDeliverybase = new System.Windows.Forms.TextBox();
+            this.txtnumberuav1 = new System.Windows.Forms.TextBox();
+            this.txtnumberuav2 = new System.Windows.Forms.TextBox();
+            this.txtnumberuav3 = new System.Windows.Forms.TextBox();
+            this.btnrefresh = new System.Windows.Forms.Button();
+            this.btnsubtrai = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -99,7 +104,7 @@ namespace Coordinator
             this.panel1.Controls.Add(this.txtIP);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(539, 689);
+            this.panel1.Location = new System.Drawing.Point(538, 785);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(419, 123);
             this.panel1.TabIndex = 19;
@@ -231,7 +236,7 @@ namespace Coordinator
             // 
             this.dtvCommunication.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dtvCommunication.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtvCommunication.Location = new System.Drawing.Point(964, 689);
+            this.dtvCommunication.Location = new System.Drawing.Point(994, 785);
             this.dtvCommunication.MultiSelect = false;
             this.dtvCommunication.Name = "dtvCommunication";
             this.dtvCommunication.ReadOnly = true;
@@ -241,7 +246,7 @@ namespace Coordinator
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(7, 248);
+            this.btnConnect.Location = new System.Drawing.Point(6, 490);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(233, 23);
             this.btnConnect.TabIndex = 21;
@@ -251,9 +256,9 @@ namespace Coordinator
             // 
             // rtbScript
             // 
-            this.rtbScript.Location = new System.Drawing.Point(7, 277);
+            this.rtbScript.Location = new System.Drawing.Point(3, 519);
             this.rtbScript.Name = "rtbScript";
-            this.rtbScript.Size = new System.Drawing.Size(423, 73);
+            this.rtbScript.Size = new System.Drawing.Size(393, 150);
             this.rtbScript.TabIndex = 22;
             this.rtbScript.Text = "";
             this.rtbScript.TextChanged += new System.EventHandler(this.rtbScript_TextChanged);
@@ -265,14 +270,14 @@ namespace Coordinator
             "script-arm-takeoff-and-auto.py",
             "vehicle_stateC.py",
             "UAV_Current_State.py"});
-            this.cbxScript.Location = new System.Drawing.Point(7, 221);
+            this.cbxScript.Location = new System.Drawing.Point(6, 463);
             this.cbxScript.Name = "cbxScript";
             this.cbxScript.Size = new System.Drawing.Size(233, 21);
             this.cbxScript.TabIndex = 23;
             // 
             // btnUpload
             // 
-            this.btnUpload.Location = new System.Drawing.Point(297, 3);
+            this.btnUpload.Location = new System.Drawing.Point(235, 8);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(122, 23);
             this.btnUpload.TabIndex = 24;
@@ -292,36 +297,36 @@ namespace Coordinator
             // 
             // txtLat
             // 
-            this.txtLat.Location = new System.Drawing.Point(82, 58);
+            this.txtLat.Location = new System.Drawing.Point(110, 71);
             this.txtLat.Name = "txtLat";
-            this.txtLat.Size = new System.Drawing.Size(144, 20);
+            this.txtLat.Size = new System.Drawing.Size(129, 20);
             this.txtLat.TabIndex = 26;
             // 
             // txtLon
             // 
-            this.txtLon.Location = new System.Drawing.Point(341, 61);
+            this.txtLon.Location = new System.Drawing.Point(110, 149);
             this.txtLon.Name = "txtLon";
-            this.txtLon.Size = new System.Drawing.Size(144, 20);
+            this.txtLon.Size = new System.Drawing.Size(129, 20);
             this.txtLon.TabIndex = 27;
             // 
             // txtAlt
             // 
-            this.txtAlt.Location = new System.Drawing.Point(82, 87);
+            this.txtAlt.Location = new System.Drawing.Point(110, 97);
             this.txtAlt.Name = "txtAlt";
-            this.txtAlt.Size = new System.Drawing.Size(144, 20);
+            this.txtAlt.Size = new System.Drawing.Size(129, 20);
             this.txtAlt.TabIndex = 28;
             // 
             // txtGs
             // 
-            this.txtGs.Location = new System.Drawing.Point(341, 90);
+            this.txtGs.Location = new System.Drawing.Point(110, 178);
             this.txtGs.Name = "txtGs";
-            this.txtGs.Size = new System.Drawing.Size(144, 20);
+            this.txtGs.Size = new System.Drawing.Size(129, 20);
             this.txtGs.TabIndex = 29;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 61);
+            this.label5.Location = new System.Drawing.Point(4, 71);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 30;
@@ -330,7 +335,7 @@ namespace Coordinator
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(246, 68);
+            this.label6.Location = new System.Drawing.Point(5, 156);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(57, 13);
             this.label6.TabIndex = 31;
@@ -339,7 +344,7 @@ namespace Coordinator
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(0, 94);
+            this.label7.Location = new System.Drawing.Point(5, 97);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(62, 13);
             this.label7.TabIndex = 32;
@@ -348,7 +353,7 @@ namespace Coordinator
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(232, 97);
+            this.label8.Location = new System.Drawing.Point(4, 181);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 13);
             this.label8.TabIndex = 33;
@@ -356,25 +361,25 @@ namespace Coordinator
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.txtDeliverybase);
-            this.panel2.Controls.Add(this.txtWarehouseNumber);
+            this.panel2.Controls.Add(this.txtPath);
             this.panel2.Controls.Add(this.label15);
+            this.panel2.Controls.Add(this.txtUAV);
             this.panel2.Controls.Add(this.txtQueue);
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.btnLoadMission);
             this.panel2.Controls.Add(this.ltbDemands);
             this.panel2.Controls.Add(this.btnUpload);
-            this.panel2.Location = new System.Drawing.Point(7, 356);
+            this.panel2.Location = new System.Drawing.Point(3, 675);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(419, 104);
+            this.panel2.Size = new System.Drawing.Size(393, 104);
             this.panel2.TabIndex = 37;
             // 
-            // txtWarehouseNumber
+            // txtPath
             // 
-            this.txtWarehouseNumber.Location = new System.Drawing.Point(196, 84);
-            this.txtWarehouseNumber.Name = "txtWarehouseNumber";
-            this.txtWarehouseNumber.Size = new System.Drawing.Size(72, 20);
-            this.txtWarehouseNumber.TabIndex = 61;
+            this.txtPath.Location = new System.Drawing.Point(189, 81);
+            this.txtPath.Name = "txtPath";
+            this.txtPath.Size = new System.Drawing.Size(72, 20);
+            this.txtPath.TabIndex = 61;
             // 
             // label15
             // 
@@ -384,6 +389,13 @@ namespace Coordinator
             this.label15.Size = new System.Drawing.Size(102, 13);
             this.label15.TabIndex = 60;
             this.label15.Text = "Queue of Demands:";
+            // 
+            // txtUAV
+            // 
+            this.txtUAV.Location = new System.Drawing.Point(3, 81);
+            this.txtUAV.Name = "txtUAV";
+            this.txtUAV.Size = new System.Drawing.Size(114, 20);
+            this.txtUAV.TabIndex = 62;
             // 
             // txtQueue
             // 
@@ -403,7 +415,7 @@ namespace Coordinator
             // 
             // btnLoadMission
             // 
-            this.btnLoadMission.Location = new System.Drawing.Point(169, 3);
+            this.btnLoadMission.Location = new System.Drawing.Point(107, 8);
             this.btnLoadMission.Name = "btnLoadMission";
             this.btnLoadMission.Size = new System.Drawing.Size(122, 23);
             this.btnLoadMission.TabIndex = 45;
@@ -414,21 +426,21 @@ namespace Coordinator
             // ltbDemands
             // 
             this.ltbDemands.FormattingEnabled = true;
-            this.ltbDemands.Location = new System.Drawing.Point(297, 32);
+            this.ltbDemands.Location = new System.Drawing.Point(267, 58);
             this.ltbDemands.Name = "ltbDemands";
             this.ltbDemands.Size = new System.Drawing.Size(119, 43);
             this.ltbDemands.TabIndex = 1;
             // 
             // panel3
             // 
-            this.panel3.Location = new System.Drawing.Point(491, 4);
+            this.panel3.Location = new System.Drawing.Point(402, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(964, 679);
+            this.panel3.Size = new System.Drawing.Size(1083, 775);
             this.panel3.TabIndex = 38;
             // 
             // btnPause
             // 
-            this.btnPause.Location = new System.Drawing.Point(135, 163);
+            this.btnPause.Location = new System.Drawing.Point(134, 405);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(122, 23);
             this.btnPause.TabIndex = 42;
@@ -438,7 +450,7 @@ namespace Coordinator
             // 
             // btnResume
             // 
-            this.btnResume.Location = new System.Drawing.Point(263, 163);
+            this.btnResume.Location = new System.Drawing.Point(262, 405);
             this.btnResume.Name = "btnResume";
             this.btnResume.Size = new System.Drawing.Size(122, 23);
             this.btnResume.TabIndex = 43;
@@ -448,7 +460,7 @@ namespace Coordinator
             // 
             // btnReturn
             // 
-            this.btnReturn.Location = new System.Drawing.Point(135, 192);
+            this.btnReturn.Location = new System.Drawing.Point(134, 434);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(122, 23);
             this.btnReturn.TabIndex = 44;
@@ -458,7 +470,7 @@ namespace Coordinator
             // 
             // btnStartMission
             // 
-            this.btnStartMission.Location = new System.Drawing.Point(7, 163);
+            this.btnStartMission.Location = new System.Drawing.Point(6, 405);
             this.btnStartMission.Name = "btnStartMission";
             this.btnStartMission.Size = new System.Drawing.Size(122, 23);
             this.btnStartMission.TabIndex = 45;
@@ -469,7 +481,7 @@ namespace Coordinator
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(232, 133);
+            this.label10.Location = new System.Drawing.Point(5, 214);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(92, 13);
             this.label10.TabIndex = 47;
@@ -477,9 +489,9 @@ namespace Coordinator
             // 
             // txtWP
             // 
-            this.txtWP.Location = new System.Drawing.Point(341, 126);
+            this.txtWP.Location = new System.Drawing.Point(110, 211);
             this.txtWP.Name = "txtWP";
-            this.txtWP.Size = new System.Drawing.Size(144, 20);
+            this.txtWP.Size = new System.Drawing.Size(129, 20);
             this.txtWP.TabIndex = 46;
             // 
             // label9
@@ -493,15 +505,15 @@ namespace Coordinator
             // 
             // txtUAVAutomataEstate
             // 
-            this.txtUAVAutomataEstate.Location = new System.Drawing.Point(82, 123);
+            this.txtUAVAutomataEstate.Location = new System.Drawing.Point(110, 123);
             this.txtUAVAutomataEstate.Name = "txtUAVAutomataEstate";
-            this.txtUAVAutomataEstate.Size = new System.Drawing.Size(144, 20);
+            this.txtUAVAutomataEstate.Size = new System.Drawing.Size(129, 20);
             this.txtUAVAutomataEstate.TabIndex = 50;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(4, 714);
+            this.label12.Location = new System.Drawing.Point(17, 813);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(53, 13);
             this.label12.TabIndex = 51;
@@ -509,7 +521,7 @@ namespace Coordinator
             // 
             // txttestelon
             // 
-            this.txttestelon.Location = new System.Drawing.Point(75, 786);
+            this.txttestelon.Location = new System.Drawing.Point(88, 885);
             this.txttestelon.Name = "txttestelon";
             this.txttestelon.Size = new System.Drawing.Size(144, 20);
             this.txttestelon.TabIndex = 52;
@@ -517,7 +529,7 @@ namespace Coordinator
             // 
             // txttestelat
             // 
-            this.txttestelat.Location = new System.Drawing.Point(75, 764);
+            this.txttestelat.Location = new System.Drawing.Point(88, 863);
             this.txttestelat.Name = "txttestelat";
             this.txttestelat.Size = new System.Drawing.Size(144, 20);
             this.txttestelat.TabIndex = 53;
@@ -526,7 +538,7 @@ namespace Coordinator
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(14, 767);
+            this.label13.Location = new System.Drawing.Point(27, 866);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(27, 13);
             this.label13.TabIndex = 54;
@@ -535,7 +547,7 @@ namespace Coordinator
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(14, 789);
+            this.label14.Location = new System.Drawing.Point(27, 888);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(29, 13);
             this.label14.TabIndex = 55;
@@ -543,7 +555,7 @@ namespace Coordinator
             // 
             // btntest
             // 
-            this.btntest.Location = new System.Drawing.Point(225, 779);
+            this.btntest.Location = new System.Drawing.Point(238, 878);
             this.btntest.Name = "btntest";
             this.btntest.Size = new System.Drawing.Size(122, 23);
             this.btntest.TabIndex = 56;
@@ -553,7 +565,7 @@ namespace Coordinator
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(7, 192);
+            this.btnClear.Location = new System.Drawing.Point(6, 434);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(122, 23);
             this.btnClear.TabIndex = 57;
@@ -564,7 +576,7 @@ namespace Coordinator
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(4, 739);
+            this.label18.Location = new System.Drawing.Point(17, 838);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(76, 13);
             this.label18.TabIndex = 58;
@@ -579,14 +591,14 @@ namespace Coordinator
             "Delivery Base 3",
             "Delivery Base 4",
             "Delivery Base 5"});
-            this.cbxDemand.Location = new System.Drawing.Point(86, 732);
+            this.cbxDemand.Location = new System.Drawing.Point(99, 831);
             this.cbxDemand.Name = "cbxDemand";
             this.cbxDemand.Size = new System.Drawing.Size(133, 21);
             this.cbxDemand.TabIndex = 59;
             // 
             // btnGenerateDemand
             // 
-            this.btnGenerateDemand.Location = new System.Drawing.Point(225, 730);
+            this.btnGenerateDemand.Location = new System.Drawing.Point(238, 829);
             this.btnGenerateDemand.Name = "btnGenerateDemand";
             this.btnGenerateDemand.Size = new System.Drawing.Size(122, 23);
             this.btnGenerateDemand.TabIndex = 60;
@@ -594,18 +606,57 @@ namespace Coordinator
             this.btnGenerateDemand.UseVisualStyleBackColor = true;
             this.btnGenerateDemand.Click += new System.EventHandler(this.btnGenerateDemand_Click);
             // 
-            // txtDeliverybase
+            // txtnumberuav1
             // 
-            this.txtDeliverybase.Location = new System.Drawing.Point(36, 81);
-            this.txtDeliverybase.Name = "txtDeliverybase";
-            this.txtDeliverybase.Size = new System.Drawing.Size(114, 20);
-            this.txtDeliverybase.TabIndex = 62;
+            this.txtnumberuav1.Location = new System.Drawing.Point(288, 304);
+            this.txtnumberuav1.Name = "txtnumberuav1";
+            this.txtnumberuav1.Size = new System.Drawing.Size(72, 20);
+            this.txtnumberuav1.TabIndex = 62;
+            // 
+            // txtnumberuav2
+            // 
+            this.txtnumberuav2.Location = new System.Drawing.Point(288, 330);
+            this.txtnumberuav2.Name = "txtnumberuav2";
+            this.txtnumberuav2.Size = new System.Drawing.Size(72, 20);
+            this.txtnumberuav2.TabIndex = 63;
+            // 
+            // txtnumberuav3
+            // 
+            this.txtnumberuav3.Location = new System.Drawing.Point(288, 356);
+            this.txtnumberuav3.Name = "txtnumberuav3";
+            this.txtnumberuav3.Size = new System.Drawing.Size(72, 20);
+            this.txtnumberuav3.TabIndex = 64;
+            // 
+            // btnrefresh
+            // 
+            this.btnrefresh.Location = new System.Drawing.Point(142, 353);
+            this.btnrefresh.Name = "btnrefresh";
+            this.btnrefresh.Size = new System.Drawing.Size(122, 23);
+            this.btnrefresh.TabIndex = 65;
+            this.btnrefresh.Text = "Refresh";
+            this.btnrefresh.UseVisualStyleBackColor = true;
+            this.btnrefresh.Click += new System.EventHandler(this.btnrefresh_Click);
+            // 
+            // btnsubtrai
+            // 
+            this.btnsubtrai.Location = new System.Drawing.Point(12, 282);
+            this.btnsubtrai.Name = "btnsubtrai";
+            this.btnsubtrai.Size = new System.Drawing.Size(122, 23);
+            this.btnsubtrai.TabIndex = 66;
+            this.btnsubtrai.Text = "subtrair";
+            this.btnsubtrai.UseVisualStyleBackColor = true;
+            this.btnsubtrai.Click += new System.EventHandler(this.btnsubtrai_Click);
             // 
             // CommunicationLinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1467, 814);
+            this.ClientSize = new System.Drawing.Size(1487, 911);
+            this.Controls.Add(this.btnsubtrai);
+            this.Controls.Add(this.btnrefresh);
+            this.Controls.Add(this.txtnumberuav3);
+            this.Controls.Add(this.txtnumberuav2);
+            this.Controls.Add(this.txtnumberuav1);
             this.Controls.Add(this.btnGenerateDemand);
             this.Controls.Add(this.cbxDemand);
             this.Controls.Add(this.label18);
@@ -711,8 +762,13 @@ namespace Coordinator
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox cbxDemand;
         private System.Windows.Forms.Button btnGenerateDemand;
-        private System.Windows.Forms.TextBox txtWarehouseNumber;
-        private System.Windows.Forms.TextBox txtDeliverybase;
+        private System.Windows.Forms.TextBox txtPath;
+        private System.Windows.Forms.TextBox txtUAV;
+        private System.Windows.Forms.TextBox txtnumberuav1;
+        private System.Windows.Forms.TextBox txtnumberuav2;
+        private System.Windows.Forms.TextBox txtnumberuav3;
+        private System.Windows.Forms.Button btnrefresh;
+        private System.Windows.Forms.Button btnsubtrai;
     }
 }
 

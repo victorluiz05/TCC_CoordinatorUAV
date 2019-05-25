@@ -43,14 +43,14 @@ def arm_and_takeoff(aTargetAltitude):
 
     while True:
         #Break and return from function just below target altitude.
-        if vehicle.location.global_relative_frame.alt>=aTargetAltitude*0.80:
+        if vehicle.location.global_relative_frame.alt>=aTargetAltitude*0.50:
             print ("Reached target altitude")
             break
         vehicle.mode = VehicleMode("AUTO")
         time.sleep(1)
     
 
-arm_and_takeoff(10)
+arm_and_takeoff(5)
 
 # Get some vehicle attributes (state)
 print ("Change mode: Starting AUTO mode...")
