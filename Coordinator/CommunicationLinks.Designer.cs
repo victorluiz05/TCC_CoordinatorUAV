@@ -44,6 +44,11 @@ namespace Coordinator
             this.cbxScript = new System.Windows.Forms.ComboBox();
             this.btnUpload = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtAssignedTo = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtDemandFrom = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.txtQueue = new System.Windows.Forms.TextBox();
             this.btnLoadMission = new System.Windows.Forms.Button();
@@ -58,12 +63,11 @@ namespace Coordinator
             this.cbxDemand = new System.Windows.Forms.ComboBox();
             this.btnGenerateDemand = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.txtBattery = new System.Windows.Forms.TextBox();
             this.txtUAVAutomataEstate = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtWP = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -75,19 +79,13 @@ namespace Coordinator
             this.btnLaunch = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.dtvWarehouse = new System.Windows.Forms.DataGridView();
             this.label21 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.txtDemandFrom = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.txtAssignedTo = new System.Windows.Forms.TextBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label24 = new System.Windows.Forms.Label();
-            this.dtvWarehouse = new System.Windows.Forms.DataGridView();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -102,8 +100,8 @@ namespace Coordinator
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvWarehouse)).BeginInit();
+            this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -321,6 +319,48 @@ namespace Coordinator
             this.panel2.Size = new System.Drawing.Size(438, 90);
             this.panel2.TabIndex = 37;
             // 
+            // txtAssignedTo
+            // 
+            this.txtAssignedTo.Location = new System.Drawing.Point(243, 54);
+            this.txtAssignedTo.Name = "txtAssignedTo";
+            this.txtAssignedTo.Size = new System.Drawing.Size(78, 20);
+            this.txtAssignedTo.TabIndex = 93;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(168, 57);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(69, 13);
+            this.label23.TabIndex = 92;
+            this.label23.Text = "Assigned To:";
+            // 
+            // txtDemandFrom
+            // 
+            this.txtDemandFrom.Location = new System.Drawing.Point(84, 54);
+            this.txtDemandFrom.Name = "txtDemandFrom";
+            this.txtDemandFrom.Size = new System.Drawing.Size(78, 20);
+            this.txtDemandFrom.TabIndex = 91;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(8, 57);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(76, 13);
+            this.label22.TabIndex = 90;
+            this.label22.Text = "Demand From:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(8, 15);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(78, 20);
+            this.label11.TabIndex = 89;
+            this.label11.Text = "Demands";
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -448,13 +488,12 @@ namespace Coordinator
             // 
             // panel4
             // 
+            this.panel4.BackColor = System.Drawing.SystemColors.Control;
             this.panel4.Controls.Add(this.label20);
             this.panel4.Controls.Add(this.label9);
             this.panel4.Controls.Add(this.label17);
             this.panel4.Controls.Add(this.txtBattery);
             this.panel4.Controls.Add(this.txtUAVAutomataEstate);
-            this.panel4.Controls.Add(this.label10);
-            this.panel4.Controls.Add(this.txtWP);
             this.panel4.Controls.Add(this.label8);
             this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.label6);
@@ -464,15 +503,26 @@ namespace Coordinator
             this.panel4.Controls.Add(this.txtLon);
             this.panel4.Controls.Add(this.txtLat);
             this.panel4.Controls.Add(this.btnLaunch);
+            this.panel4.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel4.Location = new System.Drawing.Point(11, 4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(438, 159);
             this.panel4.TabIndex = 73;
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(10, 13);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(78, 20);
+            this.label20.TabIndex = 87;
+            this.label20.Text = "Telemetry";
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(2, 132);
+            this.label9.Location = new System.Drawing.Point(322, 83);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(65, 13);
             this.label9.TabIndex = 83;
@@ -496,26 +546,10 @@ namespace Coordinator
             // 
             // txtUAVAutomataEstate
             // 
-            this.txtUAVAutomataEstate.Location = new System.Drawing.Point(77, 125);
+            this.txtUAVAutomataEstate.Location = new System.Drawing.Point(297, 99);
             this.txtUAVAutomataEstate.Name = "txtUAVAutomataEstate";
-            this.txtUAVAutomataEstate.Size = new System.Drawing.Size(183, 20);
+            this.txtUAVAutomataEstate.Size = new System.Drawing.Size(114, 20);
             this.txtUAVAutomataEstate.TabIndex = 84;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(310, 83);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(101, 13);
-            this.label10.TabIndex = 82;
-            this.label10.Text = "Flying To Waypoint:";
-            // 
-            // txtWP
-            // 
-            this.txtWP.Location = new System.Drawing.Point(297, 99);
-            this.txtWP.Name = "txtWP";
-            this.txtWP.Size = new System.Drawing.Size(114, 20);
-            this.txtWP.TabIndex = 81;
             // 
             // label8
             // 
@@ -620,16 +654,6 @@ namespace Coordinator
             this.label19.TabIndex = 58;
             this.label19.Text = "Manual Operations";
             // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(10, 13);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(78, 20);
-            this.label20.TabIndex = 87;
-            this.label20.Text = "Telemetry";
-            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.label13);
@@ -643,6 +667,37 @@ namespace Coordinator
             this.panel6.Size = new System.Drawing.Size(436, 452);
             this.panel6.TabIndex = 75;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(3, 303);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(151, 13);
+            this.label13.TabIndex = 90;
+            this.label13.Text = "List of Warehouses and Bases";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(5, 159);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(65, 13);
+            this.label12.TabIndex = 89;
+            this.label12.Text = "List of UAVs";
+            // 
+            // dtvWarehouse
+            // 
+            this.dtvWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtvWarehouse.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtvWarehouse.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dtvWarehouse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtvWarehouse.Location = new System.Drawing.Point(3, 319);
+            this.dtvWarehouse.MultiSelect = false;
+            this.dtvWarehouse.Name = "dtvWarehouse";
+            this.dtvWarehouse.ReadOnly = true;
+            this.dtvWarehouse.Size = new System.Drawing.Size(430, 123);
+            this.dtvWarehouse.TabIndex = 77;
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -652,48 +707,6 @@ namespace Coordinator
             this.label21.Size = new System.Drawing.Size(122, 20);
             this.label21.TabIndex = 88;
             this.label21.Text = "Aircraft Registry";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(8, 15);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(78, 20);
-            this.label11.TabIndex = 89;
-            this.label11.Text = "Demands";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(8, 57);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(76, 13);
-            this.label22.TabIndex = 90;
-            this.label22.Text = "Demand From:";
-            // 
-            // txtDemandFrom
-            // 
-            this.txtDemandFrom.Location = new System.Drawing.Point(84, 54);
-            this.txtDemandFrom.Name = "txtDemandFrom";
-            this.txtDemandFrom.Size = new System.Drawing.Size(78, 20);
-            this.txtDemandFrom.TabIndex = 91;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(168, 57);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(69, 13);
-            this.label23.TabIndex = 92;
-            this.label23.Text = "Assigned To:";
-            // 
-            // txtAssignedTo
-            // 
-            this.txtAssignedTo.Location = new System.Drawing.Point(243, 54);
-            this.txtAssignedTo.Name = "txtAssignedTo";
-            this.txtAssignedTo.Size = new System.Drawing.Size(78, 20);
-            this.txtAssignedTo.TabIndex = 93;
             // 
             // panel7
             // 
@@ -715,37 +728,6 @@ namespace Coordinator
             this.label24.Size = new System.Drawing.Size(78, 20);
             this.label24.TabIndex = 90;
             this.label24.Text = "Test Area";
-            // 
-            // dtvWarehouse
-            // 
-            this.dtvWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtvWarehouse.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dtvWarehouse.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dtvWarehouse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtvWarehouse.Location = new System.Drawing.Point(3, 319);
-            this.dtvWarehouse.MultiSelect = false;
-            this.dtvWarehouse.Name = "dtvWarehouse";
-            this.dtvWarehouse.ReadOnly = true;
-            this.dtvWarehouse.Size = new System.Drawing.Size(430, 123);
-            this.dtvWarehouse.TabIndex = 77;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(5, 159);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 13);
-            this.label12.TabIndex = 89;
-            this.label12.Text = "List of UAVs";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 303);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(151, 13);
-            this.label13.TabIndex = 90;
-            this.label13.Text = "List of Warehouses and Bases";
             // 
             // panel8
             // 
@@ -797,7 +779,7 @@ namespace Coordinator
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(8, 15);
+            this.label26.Location = new System.Drawing.Point(2, 14);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(197, 20);
             this.label26.TabIndex = 89;
@@ -806,7 +788,7 @@ namespace Coordinator
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(230, 22);
+            this.label27.Location = new System.Drawing.Point(211, 21);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(119, 13);
             this.label27.TabIndex = 60;
@@ -814,7 +796,7 @@ namespace Coordinator
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(355, 17);
+            this.textBox3.Location = new System.Drawing.Point(336, 16);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(78, 20);
             this.textBox3.TabIndex = 59;
@@ -823,6 +805,7 @@ namespace Coordinator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1632, 937);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel7);
@@ -848,9 +831,9 @@ namespace Coordinator
             this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtvWarehouse)).EndInit();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtvWarehouse)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.ResumeLayout(false);
@@ -898,8 +881,6 @@ namespace Coordinator
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtBattery;
         private System.Windows.Forms.TextBox txtUAVAutomataEstate;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtWP;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;

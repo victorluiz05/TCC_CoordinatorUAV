@@ -30,8 +30,10 @@ def readmission(aFileName):
     #print("\nReading mission from file: %s" % aFileName)
     cmds = vehicle.commands
     missionlist=[]
+    count=0
     with open(aFileName) as f:
         for i, line in enumerate(f):
+            count +=1
             if i==0:
                 if not line.startswith('QGC WPL 110'):
                     raise Exception('File is not supported WP version')
@@ -52,6 +54,29 @@ def readmission(aFileName):
                 cmd = Command( 0, 0, 0, ln_frame, ln_command, ln_currentwp, ln_autocontinue, ln_param1, ln_param2, ln_param3, ln_param4, ln_param5, ln_param6, ln_param7)
                 missionlist.append(cmd)
 
+    with open(aFileName) as f:
+        for i, line in enumerate(f):
+            if i==count-1:
+                linearray=line.split('\t')
+                ln_index=int(linearray[0])
+                ln_currentwp=int(linearray[1])
+                ln_frame=int(linearray[2])
+                ln_command=int(linearray[3])
+                ln_param1=float(linearray[4])
+                ln_param2=float(linearray[5])
+                ln_param3=float(linearray[6])
+                ln_param4=float(linearray[7])
+                ln_param5=float(linearray[8])
+                ln_param6=float(linearray[9])
+                ln_param7=float(linearray[10])
+                ln_autocontinue=int(linearray[11].strip())
+                latt = ln_param5-0.000003
+                lonn = ln_param6-0.000003
+                altt = 0.0
+                cmd = Command( 0, 0, 0, ln_frame, ln_command, ln_currentwp, ln_autocontinue, ln_param1, ln_param2, ln_param3, ln_param4, latt, lonn, altt)
+                missionlist.append(cmd)
+
+    
     return missionlist
 
 
@@ -85,3 +110,19 @@ def printfile(aFileName):
             print(' %s' % line.strip())        
 
 #export_mission_filename = 'exportedmission.txt'
+path = (sys.argv[4])
+import_mission_filename = path
+time.sleep(1)
+#import_mission_filename = 'CD0B3.txt'   #VICTOR - Here is where the path os the mission file is written    
+
+
+#Upload mission from file
+upload_mission(import_mission_filename)
+print('%s' % cont);
+#Download mission we just uploaded and save to a file
+save_mission(export_mission_filename)
+
+#Close vehicle object before exiting script
+ 
+print("Close vehicle object %s" % NN)
+vehicle.close()
