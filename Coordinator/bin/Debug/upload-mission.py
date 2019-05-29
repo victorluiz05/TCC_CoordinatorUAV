@@ -30,8 +30,10 @@ def readmission(aFileName):
     #print("\nReading mission from file: %s" % aFileName)
     cmds = vehicle.commands
     missionlist=[]
+    count=0
     with open(aFileName) as f:
         for i, line in enumerate(f):
+            count +=1
             if i==0:
                 if not line.startswith('QGC WPL 110'):
                     raise Exception('File is not supported WP version')
@@ -51,22 +53,58 @@ def readmission(aFileName):
                 ln_autocontinue=int(linearray[11].strip())
                 cmd = Command( 0, 0, 0, ln_frame, ln_command, ln_currentwp, ln_autocontinue, ln_param1, ln_param2, ln_param3, ln_param4, ln_param5, ln_param6, ln_param7)
                 missionlist.append(cmd)
+    with open(aFileName) as f:
+        for i, line in enumerate(f):
+            if i==count-1:
+                linearray=line.split('\t')
+                ln_index=int(linearray[0])
+                ln_currentwp=int(linearray[1])
+                ln_frame=int(linearray[2])
+                ln_command=int(linearray[3])
+                ln_param1=float(linearray[4])
+                ln_param2=float(linearray[5])
+                ln_param3=float(linearray[6])
+                ln_param4=float(linearray[7])
+                ln_param5=float(linearray[8])
+                ln_param6=float(linearray[9])
+                ln_param7=float(linearray[10])
+                ln_autocontinue=int(linearray[11].strip())
+                latt = ln_param5
+                lonn = ln_param6
+                altt = 0.0
+                
     
-    time.sleep(1)
-    """
-       #VICTOR'S MODIFICATION
+    #VICTOR'S MODIFICATION
+    lists = [] 
+    missionlist.reverse()
+    for x in missionlist:
+        if x==0:
+            cmdd = Command( 0, 0, 0, ln_frame, ln_command, ln_currentwp, ln_autocontinue, ln_param1, ln_param2, ln_param3, ln_param4, latt, lonn, altt)
+            lists.append(cmdd)
+        else:
+            lists.append(x)
+    missionlist.reverse()
+    n = len(missionlist)-1
+    for y in lists:
+        #if y==lists[0]:
+         #   cmdd = Command( 0, 0, 0, ln_frame, ln_command, ln_currentwp, ln_autocontinue, ln_param1, ln_param2, ln_param3, ln_param4, latt, lonn, altt)
+          #  missionlist.append(cmdd)    
+        if ((y!=lists[0])and(y!=lists[n])):
+             missionlist.append(y)
+          
     wp_Last_Latitude = vehicle.location.global_relative_frame.lat
     wp_Last_Longitude = vehicle.location.global_relative_frame.lon
     #wp_Last_Altitude =  vehicle.location.global_relative_frame.alt
-    wp_Last_Altitude = 0.30
+    wp_Last_Altitude = 50.2
     wpLastObject = Command( 0, 0, 0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 0, 0, 0, 0, 0, 
                            wp_Last_Latitude, wp_Last_Longitude, wp_Last_Altitude)
     missionlist.append(wpLastObject)
-      #VICTOR'S MODIFICATION 
-    """
-
+    wpLastObject = Command( 0, 0, 0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_NAV_WAYPOINT, 0, 0, 0, 0, 0, 0, 
+                           wp_Last_Latitude, wp_Last_Longitude, 0.30)
+    missionlist.append(wpLastObject)
+    #VICTOR'S MODIFICATION 
+    
     return missionlist
-
 
 def upload_mission(aFileName):
     """
