@@ -181,6 +181,7 @@ namespace Coordinator
         }
 
         //Loading DataBase (brings the database set in the files to the application when starts running)
+        int TRAVA=0;
         private void LoadData()
         {
             SetConnetcion();
@@ -193,14 +194,32 @@ namespace Coordinator
             DT = DS.Tables[0];
             dtvCommunication.DataSource = DT;
 
-            foreach (DataRow row in DT.Rows)
+            if (TRAVA == 0)
             {
-                UAVinfo[CounterUAV].N_UAV = row["ConnectionName"].ToString();
-                UAVinfo[CounterUAV].Type = row["Type"].ToString();
-                UAVinfo[CounterUAV].IP = row["IPAddress"].ToString();
-                UAVinfo[CounterUAV].Port = row["Port"].ToString();
-                UAVinfo[CounterUAV].N_Warehouse = row["Base"].ToString();
-                CounterUAV += 1;
+                foreach (DataRow row in DT.Rows)
+                {
+                
+                    UAVinfo[CounterUAV].N_UAV = row["ConnectionName"].ToString();
+                    UAVinfo[CounterUAV].Type = row["Type"].ToString();
+                    UAVinfo[CounterUAV].IP = row["IPAddress"].ToString();
+                    UAVinfo[CounterUAV].Port = row["Port"].ToString();
+                    UAVinfo[CounterUAV].N_Warehouse = row["Base"].ToString();
+                    CounterUAV += 1;
+                }
+                TRAVA = 1;
+            }
+            else
+            {
+                foreach (DataRow row in DT.Rows)
+                {
+
+                    UAVinfo[CounterUAV].N_UAV = row["ConnectionName"].ToString();
+                    UAVinfo[CounterUAV].Type = row["Type"].ToString();
+                    UAVinfo[CounterUAV].IP = row["IPAddress"].ToString();
+                    UAVinfo[CounterUAV].Port = row["Port"].ToString();
+                    UAVinfo[CounterUAV].N_Warehouse = row["Base"].ToString();
+                    
+                }
             }
 
             sql_con.Close();
@@ -723,7 +742,7 @@ namespace Coordinator
 
         }
 
-        System.Timers.Timer aTimer = new System.Timers.Timer(2500);   //Creation of the timer
+        System.Timers.Timer aTimer = new System.Timers.Timer(3000);   //Creation of the timer
 
         //Timer that runs the method to get the actual estate of the UAVs
         public void TimerCall(object sender, ElapsedEventArgs e)
@@ -792,8 +811,6 @@ namespace Coordinator
                         else
                         {
                             map.MapControl.GetUavById(indexx).CurrentPosition = new PointLatLng(ParseDouble(UAVinfo[indexx].Lat), ParseDouble(UAVinfo[indexx].Lon));
-
-
                         }
                         
                         //Verifying when the mission is over to set free the UAV
@@ -803,9 +820,13 @@ namespace Coordinator
                             {
                                 UAVinfo[indexx].UAVAutomataEstate = "IDLE";
                                 UAV_arrived(UAVinfo[indexx].N_Warehouse);
-                                // Mission_Has_Ended(indexx, "UAV");
                             }
 
+                        }
+
+                        if ((UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))) && (ParseDouble(UAVinfo[indexx].Alt) > 40.0))
+                        {
+                            Land(UAVinfo[indexx].Type, UAVinfo[indexx].IP, UAVinfo[indexx].Port, UAVinfo[indexx].N_UAV);
                         }
 
                         //It must changes when a select a UAV on dtv
@@ -1072,23 +1093,27 @@ namespace Coordinator
                             BaseNUmber = DemandInfoWarehouse.NumberoftheBase;
 
                         }
-                        Coordinate coord2 = new Coordinate(DeliveryBaseLat, DeliveyBaseLon);
-                        Coordinate coord1 = new Coordinate(Double.Parse(UAVinfo[i].Lat, CultureInfo.InvariantCulture), Double.Parse(UAVinfo[i].Lon, CultureInfo.InvariantCulture));
-                        Distance d = new Distance(coord1, coord2);
-                        distance = d.Meters;
+                        //if(Double.Parse(UAVinfo[i].Lat, CultureInfo.InvariantCulture) > 0)
+                        //{
+                            Coordinate coord2 = new Coordinate(DeliveryBaseLat, DeliveyBaseLon);
+                            Coordinate coord1 = new Coordinate(Double.Parse(UAVinfo[i].Lat, CultureInfo.InvariantCulture), Double.Parse(UAVinfo[i].Lon, CultureInfo.InvariantCulture));
+                            Distance d = new Distance(coord1, coord2);
+                            distance = d.Meters;
 
-                        distances.BaseNumber = BaseNUmber;
-                        distances.Distance = distance;
-                        distances.WarehouseNumber = Convert.ToInt16(UAVinfo[i].N_Warehouse);
-                        distances.NameUAVAssigned = UAVinfo[i].N_UAV;
-                        ListDistance.Add(distances);
+                            distances.BaseNumber = BaseNUmber;
+                            distances.Distance = distance;
+                            distances.WarehouseNumber = Convert.ToInt16(UAVinfo[i].N_Warehouse);
+                            distances.NameUAVAssigned = UAVinfo[i].N_UAV;
+                            ListDistance.Add(distances);
+                        //}
+                        
 
                     }
                 }
          
             }
             
-                ListDistance.Sort((x, y) => x.Distance.CompareTo(y.Distance));
+            ListDistance.Sort((x, y) => x.Distance.CompareTo(y.Distance));
                         
             if(ListDistance.Count > 0)
             {
@@ -1130,27 +1155,26 @@ namespace Coordinator
         */
         public void initiate_delivery_Ui(string path, int i)
         {
-            var thread = new Thread(new ThreadStart(() =>
-            {
+            
                 string myPythonApp = "upload-mission.py";
                 UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV, myPythonApp);
                 Thread.Sleep(800);
                 Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
-            }));
-            thread.Start();
-        }
-        public void go_Ui_to_Wj(string path, int i)
-        {
-            var thread = new Thread(new ThreadStart(() =>
-            {
-                string myPythonApp = "upload-mission-for-allocation.py";
-                UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV, myPythonApp);
-                Thread.Sleep(800);
-                Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
-            }));
-            thread.Start();
+            
         }
 
+        public void go_Ui_to_Wj(string path, int i, string numberwarehouse)
+        {
+            BeginInvoke(new MethodInvoker(() =>
+            {
+                UpdatingDB(i, numberwarehouse);
+            }));
+            string myPythonApp = "upload-mission-for-allocation.py";
+            UploadMission(path, UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV, myPythonApp);
+            Thread.Sleep(800);
+            Fly_UAV(UAVinfo[i].Type, UAVinfo[i].IP, UAVinfo[i].Port, UAVinfo[i].N_UAV);
+            
+        }
 
         public void UAV_left(string numberwarehouseofuav)
         {
@@ -1182,6 +1206,7 @@ namespace Coordinator
             }
 
         }
+
         public void lastUAV_left(int i, string numberwarehouseofuav)
         {
             WarehouseArrayComm[i].NumberUAV = WarehouseArrayComm[i].NumberUAV - 1;
@@ -1205,6 +1230,10 @@ namespace Coordinator
         public void request_UAV(string numberwarehouseofuav)
         {
             RequestsQueue.Enqueue(numberwarehouseofuav);
+            BeginInvoke(new MethodInvoker(() =>
+            {
+                txtWareQueue.Text = RequestsQueue.Count.ToString();
+            }));
         }
 
         //UAV allocation between warehouses
@@ -1232,8 +1261,14 @@ namespace Coordinator
                       {
                         if ((UAVinfo[j].UAVAutomataEstate == "IDLE") && (UAVinfo[j].N_Warehouse == WarehouseArrayComm[i].WarehouseNumber.ToString()))
                         {
-                                //DecisionalAlgorithm(path, j);
-                                go_Ui_to_Wj(path, j);
+                                BeginInvoke(new MethodInvoker(() =>
+                                {
+                                    txtRequest.Text = "Warehouse " + numberwarehouse;
+                                    txtServed.Text = UAVinfo[j].N_UAV;
+                                    txtWareQueue.Text = RequestsQueue.Count.ToString();
+
+                                }));
+                                go_Ui_to_Wj(path, j, numberwarehouse);   
                                 j = CounterUAV;
                         }
                          j++;
@@ -1244,6 +1279,22 @@ namespace Coordinator
                 }
                 
             }
+
+        }
+
+        public void UpdatingDB(int j, string numberwarehouse)
+        {
+            
+            int indexx = Array.FindIndex(UAVinfo, s => s.N_UAV == UAVinfo[j].N_UAV);
+            txtName.Text = UAVinfo[indexx].N_UAV;
+            txtIP.Text = UAVinfo[indexx].IP;
+            txtBase.Text = numberwarehouse;
+
+            string txtQuery = "update tbcomm set Base='" + txtBase.Text + "' where ConnectionName='" + txtName.Text + "' and IPAddress='" + txtIP.Text + "' ";
+            ExecuteQuery(txtQuery);
+            LoadData();
+
+            UAVinfo[indexx].N_Warehouse = numberwarehouse;
 
         }
 
@@ -1436,7 +1487,41 @@ namespace Coordinator
             }));
             thread.Start();
         }
-        
+
+        public void Land(string con, string ip, string port, string namee)
+        {
+            var thread = new Thread(new ThreadStart(() =>
+            {
+                string python = @"C:\Python27\python.exe";
+                string myPythonApp = "Land.py";
+                string arg = "";
+
+                arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
+
+                ProcessStartInfo psi = new ProcessStartInfo(python, arg);
+                psi.UseShellExecute = false;
+                psi.RedirectStandardOutput = true;
+                psi.CreateNoWindow = true;
+
+                var proc = Process.Start(psi);
+
+                StreamReader sr = proc.StandardOutput;
+
+                while (!proc.HasExited)
+                {
+                    if (!sr.EndOfStream)
+                    {
+                        string procOutput = sr.ReadToEnd();
+                        this.Invoke(new Action<string>(s => { rtbScript.Text += s; }), procOutput);
+
+                    }
+                    else Thread.Sleep(20);
+                }
+            }));
+
+            thread.Start();
+
+        }
         //Event from UAV Automata
         public void Mission_Has_Ended(int indexx, string Automata)
         {

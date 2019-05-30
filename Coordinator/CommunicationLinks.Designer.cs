@@ -87,13 +87,13 @@ namespace Coordinator
             this.panel7 = new System.Windows.Forms.Panel();
             this.label24 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtServed = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtRequest = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtWareQueue = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtvCommunication)).BeginInit();
             this.panel2.SuspendLayout();
@@ -731,24 +731,24 @@ namespace Coordinator
             // 
             // panel8
             // 
-            this.panel8.Controls.Add(this.textBox1);
+            this.panel8.Controls.Add(this.txtServed);
             this.panel8.Controls.Add(this.label14);
-            this.panel8.Controls.Add(this.textBox2);
+            this.panel8.Controls.Add(this.txtRequest);
             this.panel8.Controls.Add(this.label25);
             this.panel8.Controls.Add(this.label26);
             this.panel8.Controls.Add(this.label27);
-            this.panel8.Controls.Add(this.textBox3);
+            this.panel8.Controls.Add(this.txtWareQueue);
             this.panel8.Location = new System.Drawing.Point(11, 265);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(438, 117);
             this.panel8.TabIndex = 77;
             // 
-            // textBox1
+            // txtServed
             // 
-            this.textBox1.Location = new System.Drawing.Point(265, 68);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(78, 20);
-            this.textBox1.TabIndex = 93;
+            this.txtServed.Location = new System.Drawing.Point(265, 68);
+            this.txtServed.Name = "txtServed";
+            this.txtServed.Size = new System.Drawing.Size(78, 20);
+            this.txtServed.TabIndex = 93;
             // 
             // label14
             // 
@@ -759,12 +759,12 @@ namespace Coordinator
             this.label14.TabIndex = 92;
             this.label14.Text = "Served By:";
             // 
-            // textBox2
+            // txtRequest
             // 
-            this.textBox2.Location = new System.Drawing.Point(117, 68);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(78, 20);
-            this.textBox2.TabIndex = 91;
+            this.txtRequest.Location = new System.Drawing.Point(117, 68);
+            this.txtRequest.Name = "txtRequest";
+            this.txtRequest.Size = new System.Drawing.Size(78, 20);
+            this.txtRequest.TabIndex = 91;
             // 
             // label25
             // 
@@ -794,12 +794,12 @@ namespace Coordinator
             this.label27.TabIndex = 60;
             this.label27.Text = "Requests in the Queue:";
             // 
-            // textBox3
+            // txtWareQueue
             // 
-            this.textBox3.Location = new System.Drawing.Point(336, 16);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(78, 20);
-            this.textBox3.TabIndex = 59;
+            this.txtWareQueue.Location = new System.Drawing.Point(336, 16);
+            this.txtWareQueue.Name = "txtWareQueue";
+            this.txtWareQueue.Size = new System.Drawing.Size(78, 20);
+            this.txtWareQueue.TabIndex = 59;
             // 
             // CommunicationLinks
             // 
@@ -906,13 +906,13 @@ namespace Coordinator
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtServed;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtRequest;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtWareQueue;
     }
 }
 

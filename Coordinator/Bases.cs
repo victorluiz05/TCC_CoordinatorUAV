@@ -57,19 +57,19 @@ namespace Coordinator
             labell.Location = new Point(164, 54);
             Controls.Add(labell);
 
-            WarehouseArray[0].WarehouseLat = -35.342437;
-            WarehouseArray[0].WarehouseLon = 149.126881;
-            WarehouseArray[1].WarehouseLat = -35.338778;
-            WarehouseArray[1].WarehouseLon = 149.128005;
-            WarehouseArray[2].WarehouseLat = -35.337535;
-            WarehouseArray[2].WarehouseLon = 149.135191;
+            WarehouseArray[1].WarehouseLat = -35.342437;
+            WarehouseArray[1].WarehouseLon = 149.126881;
+            WarehouseArray[2].WarehouseLat = -35.338778;
+            WarehouseArray[2].WarehouseLon = 149.128005;
+            WarehouseArray[3].WarehouseLat = -35.337535;
+            WarehouseArray[3].WarehouseLon = 149.135191;
 
             int xlat = 12;
             int ylat = 82;
             int xlon = 164;
             int ylon = 82;
             
-            for (int i=0; i<Nwarehouses; i++)
+            for (int i=1; i<=Nwarehouses; i++)
             {
                 TextBox textboxlat = new TextBox();
                 textboxlat.Name = "txtbaseLat" + i.ToString();
@@ -92,11 +92,14 @@ namespace Coordinator
         {
            
 
-            for (int i = 0; i < Nwarehouses; i++)
+            for (int i = 1; i <= Nwarehouses; i++)
             {
-                WarehouseArray[i].WarehouseLat = Convert.ToDouble(((TextBox)Controls["txtbaseLat" + (i).ToString()]).Text);
-                WarehouseArray[i].WarehouseLon = Convert.ToDouble(((TextBox)Controls["txtbaseLon" + (i).ToString()]).Text);
-                WarehouseArray[i].WarehouseNumber = i;
+                
+                    WarehouseArray[i].WarehouseLat = Convert.ToDouble(((TextBox)Controls["txtbaseLat" + (i).ToString()]).Text);
+                    WarehouseArray[i].WarehouseLon = Convert.ToDouble(((TextBox)Controls["txtbaseLon" + (i).ToString()]).Text);
+                    WarehouseArray[i].WarehouseNumber = i;
+                
+                
             }
 
             CommunicationLinks comm = new CommunicationLinks();

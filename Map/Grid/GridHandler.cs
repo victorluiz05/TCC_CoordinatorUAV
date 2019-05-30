@@ -16,7 +16,7 @@ namespace CoordinatorMap.Grid
         }
 
 
-
+        
         public void InsertCell(PointLatLng cellLL)
         {
             double lat = cellLL.Lat, lng = cellLL.Lng;
@@ -33,7 +33,7 @@ namespace CoordinatorMap.Grid
 
             latNode.InsertCell(lng);
         }
-
+        
         private Waypoint AddWaypoint(PointLatLng wpLL, Waypoint prevWp, UAV uav)
         {
             // Find the nearest higher latitude node:
