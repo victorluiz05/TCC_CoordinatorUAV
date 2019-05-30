@@ -86,7 +86,7 @@ namespace Coordinator
             public double DeliveyBaseLon;
         }
 
-        public DeliveryBases[] DeliveryBasesArray = new DeliveryBases[5];
+        public DeliveryBases[] DeliveryBasesArray = new DeliveryBases[4];
 
         public struct WPLatLon
         {
@@ -687,9 +687,9 @@ namespace Coordinator
             DeliveryBasesArray[3].DeliveyBaseLat = -35.342576;
             DeliveryBasesArray[3].DeliveyBaseLon = 149.131159;
             DeliveryBasesArray[3].DeliveryBaseName = "DB 4";
-            DeliveryBasesArray[4].DeliveyBaseLat = -35.336118;
-            DeliveryBasesArray[4].DeliveyBaseLon = 149.124383;
-            DeliveryBasesArray[4].DeliveryBaseName = "DB 5";
+            //DeliveryBasesArray[4].DeliveyBaseLat = -35.336118;
+            //DeliveryBasesArray[4].DeliveyBaseLon = 149.124383;
+            //DeliveryBasesArray[4].DeliveryBaseName = "DB 5";
 
         }
 
@@ -1133,7 +1133,7 @@ namespace Coordinator
                     }));
                 }
                 initiate_delivery_Ui(path, j);
-                //DecisionalAlgorithm(path, j);
+                
                 ListDistance.Clear();
             }
 
@@ -1339,7 +1339,7 @@ namespace Coordinator
             var thread = new Thread(new ThreadStart(() =>
             {
                 string python = @"C:\Python27\python.exe";
-                //string myPythonApp = "upload-mission.py";
+                 myPythonApp = "upload-mission.py";
                 string arg = "";
                 
                 arg = myPythonApp + " " + con + " " + ip + " " + port + " " + mission;   //Final String that will passed to Dronekit
