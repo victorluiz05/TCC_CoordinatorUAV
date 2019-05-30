@@ -524,10 +524,11 @@ namespace Coordinator
             aTimer2.Elapsed += new ElapsedEventHandler(TimerCall2);
             aTimer2.Enabled = true;
             aTimer2.AutoReset = true;
-
+            
             aTimer3.Elapsed += new ElapsedEventHandler(TimerCall3);
             aTimer3.Enabled = true;
             aTimer3.AutoReset = true;
+            
         }
 
         //Button that pauses the mission of a selected UAV
@@ -545,7 +546,7 @@ namespace Coordinator
         //Button that sends the UAV to the Base
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            ReturnToHome(typee, IpAddress, Portt);
+            ReturnToHome(typee, IpAddress, Portt, CommName);
         }
 
         //Button that loads a mission from a diretory to coordinator
@@ -823,12 +824,12 @@ namespace Coordinator
                             }
 
                         }
-
+                        /*
                         if ((UAVinfo[indexx].UAVAutomataEstate == "IN FLIGHT") && ((Convert.ToInt32(UAVinfo[indexx].CurrentWP) == Convert.ToInt32(UAVinfo[indexx].NumberWpMission))) && (ParseDouble(UAVinfo[indexx].Alt) > 40.0))
                         {
                             Land(UAVinfo[indexx].Type, UAVinfo[indexx].IP, UAVinfo[indexx].Port, UAVinfo[indexx].N_UAV);
                         }
-
+                        */
                         //It must changes when a select a UAV on dtv
                         int ind = Array.FindIndex(UAVinfo, s => s.N_UAV == CommName);
                         string latt = UAVinfo[ind].Lat;
@@ -971,7 +972,7 @@ namespace Coordinator
         }
 
         //Method that sends the UAV to the base
-        public void ReturnToHome(string typee, string IpAddress, string Portt)
+        public void ReturnToHome(string typee, string IpAddress, string Portt, string Namee)
         {
             var thread = new Thread(new ThreadStart(() =>
             {
@@ -980,9 +981,10 @@ namespace Coordinator
                 string con = typee;
                 string ip = IpAddress;
                 string port = Portt;
+                string name = Namee;
                 string arg = "";
 
-                arg = myPythonApp + " " + con + " " + ip + " " + port;   //Final String that will passed to Dronekit
+                arg = myPythonApp + " " + con + " " + ip + " " + port + " " + name;   //Final String that will passed to Dronekit
 
                 ProcessStartInfo psi = new ProcessStartInfo(python, arg);
                 psi.UseShellExecute = false;
@@ -1106,8 +1108,7 @@ namespace Coordinator
                             distances.NameUAVAssigned = UAVinfo[i].N_UAV;
                             ListDistance.Add(distances);
                         //}
-                        
-
+                      
                     }
                 }
          
@@ -1237,25 +1238,68 @@ namespace Coordinator
         }
 
         //UAV allocation between warehouses
-        System.Timers.Timer aTimer3 = new System.Timers.Timer(1500);
+        System.Timers.Timer aTimer3 = new System.Timers.Timer(2500);
 
         public void TimerCall3(object sender, ElapsedEventArgs e)
         {
             AllocatingUAV();
         }
+
+        public void AllocatingUAV()
+        {
+            int warehousenumber;
+            double DeliveryBaseLat = 0, DeliveyBaseLon = 0;
+            double distance;
+
+            if (RequestsQueue.Count != 0)
+            {
+                for (int i = 0; i < WarehouseArrayComm.Length; i++)
+                {
+                    if (WarehouseArrayComm[i].NumberUAV > 2)
+                    {
+                        if (i == 0)//Dequeue only on the first iteration, the others the values are already in the respective variables
+                        {
+                            DemandInfoWarehouse = (Demands)DemandsQueueWarehouse.Dequeue();
+                            DeliveryBaseLat = DemandInfoWarehouse.DemandLatitude;
+                            DeliveyBaseLon = DemandInfoWarehouse.DemandLongitude;
+                            BaseNUmber = DemandInfoWarehouse.NumberoftheBase;
+
+                        }
+                        
+                        Coordinate coord2 = new Coordinate(DeliveryBaseLat, DeliveyBaseLon);
+                        Coordinate coord1 = new Coordinate(Double.Parse(UAVinfo[i].Lat, CultureInfo.InvariantCulture), Double.Parse(UAVinfo[i].Lon, CultureInfo.InvariantCulture));
+                        Distance d = new Distance(coord1, coord2);
+                        distance = d.Meters;
+
+                        distances.BaseNumber = BaseNUmber;
+                        distances.Distance = distance;
+                        distances.WarehouseNumber = Convert.ToInt16(UAVinfo[i].N_Warehouse);
+                        distances.NameUAVAssigned = UAVinfo[i].N_UAV;
+                        ListDistance.Add(distances);
+                        
+
+                    }
+                }
+            }
+
+        /*
         public void AllocatingUAV()
         {
             if(RequestsQueue.Count != 0)
             {
-                int i = 0;
-                while (i < WarehouseArrayComm.Length)
+                for (int i = 0; i < WarehouseArrayComm.Length; i++)
                 {
                     if (WarehouseArrayComm[i].NumberUAV > 2)
                     {
+                        string numberwarehouse = (string)RequestsQueue.Dequeue();
+                        string path = @"Missions\" + "CD" + WarehouseArrayComm[i].WarehouseNumber.ToString() + "CD" + numberwarehouse + ".txt";
 
-                      string numberwarehouse = (string)RequestsQueue.Dequeue();
-                      string path = @"Missions\" + "CD" + WarehouseArrayComm[i].WarehouseNumber.ToString() + "CD" + numberwarehouse + ".txt";
+                    }
 
+                }
+                //int i = 0;
+                //while (i < WarehouseArrayComm.Length)
+                //{
                       int j = 0;
                       while (j < CounterUAV)
                       {
@@ -1269,18 +1313,19 @@ namespace Coordinator
 
                                 }));
                                 go_Ui_to_Wj(path, j, numberwarehouse);   
-                                j = CounterUAV;
+                                //j = CounterUAV;
                         }
                          j++;
                       }
-                      i = WarehouseArrayComm.Length;
-                    }
-                    
-                }
-                
+                      //i = WarehouseArrayComm.Length;
             }
+                    
+                //}
+                
+            //}
 
         }
+        */
 
         public void UpdatingDB(int j, string numberwarehouse)
         {

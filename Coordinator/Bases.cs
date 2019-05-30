@@ -61,8 +61,8 @@ namespace Coordinator
             WarehouseArray[1].WarehouseLon = 149.126881;
             WarehouseArray[2].WarehouseLat = -35.338778;
             WarehouseArray[2].WarehouseLon = 149.128005;
-            WarehouseArray[3].WarehouseLat = -35.337535;
-            WarehouseArray[3].WarehouseLon = 149.135191;
+            //WarehouseArray[3].WarehouseLat = -35.337535;
+            //WarehouseArray[3].WarehouseLon = 149.135191;
 
             int xlat = 12;
             int ylat = 82;

@@ -13,7 +13,7 @@ connection_string = con + ':'+ ip + ':' + port
 vehicle = connect(connection_string, wait_ready=False)
 
 # Get some vehicle attributes (state)
-print ("Mission Resumed (AUTO)")
+print ("Mission Resumed")
 vehicle.mode = VehicleMode("AUTO")
 
 # Close vehicle object before exiting script

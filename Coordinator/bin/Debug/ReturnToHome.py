@@ -7,6 +7,7 @@ import sys
 con = (sys.argv[1])
 ip = (sys.argv[2])
 port = (sys.argv[3])
+name = (sys.argv[4])
 connection_string = con + ':'+ ip + ':' + port
 
 # Connect to the Vehicle.

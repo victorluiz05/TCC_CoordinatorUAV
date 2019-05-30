@@ -49,7 +49,7 @@
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(66, 20);
             this.txtNumber.TabIndex = 1;
-            this.txtNumber.Text = "3";
+            this.txtNumber.Text = "2";
             // 
             // btnEnterCoordinates
             // 
