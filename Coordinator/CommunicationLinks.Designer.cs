@@ -469,8 +469,7 @@ namespace Coordinator
             "Delivery Base 1",
             "Delivery Base 2",
             "Delivery Base 3",
-            "Delivery Base 4",
-            "Delivery Base 5"});
+            "Delivery Base 4"});
             this.cbxDemand.Location = new System.Drawing.Point(98, 30);
             this.cbxDemand.Name = "cbxDemand";
             this.cbxDemand.Size = new System.Drawing.Size(133, 21);
