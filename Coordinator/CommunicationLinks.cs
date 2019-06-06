@@ -852,7 +852,7 @@ namespace Coordinator
                     }
                     catch (FormatException e) { log.WriteLog(e, "Invalid coordinates: " + procOutput); }
 
-                } Thread.Sleep(100);
+                } Thread.Sleep(150);
             }
         }
         //Refreshing the UAVs on the map
@@ -1203,7 +1203,7 @@ namespace Coordinator
                     {
                        string possiblewareahouse =  UAVinfo[i].N_Warehouse;
                        int indexWare = Array.FindIndex(WarehouseArrayComm, s => s.WarehouseNumber == Convert.ToInt32(possiblewareahouse));
-                       if (WarehouseArrayComm[indexWare].NumberUAV > 2)
+                       if (WarehouseArrayComm[indexWare].NumberUAV >= 3)
                        {
                             if(TRAVA3 == 0)
                             {
