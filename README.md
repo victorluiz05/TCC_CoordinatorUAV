@@ -1,4 +1,4 @@
-# UAV Automatic Coordinator System
+# UAV Automatic Coordination System
 
 Final project of my graduation in electrical engineering
 
